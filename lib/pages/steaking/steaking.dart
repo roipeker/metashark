@@ -15,8 +15,10 @@ class _SteakingPage extends _SteakingState {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: const CommonAppBar(title: 'Plans'),
+      appBar: const CommonAppBar(title: 'Steaking'),
       body: CommonScrollableBody(
+        clipBehavior: Clip.none,
+        padding: kPad16,
         children: [
           MyPlanInfoCard(),
           kGap32,

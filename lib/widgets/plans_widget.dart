@@ -24,7 +24,7 @@ class MyPlanInfoCard extends StatelessWidget {
                   fontWeight: FontWeight.w600,
                 ),
               ),
-              CardBadgeGold(),
+              // CardBadgeGold(),
             ],
           ),
           // --

@@ -329,7 +329,10 @@ final router = GoRouter(
     GoRoute(
       path: '/steaking',
       name: SteakingPage.url,
-      redirect: _redirectComingSoon,
+      // redirect: _redirectComingSoon,
+      builder: (_, state) {
+        return SteakingPage(key: state.pageKey);
+      },
     ),
     GoRoute(
       path: '/quest',
