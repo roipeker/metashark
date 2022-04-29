@@ -1,0 +1,19 @@
+body {
+}
+
+main {
+flex:1;
+background-color: $eee;
+padding: 1em;
+}
+
+footer {
+flex:none;
+display: flex;
+gap: 1em;
+justify-content: space-evenly;
+background: black;
+padding: 1em 1em calc(1em + env(safe-area-inset-bottom));
+position: sticky;
+bottom:0;
+}
