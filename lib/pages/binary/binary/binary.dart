@@ -16,8 +16,13 @@ class BinaryPage extends StatefulWidget {
   }
 
   final int currentTab;
+  final int? nodeId;
 
-  const BinaryPage({Key? key, this.currentTab = 0}) : super(key: key);
+  const BinaryPage({
+    Key? key,
+    this.currentTab = 0,
+    this.nodeId,
+  }) : super(key: key);
 
   @override
   createState() => _BinaryPage();
@@ -35,9 +40,9 @@ class _BinaryPage extends _BinaryState {
         ),
         body: IndexedStack(
           index: currentIndex,
-          children: const [
-            BinaryStatisticsPage(),
-            BinaryStructurePage(),
+          children: [
+            const BinaryStatisticsPage(),
+            BinaryStructurePage(nodeId: widget.nodeId),
           ],
         ),
         bottomNavigationBar: CommonBottomNavBar(
@@ -50,6 +55,7 @@ class _BinaryPage extends _BinaryState {
   }
 
   int get currentIndex => widget.currentTab;
+
   void onBottomNavTap(int index) {
     var url = '/binary/' + _kBottomMenuNav[index].urlId;
     context.go(url);

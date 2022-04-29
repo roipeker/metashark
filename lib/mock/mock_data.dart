@@ -2,6 +2,16 @@ import 'package:metashark/commons.dart';
 
 /// add data models here.
 class MockDataFactory {
+  static final kRandom = Random();
+
+  static double random() {
+    return kRandom.nextDouble();
+  }
+
+  static int randomInt(int min, int max) {
+    return min + kRandom.nextInt(max - min);
+  }
+
   // static CountryVo randomCountryVo() {
   //   final name = kFaker.address.country();
   //   final province = kFaker.address.city();
@@ -67,6 +77,10 @@ class MockDataFactory {
 
   static String loremWords([int words = 30, String joiner = ' ']) {
     return kFaker.lorem.words(words).join(joiner);
+  }
+
+  static String randomName() {
+    return kFaker.person.name();
   }
 }
 

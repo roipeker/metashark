@@ -298,8 +298,16 @@ final router = GoRouter(
         if (tab < 0) {
           throw Exception("binary tab not found: $id");
         }
+        // if(tab==1){
+        //   trace("srtucture ID:", );
+        // }
+
         // statistics,structure
-        return BinaryPage(key: state.pageKey, currentTab: tab);
+        return BinaryPage(
+          key: state.pageKey,
+          currentTab: tab,
+          nodeId: int.tryParse(state.queryParams['id'] ?? ''),
+        );
       },
     ),
 
@@ -439,8 +447,6 @@ final router = GoRouter(
       name: ObjectInfinityTokenPage.url,
       builder: (_, state) => ObjectInfinityTokenPage(key: state.pageKey),
     ),
-
-
 
     GoRoute(
       path: '/vouchers/create/recipients',

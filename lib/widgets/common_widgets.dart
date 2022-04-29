@@ -709,3 +709,34 @@ class AppFadeImage extends StatelessWidget {
     );
   }
 }
+
+
+
+
+class Circle extends StatelessWidget {
+  final Color color;
+  final Widget? child;
+  final double size;
+
+  const Circle({
+    Key? key,
+    required this.color,
+    this.child,
+    this.size = 24,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      constraints: BoxConstraints.tightFor(width: size, height: size),
+      decoration: BoxDecoration(
+        // shape: BoxShape.circle,
+        borderRadius: kBorderRadiusPill,
+        color: color,
+      ),
+      // padding: EdgeInsets.symmetric(horizontal: 4, vertical: 2),
+      alignment: Alignment.center,
+      child: child,
+    );
+  }
+}

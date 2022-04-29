@@ -15,21 +15,26 @@ class DataView {
 
   DataView(this.tree);
 
-  void accountSet (Account account) {
+  void accountSet(Account account) {
     accounts.addAll({account.accountID: account});
   }
-  void positionSet (Position position) {
+
+  void positionSet(Position position) {
     positions.addAll({position.positionID: position});
-    refPositions.putIfAbsent(position.positionRefID, () => {}).add(position.positionID);
+    refPositions
+        .putIfAbsent(position.positionRefID, () => {})
+        .add(position.positionID);
   }
 
-  Account? accountGet (int accountID) {
+  Account? accountGet(int accountID) {
     return accounts[accountID];
   }
-  Position? positionGet (int positionID) {
+
+  Position? positionGet(int positionID) {
     return positions[positionID];
   }
-  Map<int, Position> refLinePositionsGet (int refPositionID) {
+
+  Map<int, Position> refLinePositionsGet(int refPositionID) {
     Map<int, Position> res = {};
     final _refs = refPositions[refPositionID];
     if (_refs != null) {
@@ -50,17 +55,19 @@ class Tree {
   final int defaultPositionWidth;
   final int positionsTotalQuantity;
 
-  Tree ({
+  Tree({
     this.treeID = 0,
     this.treeName = '',
     this.defaultPositionWidth = 0,
     this.positionsTotalQuantity = 0,
   });
 }
+
 class Account {
   int accountID = 0;
   String accountLogin = '';
 }
+
 class Position {
   final int positionID;
   final int positionRefID;
@@ -69,12 +76,16 @@ class Position {
   final int accountID;
   final DateTime? createdAt;
 
-  Position({
-    this.positionID = 0,
-    this.positionRefID = 0,
-    this.positionRefLine = 0,
-    this.positionWidth = 0,
-    this.accountID = 0,
-    this.createdAt
-  });
+  @override
+  String toString() {
+    return 'Position{positionID: $positionID, positionRefID: $positionRefID, positionRefLine: $positionRefLine, positionWidth: $positionWidth, accountID: $accountID, createdAt: $createdAt}';
+  }
+
+  Position(
+      {this.positionID = 0,
+      this.positionRefID = 0,
+      this.positionRefLine = 0,
+      this.positionWidth = 0,
+      this.accountID = 0,
+      this.createdAt});
 }

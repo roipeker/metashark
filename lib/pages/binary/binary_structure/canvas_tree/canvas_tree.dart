@@ -1,129 +1,84 @@
-import 'package:flutter/material.dart';
+import 'package:metashark/commons.dart';
+
+import 'tree_node.dart';
+import 'tree_widget.dart';
+
 part 'canvas_tree_state.dart';
+
 part 'model.dart';
 
 class CanvasTreeView extends StatefulWidget {
-  
-  const CanvasTreeView({Key? key}) : super(key: key);
-  
+  final BinaryTreeController? controller;
+  final int? nodeId;
+
+  const CanvasTreeView({Key? key, this.controller, this.nodeId})
+      : super(key: key);
+
   @override
   createState() => _CanvasTreeView();
 }
 
 class _CanvasTreeView extends _CanvasTreeState {
-
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Column(
-        children: [
-          Padding(
-            padding: const EdgeInsets.symmetric(vertical: 16.0, horizontal: 8.0),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                ElevatedButton(
-                  // onPressed: (position?.positionRefID ?? 0) > 0 ? () => _apiCall(1, viewLevelLimit) : null,
-                  onPressed: onTopTap,
-                  child: const Text('Top'),
-                ),
-                ElevatedButton(
-                  // onPressed: (position?.positionRefID ?? 0) > 0 ? () => _apiCall(position?.positionRefID ?? 1, viewLevelLimit) : null,
-                  onPressed: onUpTap,
-                  child: const Text('Up'),
-                ),
-              ],
-            ),
-          ),
-          buildNode(position, 0),
-        ],
-      ),
-      bottomNavigationBar: BottomNavigationBar(
-        items: const <BottomNavigationBarItem>[
-          BottomNavigationBarItem(
-            icon: Icon(Icons.adjust),
-            label: 'Level 0',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.adjust),
-            label: 'Level 1',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.adjust),
-            label: 'Level 2',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.adjust),
-            label: 'Level 3',
-          ),
-        ],
-        currentIndex: viewLevelLimit,
-        selectedItemColor: Colors.amber[800],
-        unselectedItemColor: Colors.blue[800],
-        onTap: (int index) => {
-          setState(() {
-            viewLevelLimit = index;
-          })
-        },
-      ),
-    );
+    return buildNode(position, 0);
   }
 
-  Widget buildNodePosition(Position? position, double diameter) {
-    var positionID = position?.positionID ?? 0;
-    return SizedBox.fromSize(
-      size: Size.square(diameter),
-      child: positionID > 0 ? ElevatedButton(
-        style: ButtonStyle(
-          shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-            RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(diameter/2),
-              side: BorderSide(color: Colors.black.withOpacity(0.5)),
-            ),
-          ),
-        ),
-        onPressed: () => _apiCall(positionID, viewLevelLimit),
-        child: Text('$positionID'),
-      ) : Container(
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(diameter/2),
-          color: Colors.grey,
-        ),
-      ),
+  Widget buildNodePosition(Position? position, int level) {
+    var config = kConfigByLevel[level];
+    if (config == null) {
+      return const Circle(
+        color: Colors.blue,
+        size: 10,
+      );
+    }
+    final positionID = position?.positionID ?? 0;
+    final emptyPosition = position == null;
+    final node = BinaryNode(
+      name: emptyPosition ? 'empty' : MockDataFactory.randomName(),
+      levelConfig: config,
+      isEmpty: emptyPosition,
+      positionID: positionID,
+      count: emptyPosition ? 0 : MockDataFactory.randomInt(1, 8),
+      imageUrl: _imageByLevel(emptyPosition, level),
+      purchased: emptyPosition ? false : MockDataFactory.random() < .5,
+      onTap: positionID == 0 || level == 0
+          ? null
+          : () => _apiCall(positionID, viewLevelLimit),
     );
+    return node;
   }
+
   Widget buildNode(Position? position, int currentLevel) {
     final children = <Widget>[];
     if (currentLevel < viewLevelLimit) {
       if (position == null) {
-        for (var refLine=1; refLine <= _data.tree.defaultPositionWidth; refLine++) {
-          children.add(Expanded(child: buildNode(null, currentLevel+1)));
-        }
+        final _children = List.generate(
+          _data.tree.defaultPositionWidth,
+          (index) => Expanded(
+            child: buildNode(null, currentLevel + 1),
+          ),
+        );
+        children.addAll(_children);
       } else {
         final refs = _data.refLinePositionsGet(position.positionID);
-        for (var refLine=1; refLine <= position.positionWidth; refLine++) {
-          children.add(Expanded(child: buildNode(refs[refLine], currentLevel+1)));
+        for (var refLine = 1; refLine <= position.positionWidth; refLine++) {
+          children.add(
+            Expanded(
+              child: buildNode(refs[refLine], currentLevel + 1),
+            ),
+          );
         }
       }
     }
     return Column(
       children: [
         Container(
-          color: Colors.orangeAccent.withOpacity(0.5),
-          margin: const EdgeInsets.symmetric(vertical: 8, horizontal: 4),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              buildNodePosition(position, positionDiameterByLevel(currentLevel)),
-            ],
-          ),
+          alignment: Alignment.center,
+          child: buildNodePosition(position, currentLevel),
         ),
-        if (children.isNotEmpty) Row(
-          children: children,
-        ),
+        if (children.isNotEmpty) Row(children: children),
       ],
     );
   }
-
 }
-

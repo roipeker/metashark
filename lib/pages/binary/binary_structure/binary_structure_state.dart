@@ -1,7 +1,7 @@
 part of 'binary_structure.dart';
 
 abstract class _BinaryStructureState extends State<BinaryStructurePage> {
-  String get titleText => 'Binary Structure page';
+  String selectedPanel = 'Left';
   final scrollController = ScrollController();
 
   Future<void> onRefreshPull() async {
