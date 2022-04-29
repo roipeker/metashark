@@ -31,5 +31,51 @@
             "type": "image/png",
             "purpose": "maskable"
         }
-    ]
+    ],
+  "share_target": {
+    "action": "/share-target/",
+    "method": "GET",
+    "params": {
+      "title": "title",
+      "text": "text",
+      "url": "url"
+    }
+  },
+  "shortcuts": [
+    {
+      "name": "My Wallet",
+      "short_name": "Finance",
+      "description": "View the current state of your wallet",
+      "url": "/finance/wallet?utm_source=dashboard",
+      "icons": [{ "src": "/icons/context/wallet.png", "sizes": "192x192" }]
+    },
+    {
+      "name": "Binary Structure",
+      "short_name": "Structure",
+      "description": "Check your place in the binary structure",
+      "url": "/binary/structure?utm_source=dashboard",
+      "icons": [{ "src": "/icons/context/binary.png", "sizes": "192x192" }]
+    },
+    {
+      "name": "Sessions",
+      "short_name": "Sessions",
+      "description": "See where you are logged, in the settings Sessions.",
+      "url": "/settings/sessions?utm_source=dashboard",
+      "icons": [{ "src": "/icons/context/sessions.png", "sizes": "192x192" }]
+    }
+  ],
+  "protocol_handlers": [
+    {
+      "protocol": "web+wallet",
+      "url": "/scheme/wallet/data=%s"
+    },
+    {
+      "protocol": "web+shark",
+      "url": "/scheme/shark/?data=%s"
+    },
+    {
+      "protocol": "bitcoin",
+      "url": "/scheme/bitcoin/?data=%s"
+    }
+  ]
 }

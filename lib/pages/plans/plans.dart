@@ -32,7 +32,7 @@ class _PlansPage extends _PlansState {
               children: [
                 _BronzeCard(),
                 kGap16,
-                _PlanInfoCard(),
+                MyPlanInfoCard(),
                 kGap32,
                 Text(
                   "My contracts",
@@ -43,9 +43,9 @@ class _PlansPage extends _PlansState {
                   ),
                 ),
                 kGap16,
-                _ContractCard(type: kContractGold),
+                PlanContractCard(type: kContractGold),
                 kGap16,
-                _ContractCard(type: kContractBronze),
+                PlanContractCard(type: kContractBronze),
                 kGap16,
               ],
             ),

@@ -27,7 +27,8 @@ Widget fadeTransition(BuildContext context, Animation<double> animation,
 
 GoRouterState? routerLastState;
 final router = GoRouter(
-  urlPathStrategy: UrlPathStrategy.hash,
+  // urlPathStrategy: UrlPathStrategy.hash,
+  urlPathStrategy: UrlPathStrategy.path,
   initialLocation: '/',
   redirect: (state) {
     /// mock up user!
@@ -323,6 +324,11 @@ final router = GoRouter(
     GoRoute(
       path: '/store',
       name: StorePage.url,
+      redirect: _redirectComingSoon,
+    ),
+    GoRoute(
+      path: '/steaking',
+      name: SteakingPage.url,
       redirect: _redirectComingSoon,
     ),
     GoRoute(

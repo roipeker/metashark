@@ -33,6 +33,7 @@ export "binary/binary_structure/binary_structure.dart";
 export "my_team/my_team.dart";
 export "my_team/my_registered_partners/my_registered_partners.dart";
 export "store/store.dart";
+export "steaking/steaking.dart";
 export "quest/quest.dart";
 export "roulette/roulette.dart";
 export "plans/plans.dart";

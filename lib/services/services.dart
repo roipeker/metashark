@@ -1,5 +1,6 @@
 import 'package:intl/intl.dart';
 import 'package:metashark/commons.dart';
+
 import 'app_settings.dart';
 
 abstract class AppService {

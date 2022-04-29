@@ -46,3 +46,5 @@ app.*.map.json
 /android/app/release
 
 /dev-assets/
+.firebaserc
+firebase-debug.log

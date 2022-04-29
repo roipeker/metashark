@@ -228,11 +228,17 @@ final kRootMenuList = [
     iconData: AppIcons.people,
   ),
   const _ItemVo(
-    label: 'Store',
-    svgId: SvgIcons.store,
-    url: StorePage.url,
-    iconData: AppIcons.store,
+    label: 'Steaking',
+    svgId: SvgIcons.people,
+    url: SteakingPage.url,
+    iconData: AppIcons.layer_group,
   ),
+  // const _ItemVo(
+  //   label: 'Store',
+  //   svgId: SvgIcons.store,
+  //   url: StorePage.url,
+  //   iconData: AppIcons.store,
+  // ),
   const _ItemVo(
     label: 'Quest',
     svgId: SvgIcons.quest,

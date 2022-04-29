@@ -1,7 +1,7 @@
 name: metashark
 description: MetaShark MLM app
 publish_to: 'none'
-version: 1.0.25+121
+version: 1.0.25+125
 
 environment:
   sdk: ">=2.16.2 <3.0.0"
@@ -56,7 +56,7 @@ flutter:
   fonts:
     - family: AppIcons
       fonts:
-        - asset: assets/fonts/App-Icons.ttf?v=5
+        - asset: assets/fonts/App-Icons.ttf?v=6
     - family: Open Sans
       fonts:
         - asset: assets/fonts/OpenSans-Bold.ttf

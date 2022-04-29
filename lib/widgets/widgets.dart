@@ -15,3 +15,4 @@ export 'text.dart';
 export 'textfields.dart';
 export 'vouchers_widgets.dart';
 export 'vouchers_cards.dart';
+export 'plans_widget.dart';
