@@ -11,6 +11,11 @@ List<String> getAllRestaurants() {
   return restaurants;
 }
 
+List<String> getPersonNames() {
+  return List.generate(120,
+      (index) => kFaker.person.firstName() + ' ' + kFaker.person.lastName());
+}
+
 String randomImage([
   int? w = 100,
   int? h,

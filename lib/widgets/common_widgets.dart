@@ -329,7 +329,7 @@ class PageIndicator extends StatelessWidget {
                 count,
                 (index) => GestureDetector(
                   onTap: () {
-                    final distance = (index - page).abs().toInt();
+                    // final distance = (index - page).abs().toInt();
                     controller.animateToPage(
                       index,
                       duration: const Duration(milliseconds: 280),
@@ -609,6 +609,7 @@ class NotFoundFish extends StatelessWidget {
           height: boxSize,
           child: const RiveAnimation.asset(
             Rives.doryDemo,
+            alignment: Alignment.center,
             fit: BoxFit.contain,
           ),
         ),

@@ -73,6 +73,12 @@ class MockDataFactory {
     'Cartoon Network',
   ];
 
+  static List<String> randomTeamSearchData({int quantity = 50}) {
+    final person = getPersonNames();
+    quantity = min(quantity, 90);
+    return person.take(quantity).toList(growable: false);
+  }
+
   static List<String> randomVouchers({int quantity = 50}) {
     final restaurants = getAllRestaurants();
     quantity = min(quantity, 90);

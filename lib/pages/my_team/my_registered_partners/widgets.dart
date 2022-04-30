@@ -13,15 +13,16 @@ class _ItemGroup extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.stretch,
       mainAxisAlignment: MainAxisAlignment.start,
       children: [
-        Text(
-          title,
-          style: TextStyle(
-            color: Color(0xff5e5873),
-            fontSize: 14,
-            fontFamily: "Open Sans",
-            fontWeight: FontWeight.w700,
-          ),
-        ).paddingSymmetric(horizontal: 16),
+        SafeArea(
+          child: Text(
+            title,
+            style: const TextStyle(
+              color: Color(0xff5e5873),
+              fontSize: 14,
+              fontWeight: FontWeight.w700,
+            ),
+          ).paddingSymmetric(horizontal: 16),
+        ),
         kGap8,
         ...children,
       ],
@@ -52,36 +53,39 @@ class _LoginItem extends StatelessWidget {
       onPressed: onTap,
       child: Padding(
         padding: kPadH16V8,
-        child: Row(
-          children: [
-            CommonAvatar(),
-            kGap16,
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  "Login",
-                  style: TextStyle(
-                    color: Color(0xff5e5873),
-                    fontSize: 14,
-                    fontWeight: FontWeight.w600,
+        child: SafeArea(
+          bottom: false,
+          child: Row(
+            children: [
+              const CommonAvatar(),
+              kGap16,
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    "Login",
+                    style: TextStyle(
+                      color: Color(0xff5e5873),
+                      fontSize: 14,
+                      fontWeight: FontWeight.w600,
+                    ),
                   ),
-                ),
-                Text(
-                  "26.04.2022",
-                  style: TextStyle(
-                    color: Color(0xffb9b9c3),
-                    fontSize: 14,
-                  ),
-                )
-              ],
-            ).exp(),
-            Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.end,
-              children: _getSuffix(),
-            )
-          ],
+                  Text(
+                    "26.04.2022",
+                    style: TextStyle(
+                      color: Color(0xffb9b9c3),
+                      fontSize: 14,
+                    ),
+                  )
+                ],
+              ).exp(),
+              Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.end,
+                children: _getSuffix(),
+              )
+            ],
+          ),
         ),
       ),
     );

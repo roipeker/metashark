@@ -22,18 +22,18 @@ class _HomePage extends _HomeState {
         ),
         body: RefreshIndicator(
           onRefresh: onRefreshPull,
-          child: Scrollbar(
-            controller: scrollController,
-            child: ListView(
+          child: SafeArea(
+            child: Scrollbar(
               controller: scrollController,
-              physics: const AlwaysScrollableScrollPhysics(),
-              clipBehavior: Clip.none,
-              padding: kPad16,
-              shrinkWrap: true,
-              children: [
-                kGap16,
-                SafeArea(
-                  child: UserTopCardShare(
+              child: ListView(
+                controller: scrollController,
+                physics: const AlwaysScrollableScrollPhysics(),
+                clipBehavior: Clip.none,
+                padding: kPad16,
+                shrinkWrap: true,
+                children: [
+                  kGap16,
+                  UserTopCardShare(
                     onTap: onTopCardTap,
                     onShareTap: onShareTap,
                     title: 'First & last name',
@@ -41,10 +41,8 @@ class _HomePage extends _HomeState {
                     imageUrl: '',
                     rating: 5,
                   ),
-                ),
-                kGap16,
-                const SafeArea(
-                  child: TeamCard(
+                  kGap16,
+                  const TeamCard(
                     title: "Моя команда",
                     label1: 'Партнеры',
                     value1: '12',
@@ -53,10 +51,8 @@ class _HomePage extends _HomeState {
                     label3: 'Активные',
                     value3: '3890',
                   ),
-                ),
-                kGap16,
-                const SafeArea(
-                  child: DashboardTitleCard(
+                  kGap16,
+                  const DashboardTitleCard(
                     title: "My Plan’s Info",
                     children: [
                       CardRowTitle(
@@ -70,9 +66,9 @@ class _HomePage extends _HomeState {
                       ),
                     ],
                   ),
-                ),
-                kGap16,
-              ],
+                  kGap16,
+                ],
+              ),
             ),
           ),
         ),

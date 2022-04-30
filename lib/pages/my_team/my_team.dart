@@ -1,4 +1,5 @@
 import 'package:metashark/commons.dart';
+import 'package:metashark/pages/my_team/my_team_search.dart';
 
 import 'modals/modals.dart';
 
@@ -27,10 +28,10 @@ class _MyTeamPage extends _MyTeamState {
             SearchButton(onTap: onSearchTap),
           ],
         ),
-        body: RefreshIndicator(
-          onRefresh: onRefreshPull,
-          child: Scrollbar(
-            controller: scrollController,
+        body: Scrollbar(
+          controller: scrollController,
+          child: RefreshIndicator(
+            onRefresh: onRefreshPull,
             child: ListView(
               controller: scrollController,
               physics: const AlwaysScrollableScrollPhysics(),
@@ -84,6 +85,7 @@ class _MyTeamPage extends _MyTeamState {
                     ),
                   ),
                 ),
+                kGap16,
                 Container(
                   color: Colors.white,
                   child: SafeArea(

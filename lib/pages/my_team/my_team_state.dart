@@ -29,14 +29,26 @@ abstract class _MyTeamState extends State<MyTeamPage> {
   }
 
   void onTopCardTap() {
-    context.openModalSheet(ReferralLoginSheet());
+    context.openModalSheet(const ReferralLoginSheet());
   }
 
   void onItemTap() {
-    context.openModalSheet(PartnerInfoSheetView());
+    context.openModalSheet(const PartnerInfoSheetView());
   }
 
+  List<String> get searchData => _kTeamData;
 
-  void onSearchTap() {}
+  FutureOr onSearchTap() async {
+    final result = await showSearch<String?>(
+      context: context,
+      delegate: MyTeamSearchDelegate(searchData: searchData),
+      query: lastSearch,
+    );
+    lastSearch = result ?? '';
+    trace("Result... $result");
+  }
 
+  String lastSearch = '';
 }
+
+final _kTeamData = MockDataFactory.randomTeamSearchData();

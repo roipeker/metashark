@@ -1,6 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:metashark/commons.dart';
 
+import 'modals/modals.dart';
+
 part 'quest_state.dart';
 
 part 'widgets.dart';

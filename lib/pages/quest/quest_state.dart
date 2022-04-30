@@ -14,7 +14,7 @@ abstract class _QuestState extends State<QuestPage> {
   }
 
   void onCardTap() {
-    context.toastNotImplemented();
+    context.openModalSheet(const ShowGiftsSheet());
+    // context.toastNotImplemented();
   }
-
 }

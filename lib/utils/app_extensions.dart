@@ -35,7 +35,8 @@ extension AppBuildContextExt on BuildContext {
       enableDrag: true,
       isDismissible: true,
       expand: false,
-      elevation: 12,
+      bounce: false,
+      elevation: 0,
       builder: (context) => child,
     );
   }

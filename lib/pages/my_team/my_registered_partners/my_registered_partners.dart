@@ -18,8 +18,8 @@ class _MyRegisteredPartnersPage extends _MyRegisteredPartnersState {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: CommonAppBar(
-        title: 'My registered partners',
+      appBar: const CommonAppBar(
+        title: 'My Registered Partners',
       ),
       body: ScrollConfiguration(
         behavior: AppScrollBehavior(),
@@ -34,14 +34,16 @@ class _MyRegisteredPartnersPage extends _MyRegisteredPartnersState {
               shrinkWrap: true,
               children: [
                 kGap16,
-                AppTextField(
-                  label: 'Enter login',
-                  hint: 'Enter login',
-                  accessory: AppTextButton.accessory(
-                    label: 'Add',
-                    onTap: onAddLoginTap,
-                  ),
-                ).paddingSymmetric(horizontal: 16),
+                SafeArea(
+                  child: AppTextField(
+                    label: 'Enter login',
+                    hint: 'Enter login',
+                    accessory: AppTextButton.accessory(
+                      label: 'Add',
+                      onTap: onAddLoginTap,
+                    ),
+                  ).paddingSymmetric(horizontal: 16),
+                ),
                 kGap16,
                 _ItemGroup(
                   title: 'Not activated',
