@@ -14,10 +14,68 @@ class HomePage extends StatefulWidget {
 class _HomePage extends _HomeState {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: CommonAppBar(title: 'Dashboard'),
-      body: const Center(
-        child: Text('Content for Home page'),
+    return ScrollConfiguration(
+      behavior: AppScrollBehavior(),
+      child: Scaffold(
+        appBar: const CommonAppBar(
+          title: 'Dashboard',
+        ),
+        body: RefreshIndicator(
+          onRefresh: onRefreshPull,
+          child: Scrollbar(
+            controller: scrollController,
+            child: ListView(
+              controller: scrollController,
+              physics: const AlwaysScrollableScrollPhysics(),
+              clipBehavior: Clip.none,
+              padding: kPad16,
+              shrinkWrap: true,
+              children: [
+                kGap16,
+                SafeArea(
+                  child: UserTopCardShare(
+                    onTap: onTopCardTap,
+                    onShareTap: onShareTap,
+                    title: 'First & last name',
+                    subtitle: 'Login',
+                    imageUrl: '',
+                    rating: 5,
+                  ),
+                ),
+                kGap16,
+                const SafeArea(
+                  child: TeamCard(
+                    title: "Моя команда",
+                    label1: 'Партнеры',
+                    value1: '12',
+                    label2: 'Структура',
+                    value2: '10 000',
+                    label3: 'Активные',
+                    value3: '3890',
+                  ),
+                ),
+                kGap16,
+                const SafeArea(
+                  child: DashboardTitleCard(
+                    title: "My Plan’s Info",
+                    children: [
+                      CardRowTitle(
+                        label: "Total earned",
+                        value: "32 000 MTS",
+                      ),
+                      kGap16,
+                      CardRowTitle(
+                        label: "Total in Stalking",
+                        value: "32 000 MTS",
+                      ),
+                    ],
+                  ),
+                ),
+                kGap16,
+              ],
+            ),
+          ),
+        ),
       ),
     );
   }

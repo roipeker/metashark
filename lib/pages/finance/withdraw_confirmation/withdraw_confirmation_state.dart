@@ -1,17 +1,22 @@
 part of 'withdraw_confirmation.dart';
 
-abstract class _WithdrawConfirmationState extends State<WithdrawConfirmationPage> {
-  
-  String get titleText => 'Withdraw Confirmation page';
+abstract class _WithdrawConfirmationState
+    extends State<WithdrawConfirmationPage> {
+  final code2faTec = AppTextControl(), emailTec = AppTextControl();
 
   @override
-  void initState(){
-    super.initState();  
+  void initState() {
+    super.initState();
   }
 
   @override
-  void dispose(){
-    super.dispose();  
+  void dispose() {
+    code2faTec.dispose();
+    emailTec.dispose();
+    super.dispose();
+  }
+
+  void onSaveTap() {
+    context.goNamed(FinancePage.url);
   }
 }
-

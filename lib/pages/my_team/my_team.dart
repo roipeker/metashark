@@ -1,9 +1,9 @@
 import 'package:metashark/commons.dart';
-import 'package:my_commons/utils/rect_layout_builder.dart';
 
 import 'modals/modals.dart';
 
 part 'my_team_state.dart';
+
 part 'widgets.dart';
 
 class MyTeamPage extends StatefulWidget {
@@ -39,17 +39,36 @@ class _MyTeamPage extends _MyTeamState {
               children: [
                 kGap16,
                 SafeArea(
-                  child: _UserCardTop(
+                  child: UserTopCardShare(
                     onTap: onTopCardTap,
                     onShareTap: onShareTap,
+                    title: 'First & last name',
+                    subtitle: 'Login',
+                    imageUrl: '',
+                    rating: 5,
                   ).paddingSymmetric(horizontal: 16),
                 ),
                 kGap16,
-                SafeArea(child: _TeamCard().paddingSymmetric(horizontal: 16)),
+                SafeArea(
+                  child: const TeamCard(
+                    title: "Моя команда",
+                    label1: 'Партнеры',
+                    value1: '12',
+                    label2: 'Структура',
+                    value2: '10 000',
+                    label3: 'Активные',
+                    value3: '3890',
+                  ).paddingSymmetric(horizontal: 16),
+                ),
                 kGap16,
                 SafeArea(
-                  child: _UserCard(
+                  child: UserReferralCard(
                     onTap: onTopCardTap,
+                    cardTitle: "Referral",
+                    title: "First & last name",
+                    subtitle: "Login",
+                    imageUrl: null,
+                    rating: 5,
                   ).paddingSymmetric(horizontal: 16),
                 ),
                 kGap16,

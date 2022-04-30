@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:faker/faker.dart';
 import 'package:metashark/commons.dart';
 
@@ -15,6 +17,25 @@ String randomImage([
 ]) {
   h ??= w;
   return 'https://picsum.photos/$w/$h?random=${_imageCacheCount++}';
+}
+
+ImageProvider? getImageProviderFromUrl(String? url) {
+  url = url?.trim();
+  if (url == null || url.isEmpty == true) {
+    return null;
+  }
+  if (url.startsWith('htt')) {
+    return NetworkImage(url);
+  } else if (url.startsWith('file:') || url.startsWith('//')) {
+    var f = File(url);
+    if (f.existsSync()) {
+      return FileImage(f);
+    } else {
+      return null;
+    }
+  } else {
+    return AssetImage(url);
+  }
 }
 
 String rndImage({

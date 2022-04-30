@@ -220,6 +220,7 @@ class CommonAvatar extends StatelessWidget {
   final double radius;
   final Widget? child;
   final String label;
+  final String? imageUrl;
   final Color? backgroundColor;
 
   const CommonAvatar({
@@ -228,6 +229,7 @@ class CommonAvatar extends StatelessWidget {
     this.backgroundColor,
     this.child,
     this.label = "L",
+    this.imageUrl,
   }) : super(key: key);
 
   @override
@@ -235,6 +237,7 @@ class CommonAvatar extends StatelessWidget {
     return CircleAvatar(
       backgroundColor: backgroundColor ?? AppColors.lightViolet,
       child: getChild(),
+      backgroundImage: getImageProviderFromUrl(imageUrl),
       radius: radius,
       foregroundColor: Colors.white,
     );
@@ -244,10 +247,9 @@ class CommonAvatar extends StatelessWidget {
     if (child == null) {
       return Text(
         label[0].toUpperCase(),
-        style: TextStyle(
+        style: const TextStyle(
           color: Colors.white,
           fontSize: 16,
-          fontFamily: "Open Sans",
           fontWeight: FontWeight.w600,
         ),
       );

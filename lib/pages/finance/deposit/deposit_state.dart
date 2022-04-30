@@ -7,18 +7,22 @@ abstract class _DepositState extends State<WalletDepositPage> {
 
   String get qrCode => currency().address;
 
+
   List<CurrencyVo> get currencyOptions => MockDataFactory.cryptoCurrencies;
-  late final Rx<CurrencyVo> currency;
+  late final Rx<CurrencyVo> currency = currencyOptions.first.obs();
+
+  List<String> get networkOptions => MockDataFactory.cryptoNetworkOptions;
+  late final Rx<String> currencyNetwork = networkOptions.first.obs();
 
   @override
   void initState() {
-    currency = currencyOptions.first.obs();
     super.initState();
   }
 
   @override
   void dispose() {
     currency.dispose();
+    currencyNetwork.dispose();
     super.dispose();
   }
 
@@ -27,7 +31,6 @@ abstract class _DepositState extends State<WalletDepositPage> {
       subject: 'Metashark wallet address',
       message: 'Bitcoin wallet address: $qrCode',
     );
-    trace("Share result: ", result.raw);
   }
 
   FutureOr onCopyTap() async {

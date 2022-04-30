@@ -1,151 +1,20 @@
 part of 'my_team.dart';
 
-class _TeamCard extends StatelessWidget {
-  const _TeamCard({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return RectLayoutChangedBuilder(
-      builder: (_, rect, child) {
-        var ratio = rect.size.aspectRatio;
-        // var size = Size(con.maxWidth, 300);
-        return Container(
-          width: 300,
-          // height: 300,
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(8),
-            boxShadow: kBoxShadow4,
-            gradient: RadialGradient(
-              center: Alignment.topLeft,
-              colors: [
-                Color(0xffDE8114),
-                Color(0xffD32A86),
-              ],
-              // radius: 2 * size.aspectRatio / 2,
-              radius: 2 * ratio / 2,
-            ),
-          ),
-          padding: kPad16,
-          child: child,
-        );
-      },
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: [
-          Text(
-            "Моя команда",
-            style: TextStyle(
-              color: Colors.white,
-              fontSize: 16,
-              fontFamily: "Open Sans",
-              fontWeight: FontWeight.w600,
-            ),
-          ),
-          TeamRowCard(
-            label: 'Партнеры',
-            value: '12',
-            iconData: AppIcons.person,
-            brightness: Brightness.dark,
-          ),
-          TeamRowCard(
-            label: 'Структура',
-            value: '10 000',
-            iconData: AppIcons.people,
-            brightness: Brightness.dark,
-          ),
-          TeamRowCard(
-            label: 'Активные',
-            value: '3890',
-            iconData: AppIcons.power_settings_new,
-            brightness: Brightness.dark,
-          ),
-        ].separator(kGap16),
-      ),
-    );
-  }
-}
-
-class _UserCardTop extends StatelessWidget {
-  final VoidCallback? onShareTap;
+class UserReferralCard extends StatelessWidget {
   final VoidCallback? onTap;
+  final String cardTitle, title, subtitle;
+  final String? imageUrl;
+  final int rating;
 
-  const _UserCardTop({
+  const UserReferralCard({
     Key? key,
     this.onTap,
-    this.onShareTap,
+    this.cardTitle = "Referral",
+    this.title = "First & last name",
+    this.subtitle = "Login",
+    this.imageUrl,
+    this.rating = 5,
   }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return MaterialButton(
-      padding: EdgeInsets.zero,
-      shape: kBorder8,
-      onPressed: onTap,
-      color: AppColors.appbarIconGrey,
-      child: Padding(
-        padding: kPad16,
-        child: Row(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Row(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                CommonAvatar(
-                  radius: 32 / 2,
-                  label: 'L',
-                ),
-                kGap16,
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Row(
-                      children: [
-                        Text(
-                          "First & last name",
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 14,
-                            fontWeight: FontWeight.w600,
-                          ),
-                        ),
-                        kGap8,
-                        StarRating(),
-                      ],
-                    ),
-                    Text(
-                      "Login",
-                      style: TextStyle(
-                        color: Color(0xffb9b9c3),
-                        fontSize: 14,
-                      ),
-                    )
-                  ],
-                ).exp(),
-              ],
-            ).exp(),
-            Transform.translate(
-              offset: Offset(10, -8),
-              child: IconButton(
-                onPressed: onShareTap,
-                padding: EdgeInsets.zero,
-                icon: Icon(
-                  AppIcons.share,
-                  color: Colors.white,
-                  size: 24,
-                ),
-              ),
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-}
-
-class _UserCard extends StatelessWidget {
-  final VoidCallback? onTap;
-
-  const _UserCard({Key? key, this.onTap}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -167,8 +36,8 @@ class _UserCard extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             Text(
-              "Referral",
-              style: TextStyle(
+              cardTitle,
+              style: const TextStyle(
                 color: Color(0xff5e5873),
                 fontSize: 16,
               ),
@@ -179,30 +48,33 @@ class _UserCard extends StatelessWidget {
               children: [
                 CommonAvatar(
                   radius: 32 / 2,
-                  label: 'L',
+                  label: title,
+                  imageUrl: imageUrl,
                 ),
                 kGap16,
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      "First & last name",
-                      style: TextStyle(
+                      title,
+                      style: const TextStyle(
                         color: Color(0xff5e5873),
                         fontSize: 14,
                         fontWeight: FontWeight.w600,
                       ),
                     ),
                     Text(
-                      "Login",
-                      style: TextStyle(
+                      subtitle,
+                      style: const TextStyle(
                         color: Color(0xffb9b9c3),
                         fontSize: 14,
                       ),
                     )
                   ],
                 ).exp(),
-                StarRating(),
+                StarRating(
+                  count: rating,
+                ),
                 // Text(
                 //   "GOLD",
                 //   style: TextStyle(

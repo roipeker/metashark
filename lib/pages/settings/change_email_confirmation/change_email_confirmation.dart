@@ -12,16 +12,16 @@ class ChangeEmailConfirmationPage extends StatefulWidget {
 }
 
 class _ChangeEmailConfirmationPage extends _ChangeEmailConfirmationState {
-
   @override
   Widget build(BuildContext context) {
-    return FigmaLink(
-      node: '11%3A2475',
-      child: Scaffold(
-        appBar: CommonAppBar(title: 'Confirmation'),
-        body: ListView(
-          padding: kPad16.copyWith(top: 24),
+    return Scaffold(
+      appBar: const CommonAppBar(title: 'Confirmation'),
+      body: Scrollbar(
+        child: ListView(
+          physics: const AlwaysScrollableScrollPhysics(),
+          clipBehavior: Clip.none,
           shrinkWrap: true,
+          padding: kPad16.copyWith(top: 24),
           children: [
             AppTextFieldInsert(
               label: 'Code 2-FA',
@@ -51,5 +51,4 @@ class _ChangeEmailConfirmationPage extends _ChangeEmailConfirmationState {
       ),
     );
   }
-
 }

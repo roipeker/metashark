@@ -65,6 +65,14 @@ class MockDataFactory {
     CurrencyVo(SvgCryptos.trx, 'Tron'),
   ];
 
+  static final cryptoNetworkOptions = [
+    'Bitcoin network',
+    'Tron network',
+    'Other network',
+    'MetaShark network',
+    'Cartoon Network',
+  ];
+
   static List<String> randomVouchers({int quantity = 50}) {
     final restaurants = getAllRestaurants();
     quantity = min(quantity, 90);

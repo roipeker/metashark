@@ -165,8 +165,8 @@ final router = GoRouter(
     GoRoute(
       path: '/dashboard',
       name: HomePage.url,
-      // builder: (_, state) => const HomePage(),
-      redirect: _redirectComingSoon,
+      builder: (_, state) => const HomePage(),
+      // redirect: _redirectComingSoon,
     ),
 
     /// --- SETTINGS ---

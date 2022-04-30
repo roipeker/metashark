@@ -15,90 +15,101 @@ class _WithdrawPage extends _WithdrawState {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: CommonAppBar(
-        title: 'Withdraw',
-      ),
+      appBar: const CommonAppBar(title: 'Withdraw'),
       body: Column(
         children: [
           Expanded(
-            child: ListView(
-              padding: kPad16,
-              children: [
-                FormLabeledField(
-                  label: 'Select currency',
-                  input: Obs(
-                    () => CurrencyDropdown(
-                      options: currencyOptions,
-                      onChanged: currency,
-                      current: currency(),
-                    ),
-                  ),
-                ),
-                kGap16,
-                AppTextField(
-                  label: 'Requisites',
-                  hint: 'Enter requisites',
-                  keyboardType: TextInputType.text,
-                  textInputAction: TextInputAction.next,
-                ),
-                kGap16,
-                AppTextField(
-                  keyboardType: TextInputType.numberWithOptions(
-                    decimal: true,
-                    signed: false,
-                  ),
-                  textInputAction: TextInputAction.done,
-                  control: amountTec,
-                  label: 'Amount',
-                  hint: 'Enter requisites',
-                  accessory: ConstrainedBox(
-                    constraints: BoxConstraints(
-                      maxWidth: 50,
-                    ),
-                    child: Text(
-                      "BTC",
-                      textAlign: TextAlign.center,
-                      style: kTextAccessoryStyle,
-                    ).center(),
-                  ),
-                  bottom: Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 4),
-                    child: const Text(
-                      "Commission: 0.0001 BTC",
-                      style: TextStyle(
-                        color: AppColors.primaryPurple,
-                        fontSize: 10,
+            child: Scrollbar(
+              child: ListView(
+                physics: const AlwaysScrollableScrollPhysics(),
+                clipBehavior: Clip.none,
+                shrinkWrap: true,
+                padding: kPad16,
+                children: [
+                  FormLabeledField(
+                    label: 'Select currency',
+                    input: Obs(
+                      () => CurrencyDropdown(
+                        options: currencyOptions,
+                        onChanged: currency,
+                        current: currency(),
                       ),
                     ),
                   ),
-                  // bottom: AppTextButton.tiny(
-                  //   label: "Commission: 0.0001 BTC",
-                  //   onTap: () {},
-                  // ).bottomLeft(),
-                ),
-                // kGap16,
-              ],
+                  kGap16,
+                  FormLabeledField(
+                    label: 'Select processing',
+                    input: Obs(
+                      () => CurrencyNetworkDropdown(
+                        options: networkOptions,
+                        onChanged: currencyNetwork,
+                        current: currencyNetwork(),
+                      ),
+                    ),
+                  ),
+                  kGap16,
+                  AppTextField(
+                    label: 'Requisites',
+                    hint: 'Enter requisites',
+                    keyboardType: TextInputType.text,
+                    textInputAction: TextInputAction.next,
+                  ),
+                  kGap16,
+                  AppTextField(
+                    keyboardType: TextInputType.numberWithOptions(
+                      decimal: true,
+                      signed: false,
+                    ),
+                    textInputAction: TextInputAction.done,
+                    control: amountTec,
+                    label: 'Amount',
+                    hint: 'Enter amount',
+                    accessory: Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        const Text(
+                          " BTC ",
+                          textAlign: TextAlign.center,
+                          style: kTextAccessoryStyle,
+                        ).center(),
+                        AppTextButton.accessory(
+                          label: 'MAX',
+                          onTap: onMaxTap,
+                        ),
+                      ],
+                    ),
+                    bottom: const Padding(
+                      padding:
+                          EdgeInsets.symmetric(horizontal: 8.0, vertical: 4),
+                      child: Text(
+                        "Commission: 0.0001 BTC\nReceive: 999.9999 MTS",
+                        style: TextStyle(
+                          color: AppColors.primaryPurple,
+                          fontSize: 10,
+                        ),
+                      ),
+                    ),
+                    // bottom: AppTextButton.tiny(
+                    //   label: "Commission: 0.0001 BTC",
+                    //   onTap: () {},
+                    // ).bottomLeft(),
+                  ),
+                  // kGap16,
+                ],
+              ),
             ),
           ),
           SafeArea(
             child: Padding(
               padding: kPad16,
               child: AppElevatedButton.primary(
-                child: Text('Conclusion'),
-                onTap: onConclusionTap,
+                child: Text('Next'),
+                onTap: onNextTap,
               ),
             ),
           ),
         ],
       ),
     );
-  }
-
-  void onConclusionTap() {
-    if (context.canPop()) {
-      context.pop();
-    } else {
-      context.goNamed(FinancePage.url);
-    }
   }
 }

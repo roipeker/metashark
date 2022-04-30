@@ -18,7 +18,7 @@ class _DepositPage extends _DepositState {
   Widget build(BuildContext context) {
     // trace("WERASDASD", "1NeJEFzY8PbVS9RvYPfDP93iqXxHjav791".length);
     return Scaffold(
-      appBar: CommonAppBar(title: 'Deposit'),
+      appBar: const CommonAppBar(title: 'Deposit'),
       body: SafeArea(
         child: ListView(
           padding: kPad16,
@@ -30,6 +30,17 @@ class _DepositPage extends _DepositState {
                   options: currencyOptions,
                   onChanged: currency,
                   current: currency(),
+                ),
+              ),
+            ),
+            kGap16,
+            FormLabeledField(
+              label: 'Select processing',
+              input: Obs(
+                    () => CurrencyNetworkDropdown(
+                  options: networkOptions,
+                  onChanged: currencyNetwork,
+                  current: currencyNetwork(),
                 ),
               ),
             ),
