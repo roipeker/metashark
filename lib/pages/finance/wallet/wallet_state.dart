@@ -44,7 +44,9 @@ abstract class _WalletState extends State<WalletPage> {
 
 final _kTransactionHistory = [
   TransactionHistoryVo(
+    // iconId: SvgIcons.send2,
     iconId: SvgIcons.send2,
+    iconData: AppIcons.icon_send2,
     title: 'Translation',
     subtitle: '00:00',
     amount: '-1.00000000',
@@ -52,6 +54,7 @@ final _kTransactionHistory = [
   ),
   TransactionHistoryVo(
     iconId: SvgIcons.binary,
+    iconData: AppIcons.icon_binary,
     title: 'Income',
     subtitle: '00:00',
     amount: '+1.00000000',
@@ -63,8 +66,9 @@ class TransactionHistoryVo {
   final String iconId, title, subtitle;
   final String amount;
   final Color? amountColor;
-
+  final IconData iconData;
   TransactionHistoryVo({
+    required this.iconData,
     required this.iconId,
     required this.title,
     required this.amount,

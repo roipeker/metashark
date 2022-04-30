@@ -47,6 +47,10 @@ groups:
   - path: assets/rive/
     class_name: Rives
 
+  - path: assets/animated/
+    class_name: Anims
+
+
 #  - path: assets/vectors
 #    class_name: Svgs
 #    package: res

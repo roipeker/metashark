@@ -4,8 +4,11 @@ abstract class _CanvasTreeState extends State<CanvasTreeView> {
   final _data = _kDataViewPositions;
 
   // int viewPositionID = 1;
-  int viewLevelLimit = 1;
+  int viewLevelLimit = 3;
 
+  // final viewMargin = const EdgeInsets.symmetric(vertical: 8, horizontal: 4);
+  // final viewMargin = const EdgeInsets.symmetric(vertical: 8, horizontal: 8);
+  final viewMargin = EdgeInsets.zero;
   int get viewPositionID => widget.nodeId ?? 1;
 
   @override
@@ -76,6 +79,34 @@ abstract class _CanvasTreeState extends State<CanvasTreeView> {
       viewLevelLimit = levelLimit;
     }
   }
+
+
+  List<PositionLineOffset> buildNodeOffsets(Position? position, int currentLevel, double top, double left, double width, Offset positionOffset) {
+    List<PositionLineOffset> children = [];
+    // final diameter = positionDiameterByLevel(currentLevel);
+    final diameter = kConfigByLevel[currentLevel]!.avatarSize;
+    top += diameter/2;
+    final currentPositionOffset = Offset(left+width/2, top);
+    children.add(PositionLineOffset(positionOffset, currentPositionOffset));
+    top += diameter/2+viewMargin.top+viewMargin.bottom;
+    if (currentLevel < viewLevelLimit) {
+      if (position == null) {
+        final leftOffset = width/_data.tree.defaultPositionWidth;
+        for (var refLine=1; refLine <= _data.tree.defaultPositionWidth; refLine++) {
+          children.addAll(buildNodeOffsets(null, currentLevel+1, top, left+leftOffset*(refLine-1), leftOffset, currentPositionOffset));
+        }
+      } else {
+        final refs = _data.refLinePositionsGet(position.positionID);
+        final leftOffset = width/position.positionWidth;
+        for (var refLine=1; refLine <= position.positionWidth; refLine++) {
+          children.addAll(buildNodeOffsets(refs[refLine], currentLevel+1, top, left+leftOffset*(refLine-1), leftOffset, currentPositionOffset));
+        }
+      }
+    }
+    return children;
+  }
+
+
 
   double positionDiameterByLevel(int currentLevel) {
     switch (currentLevel) {

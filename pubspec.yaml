@@ -1,7 +1,7 @@
 name: metashark
 description: MetaShark MLM app
 publish_to: 'none'
-version: 1.0.28+136
+version: 1.0.28+145
 
 environment:
   sdk: ">=2.16.2 <3.0.0"
@@ -31,6 +31,7 @@ dependencies:
   dotted_decoration: ^2.0.0
   layout: ^1.0.2
   transparent_image: any
+  video_player: ^2.4.0
 
 dev_dependencies:
   flutter_test:
@@ -52,6 +53,7 @@ flutter:
     - assets/svgs/icons/
     - assets/rive/
     - assets/images/mockup/
+    - assets/animated/
 
   fonts:
     - family: AppIcons

@@ -19,9 +19,18 @@ class CanvasTreeView extends StatefulWidget {
 }
 
 class _CanvasTreeView extends _CanvasTreeState {
+  int nodeCount=0;
+
   @override
   Widget build(BuildContext context) {
-    return buildNode(position, 0);
+    nodeCount=0;
+    final node = buildNode(position, 0);
+    return node;
+    // return CustomPaint(
+    //   painter: ShapePainter((double width) =>
+    //       buildNodeOffsets(position, 0, viewMargin.top, 0, width, Offset.zero)),
+    //   child: node,
+    // );
   }
 
   Widget buildNodePosition(Position? position, int level) {
@@ -35,6 +44,7 @@ class _CanvasTreeView extends _CanvasTreeState {
     final positionID = position?.positionID ?? 0;
     final emptyPosition = position == null;
     final node = BinaryNode(
+      key: ValueKey('node#${positionID}#${++nodeCount}'),
       name: emptyPosition ? 'empty' : MockDataFactory.randomName(),
       levelConfig: config,
       isEmpty: emptyPosition,
@@ -81,4 +91,37 @@ class _CanvasTreeView extends _CanvasTreeState {
       ],
     );
   }
+}
+
+typedef OffsetCalcFunc = List<PositionLineOffset> Function(double width);
+
+class ShapePainter extends CustomPainter {
+  final OffsetCalcFunc onResized;
+
+  ShapePainter(this.onResized);
+
+  @override
+  void paint(Canvas canvas, Size size) {
+    final paint = Paint()
+      ..strokeWidth = 5
+      ..color = Colors.grey.withOpacity(0.75)
+      ..style = PaintingStyle.stroke;
+
+    final List<PositionLineOffset> items = onResized(size.width);
+    for (var item in items) {
+      // debugPrint('${item.start} ${item.end}');
+      canvas.drawCircle(item.end, 16, paint);
+
+      if (item.start != Offset.zero) {
+        final l = Path();
+        l.moveTo(item.start.dx, item.start.dy);
+        l.lineTo(item.end.dx, item.end.dy);
+        l.close();
+        canvas.drawPath(l, paint);
+      }
+    }
+  }
+
+  @override
+  bool shouldRepaint(covariant CustomPainter oldDelegate) => false;
 }

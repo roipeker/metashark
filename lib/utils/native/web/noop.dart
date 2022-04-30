@@ -17,4 +17,8 @@ abstract class WebUtils {
   static bool isIOS() => false;
 
   static EdgeInsets getSafeArea() => EdgeInsets.zero;
+
+  static String getEngine() {
+    return '';
+  }
 }

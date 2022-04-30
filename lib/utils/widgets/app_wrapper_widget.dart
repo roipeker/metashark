@@ -49,11 +49,16 @@ class AppVersionWrapper extends StatelessWidget {
   const AppVersionWrapper({Key? key, required this.child}) : super(key: key);
 
   String get versionText {
+    var engine = WebUtils.getEngine();
     var parts = [NativeUtils.packageVersion, NativeUtils.packageBuildNumber];
     // var versions = parts.join('.').split('.');
     // var result = versions.map((e) => e.padLeft(2, '0')).join('.');
     var result = parts.join('.');
-    return 'v.' + result;
+    var str = 'v.' + result;
+    if (engine.isNotEmpty) {
+      str = '$engine ' + str;
+    }
+    return str;
   }
 
   @override
@@ -122,7 +127,7 @@ class _SafeAreaWebFixerState extends State<SafeAreaWebFixer> {
 
   @override
   void initState() {
-    2.seconds.delay(() {
+    0.5.seconds.delay(() {
       update();
     });
 
@@ -168,7 +173,7 @@ class _SafeAreaWebFixerState extends State<SafeAreaWebFixer> {
 
     final area = WebUtils.getSafeArea();
     // final mq = query;
-    var str = [query.padding, query.viewInsets, query.viewPadding].join(',');
+    // var str = [query.padding, query.viewInsets, query.viewPadding].join(',');
     // trace2('media padding', str);
     // /// [🦈] EdgeInsets(0.0, 47.0, 0.0, 34.0), EdgeInsets.zero, EdgeInsets(0.0, 47.0, 0.0, 34.0)
     // /// open keyboard.
@@ -187,7 +192,6 @@ class _SafeAreaWebFixerState extends State<SafeAreaWebFixer> {
     // if( !padding.isNonNegative ){
     //   padding = EdgeInsets.zero;
     // }
-
     /// keyboard open?
     // if (query.viewPadding.bottom > padding.bottom) {
     //   padding = EdgeInsets.zero;

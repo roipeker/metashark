@@ -12,38 +12,43 @@ class BottomSheetCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      decoration: const BoxDecoration(
-        borderRadius: BorderRadius.vertical(top: kRadius20),
-        boxShadow: [
-          BoxShadow(
-            color: Color(0x195e5873),
-            blurRadius: 8,
-            offset: Offset(0, -1),
-          ),
-          BoxShadow(
-            color: Color(0x195e5873),
-            blurRadius: 3,
-            offset: Offset(0, -1),
-          ),
-        ],
-        color: Colors.white,
+    return CustomPaint(
+      willChange: false,
+      isComplex: false,
+      painter: _BottomSheetBackgroundExtender(
+        height: context.mediaQuery.size.height,
       ),
-      padding: const EdgeInsets.only(top: 16),
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        mainAxisAlignment: MainAxisAlignment.start,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Padding(
-            padding: kPadH16,
-            child: AppText(title, style: kFinanceAssetItemTitle),
-          ),
-          kGap16,
-          Expanded(
-            child: child,
-          ),
-        ],
+      child: Container(
+        decoration: const BoxDecoration(
+          borderRadius: BorderRadius.vertical(top: kRadius20),
+          boxShadow: [
+            BoxShadow(
+              color: Color(0x195e5873),
+              blurRadius: 8,
+              offset: Offset(0, -1),
+            ),
+            BoxShadow(
+              color: Color(0x195e5873),
+              blurRadius: 3,
+              offset: Offset(0, -1),
+            ),
+          ],
+          color: Colors.white,
+        ),
+        padding: const EdgeInsets.only(top: 16),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Padding(
+              padding: kPadH16,
+              child: AppText(title, style: kFinanceAssetItemTitle),
+            ),
+            kGap16,
+            child,
+          ],
+        ),
       ),
     );
   }
@@ -250,4 +255,24 @@ class _FinanceAssetItemValues extends StatelessWidget {
       ],
     );
   }
+}
+
+class _BottomSheetBackgroundExtender extends CustomPainter {
+  final double? height;
+
+  _BottomSheetBackgroundExtender({this.height});
+
+  @override
+  void paint(Canvas canvas, Size size) {
+    final paint = Paint();
+    paint.color = Colors.white;
+    var h = height ?? size.height * 2;
+    canvas.drawRect(
+      Rect.fromLTWH(.5, 40.5, size.width - 1, h),
+      paint,
+    );
+  }
+
+  @override
+  bool shouldRepaint(covariant CustomPainter oldDelegate) => false;
 }

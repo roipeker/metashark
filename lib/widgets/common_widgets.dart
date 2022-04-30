@@ -173,6 +173,7 @@ class CommonBottomNavBar extends StatelessWidget {
 class SvgAvatarIcon extends StatelessWidget {
   final String iconId;
   final double iconSize;
+  final IconData? iconData;
   final double size;
   final Color? backgroundColor;
   final Color? foregroundColor;
@@ -180,6 +181,7 @@ class SvgAvatarIcon extends StatelessWidget {
   const SvgAvatarIcon({
     Key? key,
     required this.iconId,
+    this.iconData,
     this.iconSize = 18,
     this.size = 32,
     this.backgroundColor,
@@ -188,6 +190,19 @@ class SvgAvatarIcon extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final child = iconData != null
+        ? Icon(
+            iconData,
+            size: iconSize,
+            color: foregroundColor ?? Colors.white,
+          )
+        : SvgPicture.asset(
+            iconId,
+            width: iconSize,
+            height: iconSize,
+            fit: BoxFit.contain,
+            color: foregroundColor ?? Colors.white,
+          );
     return Container(
       decoration: BoxDecoration(
         color: backgroundColor ?? context.theme.primaryColor,
@@ -196,13 +211,7 @@ class SvgAvatarIcon extends StatelessWidget {
       width: size,
       height: size,
       alignment: Alignment.center,
-      child: SvgPicture.asset(
-        iconId,
-        width: iconSize,
-        height: iconSize,
-        fit: BoxFit.contain,
-        color: foregroundColor ?? Colors.white,
-      ),
+      child: child,
     );
   }
 }
@@ -626,10 +635,12 @@ class CommonScrollableBody extends StatelessWidget {
   final ScrollController? scrollController;
   final Clip clipBehavior;
   final Future<void> Function()? onRefreshPull;
+  final bool safeArea;
 
   const CommonScrollableBody({
     Key? key,
     required this.children,
+    this.safeArea = false,
     this.scrollController,
     this.clipBehavior = Clip.none,
     this.padding = EdgeInsets.zero,
@@ -644,13 +655,15 @@ class CommonScrollableBody extends StatelessWidget {
         controller: scrollController,
         child: RefreshIndicator(
           onRefresh: onRefreshPull ?? _onRefreshPull,
-          child: ListView(
-            physics: const AlwaysScrollableScrollPhysics(),
-            controller: scrollController,
-            padding: padding,
-            // keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
-            clipBehavior: clipBehavior,
-            children: children,
+          child: SafeArea(
+            child: ListView(
+              physics: const AlwaysScrollableScrollPhysics(),
+              controller: scrollController,
+              padding: padding,
+              // keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
+              clipBehavior: clipBehavior,
+              children: children,
+            ),
           ),
         ),
       ),
@@ -709,9 +722,6 @@ class AppFadeImage extends StatelessWidget {
     );
   }
 }
-
-
-
 
 class Circle extends StatelessWidget {
   final Color color;

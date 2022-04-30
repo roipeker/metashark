@@ -19,79 +19,81 @@ class _BinaryStatisticsPage extends _BinaryStatisticsState {
       onRefresh: onRefreshPull,
       child: Scrollbar(
         controller: scrollController,
-        child: ListView(
-          controller: scrollController,
-          padding: kPad16,
-          clipBehavior: Clip.none,
-          shrinkWrap: true,
-          children: [
-            _PageCard(
-              iconData: AppIcons.icon_awesome_code_branch,
-              title: "Binary bonus",
-              child: Column(
-                children: const [
-                  kGap16,
-                  CardRowTitle(
-                    label: "Total income:",
-                    value: "1200 MTS",
-                  ),
-                  kGap16,
-                  _Graph(),
-                ],
+        child: SafeArea(
+          child: ListView(
+            controller: scrollController,
+            padding: kPad16,
+            clipBehavior: Clip.none,
+            shrinkWrap: true,
+            children: [
+              _PageCard(
+                iconData: AppIcons.icon_awesome_code_branch,
+                title: "Binary bonus",
+                child: Column(
+                  children: const [
+                    kGap16,
+                    CardRowTitle(
+                      label: "Total income:",
+                      value: "1200 MTS",
+                    ),
+                    kGap16,
+                    _Graph(),
+                  ],
+                ),
               ),
-            ),
-            kGap16,
-            _PageCard(
-              iconData: AppIcons.work,
-              title: "Package",
-              child: Column(
-                children: [
-                  kGap16,
-                  _PackageUpgrade(),
-                  kGap16,
-                  AppElevatedButton.primary(
-                    child: Text('Upgrade'),
-                    onTap: () {
-                      context.toastNotImplemented();
-                    },
-                  ),
-                ],
+              kGap16,
+              _PageCard(
+                iconData: AppIcons.work,
+                title: "Package",
+                child: Column(
+                  children: [
+                    kGap16,
+                    _PackageUpgrade(),
+                    kGap16,
+                    AppElevatedButton.primary(
+                      child: Text('Upgrade'),
+                      onTap: () {
+                        context.toastNotImplemented();
+                      },
+                    ),
+                  ],
+                ),
               ),
-            ),
-            kGap16,
-            _PageCard(
-              iconData: AppIcons.format_color_reset,
-              title: "Binary limit",
-              child: Column(
-                children: [
-                  kGap16,
-                  CardRowTitle(
-                    label: "Earned",
-                    value: "1000 MTS",
-                  ),
-                  kGap16,
-                  CardRowTitle(
-                    label: "burned down",
-                    value: "300 MTS",
-                  ),
-                  kGap16,
-                  CardLabelProgressBar(
-                    title: 'Limit: 100 MTS/day',
-                    label: '0.5574 MTS',
-                    helperText: '3 days ago',
-                    percent: 0.6,
-                  ),
-                  kGap16,
-                  CardLabelProgressBar(
-                    title: 'Limit: 500 MTS/day',
-                    label: '5.39 MTS',
-                    helperText: '3 days ago',
-                    percent: 0.86,
-                  ),
-                ],
+              kGap16,
+              _PageCard(
+                iconData: AppIcons.format_color_reset,
+                title: "Binary limit",
+                child: Column(
+                  children: [
+                    kGap16,
+                    CardRowTitle(
+                      label: "Earned",
+                      value: "1000 MTS",
+                    ),
+                    kGap16,
+                    CardRowTitle(
+                      label: "burned down",
+                      value: "300 MTS",
+                    ),
+                    kGap16,
+                    CardLabelProgressBar(
+                      title: 'Limit: 100 MTS/day',
+                      label: '0.5574 MTS',
+                      helperText: '3 days ago',
+                      percent: 0.6,
+                    ),
+                    kGap16,
+                    CardLabelProgressBar(
+                      title: 'Limit: 500 MTS/day',
+                      label: '5.39 MTS',
+                      helperText: '3 days ago',
+                      percent: 0.86,
+                    ),
+                  ],
+                ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );

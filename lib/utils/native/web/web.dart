@@ -49,7 +49,7 @@ abstract class WebUtils {
     var viewportContent =
         'width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0,viewport-fit=cover';
     SchedulerBinding.instance?.addPostFrameCallback((timeStamp) {
-      Timer(1000.milliseconds, () {
+      Timer(500.milliseconds, () {
         var views = html.document.getElementsByName("viewport");
         if (views.isNotEmpty) {
           var e = views.first;
@@ -97,6 +97,15 @@ abstract class WebUtils {
     // }
   }
 
+  static String getEngine() {
+    // js.allowInterop()
+    var res = js.context.callMethod('getEngine');
+    if(res!=null){
+      return 'engine ' + res.toString();
+    }
+    return '';
+  }
+
   static bool isIOS() {
     // final isIOS = _nav.appVersion.contains(r'iPhone|iPad|iPod');
     final _deviceMatch = RegExp(r'iphone|ipad|ipod');
@@ -136,8 +145,12 @@ abstract class WebUtils {
     if (event is html.TouchEvent) {
       var a = event.touches!.first;
       var touch = a.screen;
-      if (touch.x < 30) {
-        trace("Cancel back history.");
+      var ratio = html.window.devicePixelRatio;
+      trace2("Window ratio: ", ratio);
+
+      /// considere the notch in landscape.
+      if (touch.x < 30 * ratio) {
+        trace2("Cancel back history.");
         event.preventDefault();
       }
     }

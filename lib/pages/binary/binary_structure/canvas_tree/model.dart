@@ -89,3 +89,12 @@ class Position {
       this.accountID = 0,
       this.createdAt});
 }
+
+
+class PositionLineOffset {
+  final Offset start;
+  final Offset end;
+
+  PositionLineOffset(this.start, this.end);
+}
+

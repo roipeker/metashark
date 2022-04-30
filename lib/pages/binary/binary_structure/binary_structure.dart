@@ -33,10 +33,12 @@ class _BinaryStructurePage extends _BinaryStructureState {
         double treeH = max(con.maxHeight, 500.0);
         return RefreshIndicator(
           onRefresh: onRefreshPull,
-          child: Scrollbar(
-            controller: scrollController,
-            child:
-                con.maxHeight < 500 ? buildList(treeH: treeH) : buildColumn(),
+          child: SafeArea(
+            child: Scrollbar(
+              controller: scrollController,
+              child:
+                  con.maxHeight < 500 ? buildList(treeH: treeH) : buildColumn(),
+            ),
           ),
         );
       },

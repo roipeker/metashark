@@ -14,7 +14,7 @@ abstract class _FinanceState extends State<FinancePage> {
   }
 
 
-  void onAssetTap(int index) {
+  void onAssetTap(FinanceAssetVo vo) {
     context.pushNamed(WalletPage.url);
   }
 

@@ -1,6 +1,7 @@
 import 'package:metashark/commons.dart';
 
 part 'steaking_state.dart';
+part 'widgets.dart';
 
 class SteakingPage extends StatefulWidget {
   static const url = "/steaking";
@@ -14,12 +15,24 @@ class SteakingPage extends StatefulWidget {
 class _SteakingPage extends _SteakingState {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: const CommonAppBar(title: 'Steaking'),
+    return const Scaffold(
+      appBar: CommonAppBar(title: 'Steaking'),
       body: CommonScrollableBody(
         clipBehavior: Clip.none,
         padding: kPad16,
         children: [
+          Gap(50 - 16),
+          _AnimatedBall(
+            title: "Your profit today:",
+            subtitle: "1670.00 MTS",
+          ),
+          Gap(50),
+          // _AnimatedBall2(
+          //   title: "Your profit today:",
+          //   subtitle: "1670.00 MTS",
+          // ),
+          // Gap(50),
+          // kGap32,
           MyPlanInfoCard(),
           kGap32,
           Text(

@@ -35,11 +35,13 @@ class WalletHeaderCard extends StatelessWidget {
                     children: [
                       _CardButton(
                         label: 'Deposit',
+                        iconData: AppIcons.wallet,
                         iconId: SvgIcons.finance,
                         onTap: onDepositTap,
                       ).exp(),
                       _CardButton(
                         label: 'Withdraw',
+                        iconData: AppIcons.credit_card,
                         iconId: SvgIcons.creditCard,
                         onTap: onWithdrawTap,
                       ).exp(),
@@ -58,11 +60,13 @@ class WalletHeaderCard extends StatelessWidget {
 
 class _CardButton extends StatelessWidget {
   final String iconId;
+  final IconData iconData;
   final String label;
   final VoidCallback? onTap;
 
   const _CardButton({
     Key? key,
+    required this.iconData,
     required this.iconId,
     required this.label,
     this.onTap,
@@ -78,7 +82,8 @@ class _CardButton extends StatelessWidget {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            SvgAvatarIcon(iconId: iconId),
+            // SvgAvatarIcon(iconId: iconId),
+            Icon(iconData),
             kGap8,
             Text(label),
           ],
@@ -178,10 +183,12 @@ class WalletTopCard extends StatelessWidget {
             ],
           ),
           kGap10,
-          SvgPicture.asset(
-            Svgs.walletBubbleChart,
-            width: 311,
-            height: 56,
+          FittedBox(
+            child: SvgPicture.asset(
+              Svgs.walletBubbleChart,
+              width: 311,
+              height: 56,
+            ),
           ),
         ],
       ),
@@ -189,13 +196,13 @@ class WalletTopCard extends StatelessWidget {
   }
 }
 
-
 /// -- item
 
 class TransactionHistoryItem extends StatelessWidget {
   final String title, subtitle, amount;
   final Color? amountColor;
   final String iconId;
+  final IconData iconData;
   final VoidCallback? onTap;
 
   const TransactionHistoryItem({
@@ -204,6 +211,7 @@ class TransactionHistoryItem extends StatelessWidget {
     required this.iconId,
     required this.title,
     required this.subtitle,
+    required this.iconData,
     required this.amount,
     this.amountColor,
   }) : super(key: key);
@@ -251,6 +259,7 @@ class TransactionHistoryItem extends StatelessWidget {
       height: 32,
       child: SvgAvatarIcon(
         iconId: iconId,
+        iconData: iconData,
         backgroundColor: AppColors.primaryPurple.withOpacity(.1),
         foregroundColor: AppColors.appbarIconGrey,
       ),

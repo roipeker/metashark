@@ -11,3 +11,5 @@ part 'svg_icons.dart';
 part 'svgs.dart';
 
 part 'rives.dart';
+
+part 'anims.dart';

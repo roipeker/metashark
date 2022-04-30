@@ -91,7 +91,17 @@ class RootMenuDrawer extends StatelessWidget {
           child: Builder(builder: (myContext) {
             return Column(
               children: [
-                SvgPicture.asset(Svgs.logo, width: 180),
+                SvgPicture.asset(
+                  Svgs.logo,
+                  width: 179,
+                  height: 52,
+                  clipBehavior: Clip.none,
+                  placeholderBuilder: (_) {
+                    return Container(
+                      color: Colors.grey.shade100.withOpacity(.5),
+                    );
+                  },
+                ),
                 const Gap(23),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
@@ -112,48 +122,54 @@ class RootMenuDrawer extends StatelessWidget {
                   ],
                 ),
                 Expanded(
-                  child: ListView(
-                    padding: kPad16,
-                    shrinkWrap: true,
-                    children: [
-                      ...kRootMenuList.map2(
-                        (e) => _MenuItem(
-                          // svgId: e.svgId,
-                          iconData: e.iconData,
-                          label: e.label,
-                          onTap: () async {
-                            var url = e.url;
-                            var current = routerLastState!.subloc;
+                  child: SafeArea(
+                    child: Scrollbar(
+                      child: ListView(
+                        padding: kPad16,
+                        shrinkWrap: true,
+                        children: [
+                          ...kRootMenuList.map2(
+                            (e) => _MenuItem(
+                              // svgId: e.svgId,
+                              iconData: e.iconData,
+                              label: e.label,
+                              onTap: () async {
+                                var url = e.url;
+                                var current = routerLastState!.subloc;
 
-                            /// only push if its NOT the same and is NOT empty
-                            if (url.isNotEmpty) {
-                              var path = router.namedLocation(url);
-                              if (path != current) {
-                                context.goNamed(e.url);
-                                await 0.25.delay();
+                                /// only push if its NOT the same and is NOT empty
+                                if (url.isNotEmpty) {
+                                  var path = router.namedLocation(url);
+                                  if (path != current) {
+                                    context.goNamed(e.url);
+                                    await 0.25.delay();
 
-                                /// HACK: ONLY WAY TO CLOSE DRAWER.
-                                if (kRootMenuKey.currentState?.isDrawerOpen ==
-                                    true) {
-                                  kRootMenuKey.currentState?.openEndDrawer();
+                                    /// HACK: ONLY WAY TO CLOSE DRAWER.
+                                    if (kRootMenuKey.currentState?.isDrawerOpen ==
+                                        true) {
+                                      kRootMenuKey.currentState?.openEndDrawer();
+                                    }
+                                  }
                                 }
-                              }
-                            }
-                          },
-                        ),
+                              },
+                            ),
+                          ),
+                        ],
                       ),
-                    ],
+                    ),
                   ),
                 ),
                 Padding(
                   padding: kPadH16,
-                  child: _MenuItem(
-                    // svgId: SvgIcons.exitToApp,
-                    iconData: AppIcons.exit_to_app,
-                    label: 'Log Out',
-                    onTap: () {
-                      appData.logout();
-                    },
+                  child: SafeArea(
+                    child: _MenuItem(
+                      // svgId: SvgIcons.exitToApp,
+                      iconData: AppIcons.exit_to_app,
+                      label: 'Log Out',
+                      onTap: () {
+                        appData.logout();
+                      },
+                    ),
                   ),
                 ),
               ],

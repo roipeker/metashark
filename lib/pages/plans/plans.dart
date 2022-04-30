@@ -24,28 +24,46 @@ class _PlansPage extends _PlansState {
           child: Scrollbar(
             controller: scrollController,
             child: ListView(
-              padding: kPad16,
+              padding: kPadH16,
               physics: const AlwaysScrollableScrollPhysics(),
               controller: scrollController,
               clipBehavior: Clip.none,
-              shrinkWrap: true,
               children: [
-                _BronzeCard(),
                 kGap16,
-                MyPlanInfoCard(),
-                kGap32,
                 Text(
-                  "My contracts",
+                  "Steaking",
+                  textAlign: TextAlign.center,
                   style: TextStyle(
-                    color: AppColors.darkGrey,
-                    fontSize: 20,
-                    fontWeight: FontWeight.w600,
+                    color: Color(0xff5e5873),
+                    fontSize: 16,
+                    fontFamily: "Open Sans",
+                    fontWeight: FontWeight.w700,
                   ),
                 ),
                 kGap16,
-                PlanContractCard(type: kContractGold),
-                kGap16,
-                PlanContractCard(type: kContractBronze),
+
+                /// build titanium card.
+                PlanCardTitanium(
+                  onBuyTap: () {},
+                  onShowGiftsTap: () {},
+                ),
+
+                // _BronzeCard(),
+                // kGap16,
+                // MyPlanInfoCard(),
+                // kGap32,
+                // Text(
+                //   "My contracts",
+                //   style: TextStyle(
+                //     color: AppColors.darkGrey,
+                //     fontSize: 20,
+                //     fontWeight: FontWeight.w600,
+                //   ),
+                // ),
+                // kGap16,
+                // PlanContractCard(type: kContractGold),
+                // kGap16,
+                // PlanContractCard(type: kContractBronze),
                 kGap16,
               ],
             ),

@@ -19,23 +19,25 @@ class _WalletPage extends _WalletState {
   Widget build(BuildContext context) {
     return ScrollConfiguration(
       behavior: AppScrollBehavior(),
-      child: FigmaLink(
-        node: '147%3A3481',
-        child: Scaffold(
-          appBar: CommonAppBar(title: 'Wallet'),
-          body: Column(
-            children: [
-              kGap16,
-              WalletHeaderCard(
-                onDepositTap: onDepositTap,
-                onWithdrawTap: onWithdrawTap,
-              ),
-              Expanded(
-                child: BottomSheetCard(
-                  title: "Transaction History",
-                  child: RefreshIndicator(
-                    onRefresh: onRefreshPull,
-                    child: ListView(
+      child: Scaffold(
+        appBar: const CommonAppBar(title: 'Wallet'),
+        body: RefreshIndicator(
+          onRefresh: onRefreshPull,
+          child: SafeArea(
+            bottom: false,
+            child: Scrollbar(
+              child: ListView(
+                clipBehavior: Clip.none,
+                shrinkWrap: true,
+                children: [
+                  kGap16,
+                  WalletHeaderCard(
+                    onDepositTap: onDepositTap,
+                    onWithdrawTap: onWithdrawTap,
+                  ),
+                  BottomSheetCard(
+                    title: "Transaction History",
+                    child: Column(
                       children: [
                         Padding(
                           padding: kPadH16,
@@ -49,6 +51,7 @@ class _WalletPage extends _WalletState {
                           return TransactionHistoryItem(
                             amount: vo.amount,
                             amountColor: vo.amountColor,
+                            iconData: vo.iconData,
                             iconId: vo.iconId,
                             title: vo.title,
                             subtitle: vo.subtitle,
@@ -57,12 +60,13 @@ class _WalletPage extends _WalletState {
                             },
                           );
                         }),
+                        kGap32,
                       ],
                     ),
                   ),
-                ),
+                ],
               ),
-            ],
+            ),
           ),
         ),
       ),

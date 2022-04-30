@@ -19,6 +19,7 @@ class SvgIcons {
   static const String creditCard = 'assets/svgs/icons/credit_card.svg';
   static const String dashboard = 'assets/svgs/icons/dashboard.svg';
   static const String dateRange = 'assets/svgs/icons/date_range.svg';
+  static const String diamondBlue = 'assets/svgs/icons/diamond_blue.svg';
   static const String exitToApp = 'assets/svgs/icons/exit_to_app.svg';
   static const String finance = 'assets/svgs/icons/finance.svg';
   static const String formatColorReset =
