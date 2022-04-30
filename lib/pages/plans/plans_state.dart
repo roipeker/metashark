@@ -17,6 +17,15 @@ abstract class _PlansState extends State<PlansPage> {
     scrollController.dispose();
     super.dispose();
   }
+
+
+  int get currentIndex => widget.currentTab;
+
+  void onBottomNavTap(int index) {
+    var url = '/plans/tab/' + _kBottomMenuNav[index].urlId;
+    context.go(url);
+  }
+
 }
 
 

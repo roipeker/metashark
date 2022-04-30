@@ -358,14 +358,24 @@ final router = GoRouter(
       },
       // redirect: _redirectComingSoon,
     ),
+
     GoRoute(
       path: '/plans',
       name: PlansPage.url,
-      builder: (_, state) {
-        return PlansPage(key: state.pageKey);
-      },
-      // redirect: _redirectComingSoon,
+      redirect: (_) => '/plans/tab/steaking',
     ),
+    GoRoute(
+      path: '/plans/tab/:id',
+      builder: (_, state) {
+        var id = state.params['id']!;
+        var tab = PlansPage.getUrlIdAsTabIndex(id);
+        if (tab < 0) {
+          throw Exception("Plan tab not found: $id");
+        }
+        return PlansPage(key: state.pageKey, currentTab: tab);
+      },
+    ),
+
     GoRoute(
       path: '/portfolio',
       name: PortfolioPage.url,
@@ -381,6 +391,8 @@ final router = GoRouter(
         return VouchersPage(key: state.pageKey);
       },
     ),
+
+
     // GoRoute(
     //   path: '/vouchers/create',
     //   name: CreateVoucherPage.url,

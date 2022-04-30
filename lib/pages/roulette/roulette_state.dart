@@ -37,6 +37,7 @@ abstract class _RouletteState extends State<RoulettePage> {
   @override
   void dispose() {
     controllers.clear();
+    pageController.dispose();
     super.dispose();
   }
 }

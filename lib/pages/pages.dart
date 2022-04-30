@@ -37,6 +37,8 @@ export "steaking/steaking.dart";
 export "quest/quest.dart";
 export "roulette/roulette.dart";
 export "plans/plans.dart";
+export "plans/plans_steaking/plans_steaking.dart";
+export "plans/plans_subscribe/plans_subscribe.dart";
 export "plans/packages/packages.dart";
 export "plans/package_details/package_details.dart";
 export "portfolio/portfolio.dart";

@@ -1,12 +1,23 @@
 import 'package:metashark/commons.dart';
 
+part 'model.dart';
 part 'plans_state.dart';
 part 'widgets.dart';
 
 class PlansPage extends StatefulWidget {
   static const url = "Plans";
 
-  const PlansPage({Key? key}) : super(key: key);
+  static int getUrlIdAsTabIndex(String id) {
+    return RouterUtils.getUrlIdAsTabIndex(_kBottomMenuNav, id);
+  }
+
+  static bool isValidUrlParam(String id) {
+    return RouterUtils.isValidUrlParam(_kBottomMenuNav, id);
+  }
+
+  final int currentTab;
+
+  const PlansPage({Key? key, this.currentTab = 0}) : super(key: key);
 
   @override
   createState() => _PlansPage();
@@ -19,57 +30,21 @@ class _PlansPage extends _PlansState {
       appBar: const CommonAppBar(title: 'Plans'),
       body: ScrollConfiguration(
         behavior: AppScrollBehavior(),
-        child: RefreshIndicator(
-          onRefresh: onRefreshPull,
-          child: Scrollbar(
-            controller: scrollController,
-            child: ListView(
-              padding: kPadH16,
-              physics: const AlwaysScrollableScrollPhysics(),
-              controller: scrollController,
-              clipBehavior: Clip.none,
-              children: [
-                kGap16,
-                Text(
-                  "Steaking",
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                    color: Color(0xff5e5873),
-                    fontSize: 16,
-                    fontFamily: "Open Sans",
-                    fontWeight: FontWeight.w700,
-                  ),
-                ),
-                kGap16,
-
-                /// build titanium card.
-                PlanCardTitanium(
-                  onBuyTap: () {},
-                  onShowGiftsTap: () {},
-                ),
-
-                // _BronzeCard(),
-                // kGap16,
-                // MyPlanInfoCard(),
-                // kGap32,
-                // Text(
-                //   "My contracts",
-                //   style: TextStyle(
-                //     color: AppColors.darkGrey,
-                //     fontSize: 20,
-                //     fontWeight: FontWeight.w600,
-                //   ),
-                // ),
-                // kGap16,
-                // PlanContractCard(type: kContractGold),
-                // kGap16,
-                // PlanContractCard(type: kContractBronze),
-                kGap16,
-              ],
-            ),
-          ),
+        child: IndexedStack(
+          index: currentIndex,
+          children: const [
+            PlansSteakingPage(),
+            PlansSubscribePage(),
+          ],
         ),
+      ),
+      bottomNavigationBar: CommonBottomNavBar(
+        items: _kBottomMenuNav,
+        onTap: onBottomNavTap,
+        currentIndex: currentIndex,
       ),
     );
   }
+
+
 }

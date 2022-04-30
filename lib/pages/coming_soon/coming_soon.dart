@@ -14,12 +14,12 @@ class ComingSoonPage extends StatelessWidget {
     var scaffold = Scaffold(
       appBar: CommonAppBar(title: title),
       backgroundColor: const Color(0xffDFE1E9),
-      body: const _PageContent(),
+      body: const ComingSoonBody(),
     );
     return Column(
       children: [
         scaffold.exp(),
-        const LayoutBar(),
+        // const LayoutBar(),
       ],
     );
   //   if (bp >= LayoutBreakpoint.sm) {
@@ -89,8 +89,8 @@ class ComingSoonPage extends StatelessWidget {
 //   }
 // }
 
-class _PageContent extends StatelessWidget {
-  const _PageContent({Key? key}) : super(key: key);
+class ComingSoonBody extends StatelessWidget {
+  const ComingSoonBody({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -109,26 +109,26 @@ class _PageContent extends StatelessWidget {
             fit: BoxFit.cover,
           ),
         ),
-        Align(
-          alignment: Alignment.topRight,
-          child: Padding(
-            // padding: const EdgeInsets.all(8.0),
-            padding: EdgeInsets.all(spacing),
-            child: AppCard(
-              color: AppColors.primaryPurple.withOpacity(.1),
-              elevation: 0,
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  Text(
-                    'Coming soon...',
-                    // style: context.theme.textTheme.subtitle2,
-                  ),
-                ],
-              ),
-            ),
-          ),
-        ),
+        // Align(
+        //   alignment: Alignment.topRight,
+        //   child: Padding(
+        //     // padding: const EdgeInsets.all(8.0),
+        //     padding: EdgeInsets.all(spacing),
+        //     child: AppCard(
+        //       color: AppColors.primaryPurple.withOpacity(.1),
+        //       elevation: 0,
+        //       child: Column(
+        //         mainAxisSize: MainAxisSize.min,
+        //         children: [
+        //           Text(
+        //             'Coming soon...',
+        //             // style: context.theme.textTheme.subtitle2,
+        //           ),
+        //         ],
+        //       ),
+        //     ),
+        //   ),
+        // ),
       ],
     );
   }

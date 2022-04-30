@@ -91,22 +91,23 @@ class AppIcons {
   static const star_1 = _AppIconsData(0xf147, 'star_1');
   static const star_2 = _AppIconsData(0xf148, 'star_2');
   static const store = _AppIconsData(0xf149, 'store');
-  static const support_agent = _AppIconsData(0xf14a, 'support_agent');
-  static const text_size = _AppIconsData(0xf14b, 'text_size');
-  static const timer = _AppIconsData(0xf14c, 'timer');
-  static const transactions = _AppIconsData(0xf14d, 'transactions');
-  static const trees = _AppIconsData(0xf14e, 'trees');
-  static const trending_up = _AppIconsData(0xf14f, 'trending_up');
-  static const trophy = _AppIconsData(0xf150, 'trophy');
-  static const vertical_align_top = _AppIconsData(0xf151, 'vertical_align_top');
-  static const visibility_off = _AppIconsData(0xf152, 'visibility_off');
-  static const visibility = _AppIconsData(0xf153, 'visibility');
-  static const voucher = _AppIconsData(0xf154, 'voucher');
-  static const wallet_1 = _AppIconsData(0xf155, 'wallet_1');
-  static const wallet_2 = _AppIconsData(0xf156, 'wallet_2');
-  static const wallet = _AppIconsData(0xf157, 'wallet');
-  static const woman = _AppIconsData(0xf158, 'woman');
-  static const work = _AppIconsData(0xf159, 'work');
+  static const subscriptions = _AppIconsData(0xf14a, 'subscriptions');
+  static const support_agent = _AppIconsData(0xf14b, 'support_agent');
+  static const text_size = _AppIconsData(0xf14c, 'text_size');
+  static const timer = _AppIconsData(0xf14d, 'timer');
+  static const transactions = _AppIconsData(0xf14e, 'transactions');
+  static const trees = _AppIconsData(0xf14f, 'trees');
+  static const trending_up = _AppIconsData(0xf150, 'trending_up');
+  static const trophy = _AppIconsData(0xf151, 'trophy');
+  static const vertical_align_top = _AppIconsData(0xf152, 'vertical_align_top');
+  static const visibility_off = _AppIconsData(0xf153, 'visibility_off');
+  static const visibility = _AppIconsData(0xf154, 'visibility');
+  static const voucher = _AppIconsData(0xf155, 'voucher');
+  static const wallet_1 = _AppIconsData(0xf156, 'wallet_1');
+  static const wallet_2 = _AppIconsData(0xf157, 'wallet_2');
+  static const wallet = _AppIconsData(0xf158, 'wallet');
+  static const woman = _AppIconsData(0xf159, 'woman');
+  static const work = _AppIconsData(0xf15a, 'work');
 
   static const all = <String, _AppIconsData>{
     'account_circle': account_circle,
@@ -182,6 +183,7 @@ class AppIcons {
     'star_1': star_1,
     'star_2': star_2,
     'store': store,
+    'subscriptions': subscriptions,
     'support_agent': support_agent,
     'text_size': text_size,
     'timer': timer,
