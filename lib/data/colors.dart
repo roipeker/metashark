@@ -21,7 +21,6 @@ class AppColors {
   static const duskyBlue = Color(0xff445984);
   static const lightGrassGreen = Color(0xff8ef15c);
   static const duskyBlue30 = Color(0x4d445984);
-  static const darkGrey10 = Color(0x1a1e1d20);
   static const charcoalGrey = Color(0xff373a4d);
   static const denim65 = Color(0xa6384f7d);
   static const shamrockGreen = Color(0xff00d23a);
@@ -31,5 +30,6 @@ class AppColors {
 
   static const appbarIconGrey = Color(0xff5e5873);
   static const darkGrey = Color(0xff5e5873);
+  static const darkGrey10 = Color(0x195e5873);
 
 }

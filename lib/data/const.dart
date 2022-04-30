@@ -1,7 +1,8 @@
 class AppStrings {
   static const bundleId = 'com.roipeker.metashark.test';
   static const appName = 'Meta Shark';
-
+  /// to be fullfil later.
+  static var buildVersion = '#replace_build';
   static const shareProfileText = 'Hey, check out my profile on MetaShark';
   static const shareProfileTitle = 'Super MetaShark promo';
 }

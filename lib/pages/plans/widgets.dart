@@ -81,16 +81,17 @@ class PlanCardTitanium extends StatelessWidget {
       color: Colors.white,
       borderRadius: kBorderRadius8,
       padding: EdgeInsets.zero,
+      // padding: kPad16.copyWith(top: 0),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          _Header(),
+          const _Header(),
           Padding(
             padding: kPad16,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
-                Text(
+                const Text(
                   "50-100 MTS",
                   textAlign: TextAlign.center,
                   style: TextStyle(
@@ -102,31 +103,31 @@ class PlanCardTitanium extends StatelessWidget {
                 kGap32,
                 Row(
                   children: [
-                    _SmallCard(
+                    const _SmallCard(
                       label: 'Token Bonus:',
                       value: '+20%',
                     ).exp(),
                     kGap16,
-                    _SmallCard(
+                    const _SmallCard(
                       label: 'Staking:',
                       value: '36% year',
                     ).exp(),
                   ],
                 ),
                 kGap16,
-                _SmallCard(
+                const _SmallCard(
                   label: 'Lock Up:',
                   value: '12 months',
                 ),
                 kGap16,
                 Row(
                   children: [
-                    _SmallCard(
+                    const _SmallCard(
                       label: 'Direct Bonus:',
                       value: '11%',
                     ).exp(),
                     kGap16,
-                    _SmallCard(
+                    const _SmallCard(
                       label: 'Direct Bonus:',
                       value: '11%',
                     ).exp(),
@@ -135,12 +136,12 @@ class PlanCardTitanium extends StatelessWidget {
                 kGap16,
                 Row(
                   children: [
-                    _SmallCard(
+                    const _SmallCard(
                       label: 'Binary Limit:',
                       value: '150 MTS/day',
                     ).exp(),
                     kGap16,
-                    _SmallCard(
+                    const _SmallCard(
                       label: 'Matching Bonus',
                       value: '3 Levels',
                     ).exp(),
@@ -150,14 +151,14 @@ class PlanCardTitanium extends StatelessWidget {
                 SizedBox(
                   height: 47,
                   child: OutlinedButton.icon(
-                    icon: Icon(AppIcons.card_giftcard, size: 20),
+                    icon: const Icon(AppIcons.card_giftcard, size: 20),
                     onPressed: onShowGiftsTap,
-                    label: Text('Show gifts'),
+                    label: const Text('Show gifts'),
                   ),
                 ),
                 kGap16,
                 AppElevatedButton.primary(
-                  child: Text('Buy'),
+                  child: const Text('Buy'),
                   onTap: onBuyTap,
                   extended: true,
                 ),
@@ -192,10 +193,10 @@ class _Header extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          Text(
+          const Text(
             "TITANIUM",
             textAlign: TextAlign.center,
-            style: TextStyle(
+            style: const TextStyle(
               color: Colors.white,
               fontSize: 32,
               fontFamily: "Open Sans",

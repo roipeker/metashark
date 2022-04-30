@@ -38,21 +38,22 @@ class _WalletPage extends _WalletState {
                   BottomSheetCard(
                     title: "Transaction History",
                     child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.stretch,
                       children: [
                         Padding(
                           padding: kPadH16,
-                          child: AppText(
+                          child: Text(
                             "15.04.2022",
                             style: kFinanceAssetItemTitle,
                           ),
                         ),
-                        kGap16,
+                        kGap8,
                         ...transactions.map2((vo) {
                           return TransactionHistoryItem(
                             amount: vo.amount,
                             amountColor: vo.amountColor,
                             iconData: vo.iconData,
-                            iconId: vo.iconId,
+                            // iconId: vo.iconId,
                             title: vo.title,
                             subtitle: vo.subtitle,
                             onTap: () {

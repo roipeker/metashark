@@ -19,73 +19,75 @@ class WalletDetailsSheet extends StatefulWidget {
 }
 
 class _WalletDetailsSheet extends _WalletDetailsSheetState {
-
   final bgColor = Colors.white;
   final headerColor = Color(0xff5E5873);
 
   @override
   Widget build(BuildContext context) {
-    return ClipRRect(
-      borderRadius: BorderRadius.vertical(top: kRadius20),
-      child: Stack(
-        clipBehavior: Clip.none,
-        fit: StackFit.passthrough,
-        alignment: Alignment.bottomCenter,
-        children: [
-          Column(
-            mainAxisSize: MainAxisSize.min,
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [
-              Container(
-                height: 97,
-                color: headerColor,
-                padding: EdgeInsets.only(top: 28),
-                child: Text(
-                  widget.title,
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 16,
-                    fontFamily: "Open Sans",
-                    fontWeight: FontWeight.w600,
+    return SafeArea(
+      bottom: false,
+      child: ClipRRect(
+        borderRadius: const BorderRadius.vertical(top: kRadius20),
+        child: Stack(
+          clipBehavior: Clip.none,
+          fit: StackFit.passthrough,
+          alignment: Alignment.bottomCenter,
+          children: [
+            Column(
+              mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                Container(
+                  height: 97,
+                  color: headerColor,
+                  padding: EdgeInsets.only(top: 28),
+                  child: Text(
+                    widget.title,
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 16,
+                      fontFamily: "Open Sans",
+                      fontWeight: FontWeight.w600,
+                    ),
                   ),
                 ),
-              ),
-              Container(
-                padding: kPad16,
-                color: Colors.white,
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  crossAxisAlignment: CrossAxisAlignment.stretch,
-                  children: [
-                    kGap16,
-                    const Text(
-                      "Details",
-                      style: TextStyle(
-                        color: Color(0xff5e5873),
-                        fontSize: 16,
-                        fontFamily: "Open Sans",
-                        fontWeight: FontWeight.w600,
+                Container(
+                  padding: kPad16,
+                  color: Colors.white,
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                    children: [
+                      kGap16,
+                      const Text(
+                        "Details",
+                        style: TextStyle(
+                          color: Color(0xff5e5873),
+                          fontSize: 16,
+                          fontFamily: "Open Sans",
+                          fontWeight: FontWeight.w600,
+                        ),
                       ),
-                    ),
-                    kGap16,
-                    ...List.generate(
-                      4,
-                      (index) => _Item(),
-                    ).separator(kGap16),
-                    kGap32,
-                  ],
+                      kGap16,
+                      ...List.generate(
+                        4,
+                        (index) => _Item(),
+                      ).separator(kGap16),
+                      kGap32,
+                    ],
+                  ),
                 ),
-              ),
-            ],
-          ),
-          Positioned(
-            left: 0,
-            right: 0,
-            top: 64,
-            child: getLogo(),
-          ),
-        ],
+              ],
+            ),
+            Positioned(
+              left: 0,
+              right: 0,
+              top: 64,
+              child: getLogo(),
+            ),
+          ],
+        ),
       ),
     );
   }

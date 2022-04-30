@@ -1,30 +1,33 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <base href="$FLUTTER_BASE_HREF" />
-    <meta charset="UTF-8" />
-    <meta content="IE=Edge" http-equiv="X-UA-Compatible" />
-    <meta name="description" content="MetaShark" />
-    <meta name="google" content="notranslate" />
+<head>
+    <base href="$FLUTTER_BASE_HREF"/>
+    <meta charset="UTF-8"/>
+    <meta content="IE=Edge" http-equiv="X-UA-Compatible"/>
+    <meta name="description" content="MetaShark"/>
+    <meta name="google" content="notranslate"/>
+    <meta http-equiv="cache-control" content="no-cache"/>
+    <meta http-equiv="Pragma" content="no-cache"/>
+
     <!-- iOS meta tags & icons -->
-    <meta name="apple-mobile-web-app-capable" content="yes" />
-    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <meta name="mobile-web-app-capable" content="yes"/>
     <!--    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">-->
     <!--    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">-->
-    <meta name="apple-mobile-web-app-status-bar-style" content="default" />
-    <meta name="apple-mobile-web-app-title" content="MetaShark" />
-    <link rel="apple-touch-icon" href="icons/Icon-192.png" />
-    <link rel="icon" type="image/png" href="favicon.png" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="default"/>
+    <meta name="apple-mobile-web-app-title" content="MetaShark"/>
+    <link rel="apple-touch-icon" href="icons/Icon-192.png"/>
+    <link rel="icon" type="image/png" href="favicon.png"/>
 
     <title>MetaShark</title>
-    <link rel="manifest" href="manifest.json" />
+    <link rel="manifest" href="manifest.json"/>
     <script src="splash/splash.js"></script>
-    <link rel="stylesheet" type="text/css" href="splash/style.css" />
-    <link rel="stylesheet" href="mystyle.css" />
-    <meta id="flutterweb-theme" name="theme-color" content="#ffffff" />
+    <link rel="stylesheet" type="text/css" href="splash/style.css"/>
+    <link rel="stylesheet" href="mystyle.css"/>
+    <meta id="flutterweb-theme" name="theme-color" content="#ffffff"/>
     <meta
-      name="viewport"
-      content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no,viewport-fit=cover"
+            name="viewport"
+            content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no,viewport-fit=cover"
     />
     <style>
       :root {
@@ -33,10 +36,12 @@
         --safe-area-right: env(safe-area-inset-right);
         --safe-area-left: env(safe-area-inset-left);
       }
+
+
     </style>
-  </head>
-  <body>
-    <script>
+</head>
+<body>
+<script>
       function isInstalled() {
         // For iOS
         if (window.navigator.standalone) return true;
@@ -62,42 +67,51 @@
           window.flutterWebRenderer = "canvaskit";
         }
       }
-      console.log("web renderer: " + window.flutterWebRenderer + " / " + engine);
-    </script>
+      console.log(
+        "web renderer: " + window.flutterWebRenderer + " / " + engine
+      );
 
-    <picture id="splash">
-      <source
-        srcset="
+
+</script>
+
+<picture id="splash">
+    <source
+            srcset="
           splash/img/light-1x.png 1x,
           splash/img/light-2x.png 2x,
           splash/img/light-3x.png 3x
         "
-        media="(prefers-color-scheme: light)"
-      />
-      <source
-        srcset="
+            media="(prefers-color-scheme: light)"
+    />
+    <source
+            srcset="
           splash/img/dark-1x.png 1x,
           splash/img/dark-2x.png 2x,
           splash/img/dark-3x.png 3x
         "
-        media="(prefers-color-scheme: dark)"
-      />
-      <img
-        class="center"
-        aria-hidden="true"
-        src="splash/img/light-1x.png"
-        alt=""
-      />
-    </picture>
-    <!-- This script installs service_worker.js to provide PWA functionality to
- application. For more information, see:
- https://developers.google.com/web/fundamentals/primers/service-workers -->
-    <script>
+            media="(prefers-color-scheme: dark)"
+    />
+    <img
+            class="center"
+            aria-hidden="true"
+            src="splash/img/light-1x.png"
+            alt=""
+    />
+</picture>
+<!-- This script installs service_worker.js to provide PWA functionality to
+application. For more information, see:
+https://developers.google.com/web/fundamentals/primers/service-workers -->
+<script>
       var serviceWorkerVersion = null;
       var scriptLoaded = false;
       function loadMainDartJs() {
         window.flutterWebRenderer = engine;
-        console.log("reset engine ... web renderer: " + window.flutterWebRenderer + " / " + engine);
+        console.log(
+          "reset engine ... web renderer: " +
+            window.flutterWebRenderer +
+            " / " +
+            engine
+        );
         if (scriptLoaded) {
           return;
         }
@@ -156,9 +170,11 @@
         // Service workers not supported. Just drop the <script> tag.
         loadMainDartJs();
       }
-    </script>
 
-    <script>
+
+</script>
+
+<script>
       window.addEventListener("load", () => {
         console.log("Loaded window!");
         computeValue();
@@ -186,6 +202,8 @@
       function trace(msg) {
         console.log(msg);
       }
-    </script>
-  </body>
+
+
+</script>
+</body>
 </html>

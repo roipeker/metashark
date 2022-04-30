@@ -35,10 +35,12 @@ abstract class _WalletState extends State<WalletPage> {
   }
 
   void onTransactionTap(TransactionHistoryVo vo) {
-    context.openModalSheet(WalletDetailsSheet(
-      iconId: vo.iconId,
-      title: vo.title,
-    ));
+    context.openModalSheet(
+      WalletDetailsSheet(
+        iconId: vo.iconId,
+        title: vo.title,
+      ),
+    );
   }
 }
 
@@ -67,6 +69,7 @@ class TransactionHistoryVo {
   final String amount;
   final Color? amountColor;
   final IconData iconData;
+
   TransactionHistoryVo({
     required this.iconData,
     required this.iconId,

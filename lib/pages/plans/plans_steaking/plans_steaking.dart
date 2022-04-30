@@ -23,7 +23,6 @@ class _PlansSteakingPage extends _PlansSteakingState {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               /// build titanium card.
-
               Expanded(
                 child: PageView(
                   controller: pageController,
@@ -34,15 +33,18 @@ class _PlansSteakingPage extends _PlansSteakingState {
                     ...List.generate(
                       count,
                       (index) => Center(
-                        child: FittedBox(
-                          alignment: Alignment.center,
-                          fit: BoxFit.contain,
-                          child: SizedBox(
-                            width: 343,
-                            height: 618,
-                            child: PlanCardTitanium(
-                              onBuyTap: onBuyTap,
-                              onShowGiftsTap: onShowGifts,
+                        child: Padding(
+                          padding: kPad16,
+                          child: FittedBox(
+                            alignment: Alignment.center,
+                            fit: BoxFit.contain,
+                            child: SizedBox(
+                              width: 343,
+                              height: 618,
+                              child: PlanCardTitanium(
+                                onBuyTap: onBuyTap,
+                                onShowGiftsTap: onShowGifts,
+                              ),
                             ),
                           ),
                         ),
@@ -63,6 +65,4 @@ class _PlansSteakingPage extends _PlansSteakingState {
       ),
     );
   }
-
-
 }

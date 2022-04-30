@@ -50,6 +50,7 @@ class AppVersionWrapper extends StatelessWidget {
 
   String get versionText {
     var engine = WebUtils.getEngine();
+
     var parts = [NativeUtils.packageVersion, NativeUtils.packageBuildNumber];
     // var versions = parts.join('.').split('.');
     // var result = versions.map((e) => e.padLeft(2, '0')).join('.');
@@ -58,6 +59,12 @@ class AppVersionWrapper extends StatelessWidget {
     if (engine.isNotEmpty) {
       str = '$engine ' + str;
     }
+    // if (AppStrings.buildVersion == '#replace_build_version') {
+    //   str += '| ?';
+    // } else {
+    str += ' | ${AppStrings.buildVersion}';
+    // }
+
     return str;
   }
 

@@ -20,7 +20,7 @@ class WalletHeaderCard extends StatelessWidget {
           child: Column(
             verticalDirection: VerticalDirection.up,
             children: [
-              WalletTopCard(
+              const WalletTopCard(
                 title: "1.0000 BTC",
                 subtitle: "3 000 USDT",
                 iconId: SvgCryptos.btc,
@@ -36,13 +36,13 @@ class WalletHeaderCard extends StatelessWidget {
                       _CardButton(
                         label: 'Deposit',
                         iconData: AppIcons.wallet,
-                        iconId: SvgIcons.finance,
+                        // iconId: SvgIcons.finance,
                         onTap: onDepositTap,
                       ).exp(),
                       _CardButton(
                         label: 'Withdraw',
                         iconData: AppIcons.credit_card,
-                        iconId: SvgIcons.creditCard,
+                        // iconId: SvgIcons.creditCard,
                         onTap: onWithdrawTap,
                       ).exp(),
                     ],
@@ -59,7 +59,7 @@ class WalletHeaderCard extends StatelessWidget {
 }
 
 class _CardButton extends StatelessWidget {
-  final String iconId;
+  // final String iconId;
   final IconData iconData;
   final String label;
   final VoidCallback? onTap;
@@ -67,7 +67,7 @@ class _CardButton extends StatelessWidget {
   const _CardButton({
     Key? key,
     required this.iconData,
-    required this.iconId,
+    // required this.iconId,
     required this.label,
     this.onTap,
   }) : super(key: key);
@@ -83,7 +83,16 @@ class _CardButton extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             // SvgAvatarIcon(iconId: iconId),
-            Icon(iconData),
+            Circle(
+              alignment: null,
+              color: AppColors.primaryPurple,
+              size: 32,
+              child: Icon(
+                iconData,
+                size: 18,
+                color: Colors.white,
+              ),
+            ),
             kGap8,
             Text(label),
           ],
@@ -201,14 +210,15 @@ class WalletTopCard extends StatelessWidget {
 class TransactionHistoryItem extends StatelessWidget {
   final String title, subtitle, amount;
   final Color? amountColor;
-  final String iconId;
+
+  // final String iconId;
   final IconData iconData;
   final VoidCallback? onTap;
 
   const TransactionHistoryItem({
     Key? key,
     this.onTap,
-    required this.iconId,
+    // required this.iconId,
     required this.title,
     required this.subtitle,
     required this.iconData,
@@ -228,12 +238,12 @@ class TransactionHistoryItem extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
-                AppText(
+                Text(
                   title,
                   style: kFinanceAssetItemTitle,
                   textAlign: TextAlign.start,
                 ),
-                AppText(
+                Text(
                   subtitle,
                   style: kFinanceAssetItemSubtitle,
                   textAlign: TextAlign.start,
@@ -241,7 +251,7 @@ class TransactionHistoryItem extends StatelessWidget {
               ],
             ),
           ),
-          AppText(
+          Text(
             amount,
             textAlign: TextAlign.end,
             style: kWalletHistoryItemValueStyle.copyWith(color: amountColor),
@@ -254,15 +264,23 @@ class TransactionHistoryItem extends StatelessWidget {
   }
 
   Widget getAvatar() {
-    return SizedBox(
-      width: 32,
-      height: 32,
-      child: SvgAvatarIcon(
-        iconId: iconId,
-        iconData: iconData,
-        backgroundColor: AppColors.primaryPurple.withOpacity(.1),
-        foregroundColor: AppColors.appbarIconGrey,
-      ),
+    return AvatarIcon(
+      iconData: iconData,
+      backgroundColor: AppColors.primaryPurple10,
+      foregroundColor: AppColors.appbarIconGrey,
+      size: 32,
+      iconSize: 18,
     );
+    // return SizedBox(
+    //   width: 32,
+    //   height: 32,
+    //
+    //   child: SvgAvatarIcon(
+    //     iconId: iconId,
+    //     iconData: iconData,
+    //     backgroundColor: AppColors.primaryPurple.withOpacity(.1),
+    //     foregroundColor: AppColors.appbarIconGrey,
+    //   ),
+    // );
   }
 }

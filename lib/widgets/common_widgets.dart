@@ -726,14 +726,47 @@ class AppFadeImage extends StatelessWidget {
   }
 }
 
+class AvatarIcon extends StatelessWidget {
+  final IconData iconData;
+  final double iconSize;
+  final double size;
+  final Color? foregroundColor;
+  final Color? backgroundColor;
+
+  const AvatarIcon({
+    Key? key,
+    required this.iconData,
+    this.iconSize = 18,
+    this.size = 32,
+    this.foregroundColor,
+    this.backgroundColor,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Circle(
+      color: backgroundColor ?? context.theme.primaryColor,
+      alignment: Alignment.center,
+      size: size,
+      child: Icon(
+        iconData,
+        color: foregroundColor,
+        size: iconSize,
+      ),
+    );
+  }
+}
+
 class Circle extends StatelessWidget {
   final Color color;
   final Widget? child;
   final double size;
+  final Alignment? alignment;
 
   const Circle({
     Key? key,
     required this.color,
+    this.alignment = Alignment.center,
     this.child,
     this.size = 24,
   }) : super(key: key);
@@ -748,7 +781,7 @@ class Circle extends StatelessWidget {
         color: color,
       ),
       // padding: EdgeInsets.symmetric(horizontal: 4, vertical: 2),
-      alignment: Alignment.center,
+      alignment: alignment,
       child: child,
     );
   }
