@@ -177,6 +177,8 @@ class TeamCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
+
     return RectLayoutChangedBuilder(
       builder: (_, rect, child) {
         var ratio = rect.size.aspectRatio;

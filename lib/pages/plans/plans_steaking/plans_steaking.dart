@@ -16,49 +16,48 @@ class _PlansSteakingPage extends _PlansSteakingState {
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
-        child: Padding(
-          padding: kPad16,
-          child: Column(
-            // crossAxisAlignment: CrossAxisAlignment.stretch,
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              /// build titanium card.
-              Expanded(
-                child: PageView(
-                  controller: pageController,
-                  clipBehavior: Clip.none,
-                  scrollDirection: Axis.horizontal,
-                  pageSnapping: true,
-                  children: cards.map2(
-                        (data) => Center(
-                      child: Padding(
-                        padding: kPad16,
-                        child: FittedBox(
-                          // alignment: Alignment.center,
-                          fit: BoxFit.contain,
-                          child: SizedBox(
-                            width: 343,
-                            height: 618,
-                            child: PlanCardWidget(
-                              data: data,
-                              onBuyTap: onBuyTap,
-                              onShowGiftsTap: onShowGifts,
-                            ),
-                          ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            kGap16,
+            Expanded(
+              child: PageView(
+                controller: pageController,
+                clipBehavior: Clip.none,
+                pageSnapping: true,
+                children: cards.map2(
+                      (data) => Padding(
+                        padding: kPadH16,
+                        child: PlanCardWidget(
+                          data: data,
+                          onBuyTap: onBuyTap,
+                          onShowGiftsTap: onShowGifts,
                         ),
+                        // child: FittedBox(
+                        //   // alignment: Alignment.center,
+                        //   fit: BoxFit.contain,
+                        //   child: SizedBox(
+                        //     width: 343,
+                        //     height: 618,
+                        //     child: PlanCardWidget(
+                        //       data: data,
+                        //       onBuyTap: onBuyTap,
+                        //       onShowGiftsTap: onShowGifts,
+                        //     ),
+                        //   ),
+                        // ),
                       ),
-                    ),
-                  ),
                 ),
               ),
-              kGap16,
-              PageIndicator(
-                controller: pageController,
-                count: count,
-              ),
-              kGap16,
-            ],
-          ),
+            ),
+            kGap16,
+            PageIndicator(
+              controller: pageController,
+              count: count,
+            ),
+            kGap16,
+          ],
         ),
       ),
     );

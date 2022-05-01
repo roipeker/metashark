@@ -6,12 +6,10 @@ part 'wallet_details_modal_state.dart';
 class WalletDetailsSheet extends StatefulWidget {
   static const url = "/wallet-details-modal";
   final String title;
-  final String iconId;
 
   const WalletDetailsSheet({
     Key? key,
     required this.title,
-    required this.iconId,
   }) : super(key: key);
 
   @override
@@ -20,93 +18,61 @@ class WalletDetailsSheet extends StatefulWidget {
 
 class _WalletDetailsSheet extends _WalletDetailsSheetState {
   final bgColor = Colors.white;
-  final headerColor = Color(0xff5E5873);
+  final headerColor = const Color(0xff5E5873);
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      bottom: false,
-      child: ClipRRect(
-        borderRadius: const BorderRadius.vertical(top: kRadius20),
-        child: Stack(
+    return ScrollConfiguration(
+      behavior: AppScrollBehavior(),
+      child: Scrollbar(
+        controller: scrollController,
+        child: SingleChildScrollView(
           clipBehavior: Clip.none,
-          fit: StackFit.passthrough,
-          alignment: Alignment.bottomCenter,
-          children: [
-            Column(
-              mainAxisSize: MainAxisSize.min,
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: [
-                Container(
-                  height: 97,
-                  color: headerColor,
-                  padding: EdgeInsets.only(top: 28),
-                  child: Text(
-                    widget.title,
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 16,
-                      fontFamily: "Open Sans",
-                      fontWeight: FontWeight.w600,
-                    ),
-                  ),
-                ),
-                Container(
-                  padding: kPad16,
-                  color: Colors.white,
-                  child: Column(
-                    mainAxisSize: MainAxisSize.min,
-                    crossAxisAlignment: CrossAxisAlignment.stretch,
-                    children: [
-                      kGap16,
-                      const Text(
-                        "Details",
-                        style: TextStyle(
-                          color: Color(0xff5e5873),
-                          fontSize: 16,
-                          fontFamily: "Open Sans",
+          physics: const BouncingScrollPhysics(parent: ClampingScrollPhysics()),
+          controller: scrollController,
+          child: SafeArea(
+            bottom: false,
+            child: Container(
+              width: double.infinity,
+              margin: const EdgeInsets.only(top: 32),
+              decoration: const BoxDecoration(
+                color: AppColors.scaffold,
+                borderRadius: BorderRadius.vertical(top: Radius.circular(12)),
+              ),
+              padding: kPad16,
+              child: SafeArea(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    AppCard(
+                      padding: kPad16,
+                      elevation: 0,
+                      borderRadius: kBorderRadius8,
+                      color: AppColors.darkGrey,
+                      child: Text(
+                        widget.title,
+                        textAlign: TextAlign.center,
+                        style: const TextStyle(
+                          color: Colors.white,
+                          fontSize: 20,
                           fontWeight: FontWeight.w600,
                         ),
                       ),
-                      kGap16,
-                      ...List.generate(
-                        4,
-                        (index) => _Item(),
-                      ).separator(kGap16),
-                      kGap32,
-                    ],
-                  ),
+                    ),
+                    kGap16,
+                    ...List.generate(
+                      4,
+                          (index) => const Padding(
+                            padding: EdgeInsets.symmetric(vertical: 8.0),
+                            child: _Item(),
+                          ),
+                    ).separator(kDivider1),
+                  ],
                 ),
-              ],
+              ),
             ),
-            Positioned(
-              left: 0,
-              right: 0,
-              top: 64,
-              child: getLogo(),
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-
-  Widget getLogo() {
-    return Align(
-      alignment: Alignment.bottomCenter,
-      child: Container(
-        width: 60,
-        height: 60,
-        padding: EdgeInsets.all(4),
-        child: SvgAvatarIcon(
-          iconId: widget.iconId,
-          iconSize: 26,
-          backgroundColor: Color(0xff9E95F5),
-        ),
-        decoration: BoxDecoration(
-          color: bgColor,
-          shape: BoxShape.circle,
+          ),
         ),
       ),
     );
@@ -120,7 +86,7 @@ class _Item extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
-      children: [
+      children: const [
         Text(
           "Some kind of inscription",
           style: TextStyle(

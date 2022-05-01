@@ -37,8 +37,8 @@ abstract class _WalletState extends State<WalletPage> {
   void onTransactionTap(TransactionHistoryVo vo) {
     context.openModalSheet(
       WalletDetailsSheet(
-        iconId: vo.iconId,
-        title: vo.title,
+        // title: vo.title,
+        title: "TXID: ${vo.transactionId}",
       ),
     );
   }
@@ -47,6 +47,7 @@ abstract class _WalletState extends State<WalletPage> {
 final _kTransactionHistory = [
   TransactionHistoryVo(
     // iconId: SvgIcons.send2,
+    transactionId: '7284783742',
     iconId: SvgIcons.send2,
     iconData: AppIcons.icon_send2,
     title: 'Translation',
@@ -55,6 +56,7 @@ final _kTransactionHistory = [
     amountColor: AppColors.darkGrey,
   ),
   TransactionHistoryVo(
+    transactionId: '842222742',
     iconId: SvgIcons.binary,
     iconData: AppIcons.icon_binary,
     title: 'Income',
@@ -67,6 +69,7 @@ final _kTransactionHistory = [
 class TransactionHistoryVo {
   final String iconId, title, subtitle;
   final String amount;
+  final String transactionId;
   final Color? amountColor;
   final IconData iconData;
 
@@ -74,6 +77,7 @@ class TransactionHistoryVo {
     required this.iconData,
     required this.iconId,
     required this.title,
+    required this.transactionId,
     required this.amount,
     this.subtitle = '00:00',
     this.amountColor,

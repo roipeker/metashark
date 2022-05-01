@@ -125,7 +125,7 @@ class PlanContractCard extends StatelessWidget {
           CardLabelProgressBar(
             label: barValue,
             percent: barPercent,
-            barForegroundColor: barColor??AppColors.lightViolet,
+            barForegroundColor: barColor ?? AppColors.lightViolet,
           ),
         ],
       ),
@@ -142,6 +142,16 @@ class ContractBadge extends StatelessWidget {
     Key? key,
     required this.type,
   }) : super(key: key);
+
+  const ContractBadge.gold({
+    Key? key,
+  })  : type = kContractGold,
+        super(key: key);
+
+  const ContractBadge.bronze({
+    Key? key,
+  })  : type = kContractBronze,
+        super(key: key);
 
   @override
   Widget build(BuildContext context) {

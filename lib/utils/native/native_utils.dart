@@ -10,6 +10,7 @@ class NativeUtils {
   static bool _splashInited = false;
 
   static void initSplash() {
+    // return ;
     if (_splashInited) {
       return;
     }
@@ -20,11 +21,16 @@ class NativeUtils {
   }
 
   static void removeSplash() {
+    // return ;
     if (!_splashInited) {
       return;
     }
     _splashInited = false;
     FlutterNativeSplash.remove();
+  }
+
+  static String get buildVersion {
+    return packageVersion + '+' + packageBuildNumber;
   }
 
   static String get packageBuildNumber => _packageInfo.buildNumber;

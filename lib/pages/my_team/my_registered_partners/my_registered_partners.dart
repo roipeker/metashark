@@ -1,5 +1,4 @@
 import 'package:metashark/commons.dart';
-import 'package:metashark/pages/my_team/modals/partner_login_sheet/partner_login_sheet.dart';
 
 part 'my_registered_partners_state.dart';
 

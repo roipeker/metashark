@@ -1,21 +1,57 @@
-<svg width="311" height="56" viewBox="0 0 311 56" fill="none" xmlns="http://www.w3.org/2000/svg">
-<g clip-path="url(#clip0_672_12455)">
-<rect width="311" height="56" rx="6" fill="white" fill-opacity="0.1"/>
-<circle cx="27.5" cy="28" r="7.5" fill="#3ED0B6"/>
-<circle cx="61.5" cy="28" r="14.5" fill="#3ED0B6"/>
-<circle r="2.5" transform="matrix(1 0 0 -1 90.5 28)" fill="#3ED0B6"/>
-<circle r="2.5" transform="matrix(1 0 0 -1 107.5 28)" fill="#3ED0B6"/>
-<circle cx="129.5" cy="28" r="7.5" fill="#3ED0B6"/>
-<circle cx="163.5" cy="28" r="14.5" fill="#FE58BB"/>
-<circle cx="197.5" cy="28" r="7.5" fill="#3ED0B6"/>
-<circle cx="227.5" cy="28" r="10.5" fill="#FE58BB"/>
-<circle r="4.5" transform="matrix(1 0 0 -1 254.5 28)" fill="#3ED0B6"/>
-<circle r="4.5" transform="matrix(1 0 0 -1 275.5 28)" fill="#3ED0B6"/>
-<circle r="7.5" transform="matrix(1 0 0 -1 299.5 28)" fill="#3ED0B6"/>
-</g>
-<defs>
-<clipPath id="clip0_672_12455">
-<rect width="311" height="56" rx="6" fill="white"/>
-</clipPath>
-</defs>
+<svg width="1547" height="49" viewBox="0 0 1547 49" fill="none" xmlns="http://www.w3.org/2000/svg">
+<circle cx="7.5" cy="24.5" r="7.5" fill="#3ED0B6"/>
+<circle cx="41.5" cy="24.5" r="14.5" fill="#3ED0B6"/>
+<circle r="2.5" transform="matrix(1 0 0 -1 70.5 24.5)" fill="#3ED0B6"/>
+<circle r="2.5" transform="matrix(1 0 0 -1 87.5 24.5)" fill="#3ED0B6"/>
+<circle cx="109.5" cy="24.5" r="7.5" fill="#3ED0B6"/>
+<circle cx="143.5" cy="24.5" r="14.5" fill="#FE58BB"/>
+<circle cx="177.5" cy="24.5" r="7.5" fill="#3ED0B6"/>
+<circle cx="207.5" cy="24.5" r="10.5" fill="#FE58BB"/>
+<circle r="4.5" transform="matrix(1 0 0 -1 234.5 24.5)" fill="#3ED0B6"/>
+<circle r="4.5" transform="matrix(1 0 0 -1 255.5 24.5)" fill="#3ED0B6"/>
+<circle r="7.5" transform="matrix(1 0 0 -1 279.5 24.5)" fill="#3ED0B6"/>
+<circle cx="313.5" cy="24.5" r="14.5" fill="#3ED0B6"/>
+<circle r="7.5" transform="matrix(1 0 0 -1 347.5 24.5)" fill="#3ED0B6"/>
+<circle r="4.5" transform="matrix(1 0 0 -1 371.5 24.5)" fill="#FE58BB"/>
+<circle r="2.5" transform="matrix(1 0 0 -1 390.5 24.5)" fill="#3ED0B6"/>
+<circle r="7.5" transform="matrix(1 0 0 -1 412.5 24.5)" fill="#FE58BB"/>
+<circle r="2.5" transform="matrix(1 0 0 -1 434.5 24.5)" fill="#3ED0B6"/>
+<circle r="4.5" transform="matrix(1 0 0 -1 453.5 24.5)" fill="#FE58BB"/>
+<circle r="4.5" transform="matrix(1 0 0 -1 474.5 24.5)" fill="#3ED0B6"/>
+<circle cx="508.5" cy="24.5" r="17.5" fill="#3ED0B6"/>
+<circle cx="559.5" cy="24.5" r="21.5" fill="#FE58BB"/>
+<circle r="7.5" transform="matrix(1 0 0 -1 600.5 24.5)" fill="#3ED0B6"/>
+<circle cx="637.5" cy="24.5" r="17.5" fill="#3ED0B6"/>
+<circle r="2.5" transform="matrix(1 0 0 -1 669.5 24.5)" fill="#3ED0B6"/>
+<circle cx="698.5" cy="24.5" r="14.5" fill="#3ED0B6"/>
+<circle cx="739.5" cy="24.5" r="14.5" fill="#FE58BB"/>
+<circle r="7.5" transform="matrix(1 0 0 -1 773.5 24.5)" fill="#FE58BB"/>
+<circle r="4.5" transform="matrix(1 0 0 -1 797.5 24.5)" fill="#3ED0B6"/>
+<circle r="4.5" transform="matrix(1 0 0 -1 818.5 24.5)" fill="#FE58BB"/>
+<circle r="2.5" transform="matrix(1 0 0 -1 837.5 24.5)" fill="#3ED0B6"/>
+<circle cx="867.5" cy="24.5" r="15.5" fill="#3ED0B6"/>
+<circle cx="916.5" cy="24.5" r="21.5" fill="#3ED0B6"/>
+<circle r="2.5" transform="matrix(1 0 0 -1 952.5 24.5)" fill="#3ED0B6"/>
+<circle r="10.5" transform="matrix(1 0 0 -1 977.5 24.5)" fill="#FE58BB"/>
+<circle r="2.5" transform="matrix(1 0 0 -1 1002.5 24.5)" fill="#3ED0B6"/>
+<circle r="2.5" transform="matrix(1 0 0 -1 1019.5 24.5)" fill="#3ED0B6"/>
+<circle cx="1058.5" cy="24.5" r="24.5" fill="#3ED0B6"/>
+<circle r="7.5" transform="matrix(1 0 0 -1 1102.5 24.5)" fill="#3ED0B6"/>
+<circle r="2.5" transform="matrix(1 0 0 -1 1124.5 24.5)" fill="#3ED0B6"/>
+<circle r="7.5" transform="matrix(1 0 0 -1 1146.5 24.5)" fill="#3ED0B6"/>
+<circle cx="1181.5" cy="24.5" r="15.5" fill="#FE58BB"/>
+<circle r="7.5" transform="matrix(1 0 0 -1 1216.5 24.5)" fill="#3ED0B6"/>
+<circle r="2.5" transform="matrix(1 0 0 -1 1238.5 24.5)" fill="#3ED0B6"/>
+<circle r="2.5" transform="matrix(1 0 0 -1 1255.5 24.5)" fill="#3ED0B6"/>
+<circle cx="1284.5" cy="24.5" r="14.5" fill="#3ED0B6"/>
+<circle r="4.5" transform="matrix(1 0 0 -1 1315.5 24.5)" fill="#3ED0B6"/>
+<circle r="4.5" transform="matrix(1 0 0 -1 1336.5 24.5)" fill="#3ED0B6"/>
+<circle r="7.5" transform="matrix(1 0 0 -1 1360.5 24.5)" fill="#FE58BB"/>
+<circle r="7.5" transform="matrix(1 0 0 -1 1387.5 24.5)" fill="#FE58BB"/>
+<circle cx="1422.5" cy="24.5" r="15.5" fill="#3ED0B6"/>
+<circle r="7.5" transform="matrix(1 0 0 -1 1457.5 24.5)" fill="#FE58BB"/>
+<circle r="4.5" transform="matrix(1 0 0 -1 1481.5 24.5)" fill="#3ED0B6"/>
+<circle r="2.5" transform="matrix(1 0 0 -1 1500.5 24.5)" fill="#FE58BB"/>
+<circle r="7.5" transform="matrix(1 0 0 -1 1522.5 24.5)" fill="#FE58BB"/>
+<circle r="2.5" transform="matrix(1 0 0 -1 1544.5 24.5)" fill="#3ED0B6"/>
 </svg>

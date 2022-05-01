@@ -84,7 +84,7 @@ class CommonAppBar extends StatelessWidget implements PreferredSizeWidget {
   Widget build(BuildContext context) {
     final menu = RootMenu.of(context);
     final hasDrawer = menu != null;
-    late Widget? leading;
+    Widget? leading;
     var can = context.canPop();
     if (can) {
       /// show back button.
@@ -97,7 +97,7 @@ class CommonAppBar extends StatelessWidget implements PreferredSizeWidget {
       leading = IconButton(
         icon: const Icon(Icons.menu),
         onPressed: () {
-          menu.open();
+          menu.openDrawer();
         },
       );
     }

@@ -3,11 +3,14 @@ import 'package:metashark/commons.dart';
 class CircularPercent extends StatelessWidget {
   final double percent, size;
   final Widget child;
+  final Color foregroundColor, borderColor;
 
   const CircularPercent({
     Key? key,
     this.percent = 0.4,
     this.size = 56,
+    this.foregroundColor = AppColors.primaryPurple,
+    this.borderColor = Colors.grey,
     required this.child,
   }) : super(key: key);
 
@@ -21,6 +24,8 @@ class CircularPercent extends StatelessWidget {
         isComplex: false,
         foregroundPainter: _CircularPercentStarPainter(
           percent: percent,
+          foregroundColor: foregroundColor,
+          borderColor: borderColor,
         ),
         child: Center(child: child),
       ),
@@ -30,8 +35,13 @@ class CircularPercent extends StatelessWidget {
 
 class _CircularPercentStarPainter extends CustomPainter {
   final double percent;
+  final Color foregroundColor, borderColor;
 
-  _CircularPercentStarPainter({this.percent = 0.5});
+  _CircularPercentStarPainter({
+    this.percent = 0.5,
+    this.foregroundColor = AppColors.primaryPurple,
+    this.borderColor = const Color(0xffDBDFF1),
+  });
 
   @override
   void paint(Canvas canvas, Size size) {
@@ -40,12 +50,12 @@ class _CircularPercentStarPainter extends CustomPainter {
     /// inside ?
 
     final paint1 = Paint();
-    paint1.color = const Color(0xffDBDFF1);
+    paint1.color = borderColor;
     paint1.style = PaintingStyle.stroke;
     paint1.strokeWidth = 2;
 
     final paint2 = Paint();
-    paint2.color = AppColors.primaryPurple;
+    paint2.color = foregroundColor;
     paint2.style = PaintingStyle.stroke;
     paint2.strokeWidth = 5;
     paint2.strokeCap = StrokeCap.round;
@@ -68,11 +78,17 @@ class _CircularPercentStarPainter extends CustomPainter {
 
 class CircularPercentStar extends StatelessWidget {
   final double percent, size;
+  final Color foregroundColor;
+  final TextStyle? style;
+  final Color borderColor;
 
   const CircularPercentStar({
     Key? key,
     required this.percent,
     required this.size,
+    this.foregroundColor = AppColors.primaryPurple,
+    this.style,
+    this.borderColor = const Color(0xffDBDFF1),
   }) : super(key: key);
 
   @override
@@ -80,8 +96,12 @@ class CircularPercentStar extends StatelessWidget {
     return CircularPercent(
       percent: percent,
       size: size,
+      borderColor: borderColor,
+      foregroundColor: foregroundColor,
       child: _CircularTitleStar(
         percent: percent,
+        style: style,
+        iconColor: foregroundColor,
       ),
     );
   }
@@ -90,8 +110,15 @@ class CircularPercentStar extends StatelessWidget {
 /// child for circular preloader.
 class _CircularTitleStar extends StatelessWidget {
   final double percent;
+  final TextStyle? style;
+  final Color iconColor;
 
-  const _CircularTitleStar({Key? key, required this.percent}) : super(key: key);
+  const _CircularTitleStar({
+    Key? key,
+    this.style,
+    this.iconColor = AppColors.primaryPurple,
+    required this.percent,
+  }) : super(key: key);
 
   String get percentString =>
       (percent * 100).round().toString().padLeft(2, '0');
@@ -101,7 +128,12 @@ class _CircularTitleStar extends StatelessWidget {
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        const Icon(AppIcons.star_2, color: AppColors.primaryPurple, size: 12),
+        Icon(
+          AppIcons.star_2,
+          // color: AppColors.primaryPurple,
+          color: iconColor,
+          size: 12,
+        ),
         const Gap(3),
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -112,19 +144,19 @@ class _CircularTitleStar extends StatelessWidget {
               textAlign: TextAlign.center,
               style: TextStyle(
                 height: 1,
-                color: AppColors.appbarIconGrey,
+                // color: AppColors.appbarIconGrey,
                 fontSize: 19,
                 fontWeight: FontWeight.w600,
-              ),
+              ).merge(style),
             ),
             Text(
               "%",
               style: TextStyle(
-                color: AppColors.appbarIconGrey,
+                // color: AppColors.appbarIconGrey,
                 fontSize: 10.11,
                 height: 1,
                 fontWeight: FontWeight.w600,
-              ),
+              ).merge(style),
             ),
           ],
         ),

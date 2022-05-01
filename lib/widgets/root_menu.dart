@@ -65,7 +65,7 @@ class RootMenuState extends State<RootMenu> {
     );
   }
 
-  void open() {
+  void openDrawer() {
     final _state = kRootMenuKey.currentState;
     if (_state != null) {
       if (!_state.isDrawerOpen) {

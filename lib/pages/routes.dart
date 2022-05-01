@@ -27,8 +27,8 @@ Widget fadeTransition(BuildContext context, Animation<double> animation,
 
 GoRouterState? routerLastState;
 final router = GoRouter(
-  // urlPathStrategy: UrlPathStrategy.hash,
-  urlPathStrategy: UrlPathStrategy.path,
+  urlPathStrategy: UrlPathStrategy.hash,
+  // urlPathStrategy: UrlPathStrategy.path,
   initialLocation: '/',
   redirect: (state) {
     /// mock up user!
@@ -60,14 +60,16 @@ final router = GoRouter(
       if (!appData.isLogged) {
         return state.namedLocation(LoginPage.name);
       } else {
-        return state.namedLocation(HomePage.url);
+        return null ;
+        // return state.namedLocation(HomePage.url);
       }
     }
 
     if (_isLoginRoute(state)) {
       if (appData.isLogged) {
         // query param in URL. Go to dashboard!
-        return state.namedLocation(HomePage.url);
+        // return state.namedLocation(HomePage.url);
+        return '/';
       }
     } else {
       if (!appData.isLogged) {
@@ -163,7 +165,7 @@ final router = GoRouter(
 
     /// ROOT stuffs.
     GoRoute(
-      path: '/dashboard',
+      path: '/',
       name: HomePage.url,
       builder: (_, state) => const HomePage(),
       // redirect: _redirectComingSoon,
@@ -347,7 +349,7 @@ final router = GoRouter(
       name: SteakingContractPage.url,
       builder: (_, state) {
         final id = state.params['id'] ?? '';
-        if(id.isEmpty){
+        if (id.isEmpty) {
           throw Exception("Invalid contract id");
         }
         return SteakingContractPage(

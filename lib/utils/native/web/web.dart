@@ -1,8 +1,10 @@
 import 'dart:async';
+import 'dart:convert';
 import 'dart:html' as html;
 import 'dart:js' as js;
 
 import 'package:flutter/scheduler.dart';
+import 'package:http/http.dart' as http;
 import 'package:metashark/commons.dart';
 
 void trace2(
@@ -46,17 +48,10 @@ abstract class WebUtils {
     div.addEventListener('touchstart', _onTouch, true);
 
     /// inject viewport!
-    var viewportContent =
-        'width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0,viewport-fit=cover';
     SchedulerBinding.instance?.addPostFrameCallback((timeStamp) {
-      Timer(2000.milliseconds, () {
-        var views = html.document.getElementsByName("viewport");
-        if (views.isNotEmpty) {
-          var e = views.first;
-          if (e is html.Element) {
-            e.setAttribute('content', viewportContent);
-          }
-        }
+      Timer(1000.milliseconds, () {
+        _updateViewport();
+        _startUpdateChecker();
       });
     });
 
@@ -91,6 +86,8 @@ abstract class WebUtils {
             "window resize: ", html.window.innerWidth, html.window.innerHeight);
       });
     }
+
+    // Periodic timer to check if there's a new version.
     // trace2("Is safari ios: ${isSafariIos()}");
     // if (isSafariIos()) {
     //   html.window.addEventListener('focusout', _removeFocus);
@@ -100,7 +97,7 @@ abstract class WebUtils {
   static String getEngine() {
     // js.allowInterop()
     var res = js.context.callMethod('getEngine');
-    if(res!=null){
+    if (res != null) {
       return 'engine ' + res.toString();
     }
     return '';
@@ -147,6 +144,7 @@ abstract class WebUtils {
       var touch = a.screen;
       var ratio = html.window.devicePixelRatio;
       trace2("Window ratio: ", ratio);
+
       /// considere the notch in landscape.
       if (touch.x < 30 * ratio) {
         trace2("Cancel back history.");
@@ -183,84 +181,92 @@ abstract class WebUtils {
     var res = js.context.callMethod('computeValue');
     trace('computeSafeArea() $res');
   }
+
+  static void _updateViewport() {
+    var views = html.document.getElementsByName("viewport");
+    if (views.isNotEmpty) {
+      var e = views.first;
+      if (e is html.Element) {
+        const viewportContent =
+            'width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0,viewport-fit=cover';
+        e.setAttribute('content', viewportContent);
+      }
+    }
+  }
+
+  static Timer? _updateCheckTimer;
+  static int updateCheckerDelay = 10;
+
+  static void _cancelUpdateChecker() {
+    if (_updateCheckTimer?.isActive == true) {
+      trace2('canceling update checker');
+      _updateCheckTimer?.cancel();
+    }
+  }
+
+  static void _startUpdateChecker() {
+    _cancelUpdateChecker();
+    // if(AppStrings.buildVersion=='#replace_build'){
+    if (AppStrings.isDev) {
+      trace2('Using dev/local version. No need for update checker');
+      return;
+    }
+    trace2('_startUpdateChecker in $updateCheckerDelay seconds');
+    _updateCheckTimer = Timer(
+      Duration(seconds: updateCheckerDelay),
+      _requestUpdateCheck,
+    );
+  }
+
+  static FutureOr _requestAppRefresh() {
+    trace2('_requestAppRefresh');
+    html.window.location.reload();
+  }
+
+  static FutureOr _requestUpdateCheck() async {
+    trace2('_requestUpdateCheck');
+    try {
+      final remoteVersion = await _getVersion();
+      trace2("Got remote version $remoteVersion");
+      if (AppStrings.buildVersion != remoteVersion) {
+        _requestAppRefresh();
+      } else {
+        trace2("no updates");
+        _startUpdateChecker();
+      }
+    } catch (e) {
+      trace2("Error requesting version: $e");
+    }
+  }
+
 //
 // static bool isSafariIos() =>
 //     WebDeviceInfo.isIOS() && WebDeviceInfo.isSafari();
 // static bool isChromeIos() => WebDeviceInfo.isChromeInIOS();
+
+  static final _httpClient = http.Client();
+
+  static Future<String> _getVersion() async {
+    final res = await _httpClient.get(_versionJsonUrl());
+    if (res.statusCode == 200) {
+      var map = jsonDecode(utf8.decode(res.bodyBytes)) as Map<String, dynamic>;
+      final version = map['version'];
+      final build = map['build_number'];
+      return version + '+' + build;
+    } else {
+      return '';
+    }
+  }
+
+  /// Get version.json full url.
+  static Uri _versionJsonUrl() {
+    final baseUrl = html.window.document.baseUri!;
+    final cacheBuster = DateTime.now().millisecondsSinceEpoch;
+    final baseUri = Uri.parse(baseUrl);
+    final originPath = '${baseUri.origin}${baseUri.path}';
+    final versionJson = 'version.json?cachebuster=$cacheBuster';
+    return Uri.parse(originPath.endsWith('/')
+        ? '$originPath$versionJson'
+        : '$originPath/$versionJson');
+  }
 }
-
-// class DeviceUtils {
-//   static bool get isMacOs => _nav.platform.toLowerCase().contains('MacI');
-//   static bool get isWindows => _nav.platform.toLowerCase().contains('MacI');
-//   static bool get isIphone => _nav.platform.toLowerCase().contains('MacI');
-// }
-
-//
-//
-// // ignore: avoid_classes_with_only_static_members
-// class GeneralPlatform {
-//   static bool get isWeb => true;
-//
-//   static bool get isMacOS =>
-//       _navigator.appVersion.contains('Mac OS') && !GeneralPlatform.isIOS;
-//
-//   static bool get isWindows => _navigator.appVersion.contains('Win');
-//
-//   static bool get isLinux =>
-//       (_navigator.appVersion.contains('Linux') ||
-//           _navigator.appVersion.contains('x11')) &&
-//           !isAndroid;
-//
-//   // @check https://developer.chrome.com/multidevice/user-agent
-//   static bool get isAndroid => _navigator.appVersion.contains('Android ');
-//
-//   static bool get isIOS {
-//     final rx = RegExp(r'/iPad|iPhone|iPod/');
-//     rx.hasMatch(input)
-//     // maxTouchPoints is needed to separate iPad iOS13 vs new MacOS
-//     return GetUtils.hasMatch(_navigator.platform, ) ||
-//         (_navigator.platform == 'MacIntel' && _navigator.maxTouchPoints! > 1);
-//   }
-//
-//   static bool get isFuchsia => false;
-//
-//   static bool get isDesktop => isMacOS || isWindows || isLinux;
-// }
-//
-//
-//
-// abstract class WebDeviceInfo {
-//   static bool isChromeInIOS() {
-//     return isIOS() && !isSafari();
-//   }
-//
-//   static String get ua => html.window.navigator.userAgent.toLowerCase();
-//
-//   static bool isSafari() {
-//     if (ua.contains('crios')) {
-//       return false;
-//     }
-//     return js.context.callMethod('isSafari', []);
-//   }
-//
-//   static String getOSInsideWeb() {
-//     final userAgent = ua;
-//     if (userAgent.contains('iphone')) return 'ios';
-//     if (userAgent.contains('ipad')) return 'ios';
-//     if (userAgent.contains('android')) return 'Android';
-//     return 'Web';
-//   }
-//
-//   static int? get iosVersion {
-//     if (!isIOS()) {
-//       return null;
-//     }
-//     final versionPart = ua.split('version/')[1];
-//     return int.tryParse(versionPart.substring(0, versionPart.indexOf('.'))) ??
-//         -1;
-//   }
-//
-//   static bool isIOS() {
-//     return getOSInsideWeb() == 'ios';
-//   }
-// }

@@ -4,8 +4,11 @@ class _QuestCard extends StatelessWidget {
   final String title;
   final VoidCallback? onShowGiftsTap;
 
-  const _QuestCard({Key? key, required this.title, this.onShowGiftsTap})
-      : super(key: key);
+  const _QuestCard({
+    Key? key,
+    required this.title,
+    this.onShowGiftsTap,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -14,6 +17,7 @@ class _QuestCard extends StatelessWidget {
       fontSize: 14,
       fontWeight: FontWeight.w600,
     );
+
     const cardLabelTitleStyle = TextStyle(
       color: Color(0xff5e5873),
       fontSize: 14,
@@ -30,9 +34,9 @@ class _QuestCard extends StatelessWidget {
             title, //"Quest “KING”",
             textAlign: TextAlign.center,
             style: const TextStyle(
-              color: Color(0xff5e5873),
+              color: AppColors.primaryPurple,
               fontSize: 16,
-              fontWeight: FontWeight.w600,
+              fontWeight: FontWeight.w700,
             ),
           ),
           kGap16,

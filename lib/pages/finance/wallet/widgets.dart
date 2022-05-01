@@ -16,7 +16,7 @@ class WalletHeaderCard extends StatelessWidget {
       padding: kPadH16,
       child: Center(
         child: SizedBox(
-          width: 343,
+          // width: 343,
           child: Column(
             verticalDirection: VerticalDirection.up,
             children: [
@@ -117,8 +117,8 @@ class WalletTopCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: 343,
-      height: 187,
+      // width: 343,
+      // height: 187,
       decoration: BoxDecoration(
         borderRadius: kBorderRadius12,
         boxShadow: [
@@ -192,11 +192,21 @@ class WalletTopCard extends StatelessWidget {
             ],
           ),
           kGap10,
-          FittedBox(
-            child: SvgPicture.asset(
-              Svgs.walletBubbleChart,
-              width: 311,
-              height: 56,
+          Container(
+            height: 49,
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(6),
+              color: Colors.white10,
+            ),
+            padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 6),
+            child: Center(
+              child: SvgPicture.asset(
+                Svgs.walletBubbleChart,
+                fit: BoxFit.cover,
+                alignment: Alignment.topLeft,
+                // width: 311,
+                // height: 56,
+              ),
             ),
           ),
         ],

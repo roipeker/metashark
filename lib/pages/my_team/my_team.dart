@@ -1,8 +1,6 @@
 import 'package:metashark/commons.dart';
 import 'package:metashark/pages/my_team/my_team_search.dart';
 
-import 'modals/modals.dart';
-
 part 'my_team_state.dart';
 
 part 'widgets.dart';
@@ -52,12 +50,12 @@ class _MyTeamPage extends _MyTeamState {
                 kGap16,
                 SafeArea(
                   child: const TeamCard(
-                    title: "Моя команда",
-                    label1: 'Партнеры',
+                    title: "My team",
+                    label1: 'Partners',
                     value1: '12',
-                    label2: 'Структура',
+                    label2: 'Structure',
                     value2: '10 000',
-                    label3: 'Активные',
+                    label3: 'Active',
                     value3: '3890',
                   ).paddingSymmetric(horizontal: 16),
                 ),

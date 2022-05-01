@@ -12,14 +12,14 @@ class _Title extends StatelessWidget {
           child: Row(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              CommonAvatar(
+              const CommonAvatar(
                 radius: 40 / 2,
                 label: 'F',
               ),
               kGap16,
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
+                children: const [
                   Text(
                     "First & last name",
                     style: TextStyle(
@@ -41,49 +41,50 @@ class _Title extends StatelessWidget {
             ],
           ),
         ),
-        _TitleBadge(),
+        const ContractBadge.bronze(),
+        // _TitleBadge(),
       ],
     );
   }
 }
-
-class _TitleBadge extends StatelessWidget {
-  const _TitleBadge({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(4),
-        gradient: LinearGradient(
-          begin: Alignment.topLeft,
-          end: Alignment.bottomRight,
-          colors: [Color(0xfff595e0), Color(0xffd468a9)],
-        ),
-      ),
-      padding: const EdgeInsets.symmetric(
-        horizontal: 6,
-        vertical: 4,
-      ),
-      child: Row(
-        mainAxisSize: MainAxisSize.min,
-        mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: const [
-          Text(
-            "BRONZE",
-            style: TextStyle(
-              color: Colors.white,
-              fontSize: 14,
-              fontFamily: "Open Sans",
-              fontWeight: FontWeight.w600,
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-}
+//
+// class _TitleBadge extends StatelessWidget {
+//   const _TitleBadge({Key? key}) : super(key: key);
+//
+//   @override
+//   Widget build(BuildContext context) {
+//     return Container(
+//       decoration: BoxDecoration(
+//         borderRadius: BorderRadius.circular(4),
+//         gradient: LinearGradient(
+//           begin: Alignment.topLeft,
+//           end: Alignment.bottomRight,
+//           colors: [Color(0xfff595e0), Color(0xffd468a9)],
+//         ),
+//       ),
+//       padding: const EdgeInsets.symmetric(
+//         horizontal: 6,
+//         vertical: 4,
+//       ),
+//       child: Row(
+//         mainAxisSize: MainAxisSize.min,
+//         mainAxisAlignment: MainAxisAlignment.center,
+//         crossAxisAlignment: CrossAxisAlignment.center,
+//         children: const [
+//           Text(
+//             "BRONZE",
+//             style: TextStyle(
+//               color: Colors.white,
+//               fontSize: 14,
+//               fontFamily: "Open Sans",
+//               fontWeight: FontWeight.w600,
+//             ),
+//           ),
+//         ],
+//       ),
+//     );
+//   }
+// }
 
 class _Boss extends StatelessWidget {
   const _Boss({Key? key}) : super(key: key);
@@ -93,7 +94,7 @@ class _Boss extends StatelessWidget {
     return Row(
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
-        Text(
+        const Text(
           "BOSS",
           style: TextStyle(
             color: Color(0xff5e5873),
@@ -103,7 +104,7 @@ class _Boss extends StatelessWidget {
           ),
         ),
         kGap16,
-        StarRating(),
+        const StarRating(),
       ],
     );
   }

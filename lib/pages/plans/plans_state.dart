@@ -57,7 +57,8 @@ const kContractBronze = ContractTypeData(
   name: 'BRONZE',
   type: ContractType.bronze,
   gradient: LinearGradient(
-    colors: [Color(0xffF595E0), Color(0xffD468A9)],
+    // colors: [Color(0xffF595E0), Color(0xffD468A9)],
+    colors: [Color(0xffC9915B), Color(0xffAF7741)],
     begin: Alignment.topLeft,
     end: Alignment.bottomRight,
   ),

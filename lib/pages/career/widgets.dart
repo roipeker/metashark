@@ -213,7 +213,7 @@ class _CareerListItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return AppMaterialButton(
+    return AppMaterialButton.noElevation(
       onTap: onTap,
       color: Colors.white,
       padding: kPadH16V8,

@@ -14,23 +14,13 @@ class ReferralLoginSheet extends StatefulWidget {
 class _ReferralLoginSheet extends _ReferralLoginSheetState {
   @override
   Widget build(BuildContext context) {
-    // final mq = context.mediaQuery;
-    // var str = [mq.padding, mq.viewInsets, mq.viewPadding].join(',');
-    // trace('2 - $str');
-    // trace2('2 - $str');
-    /// [🦈] EdgeInsets(0.0, 47.0, 0.0, 34.0), EdgeInsets.zero, EdgeInsets(0.0, 47.0, 0.0, 34.0)
-    /// open keyboard.
-    /// [🦈] EdgeInsets(0.0, 47.0, 0.0, 34.0), EdgeInsets.zero, EdgeInsets(0.0, 47.0, 0.0, 34.0)
-    // [🦈] EdgeInsets(0.0, 47.0, 0.0, 32.1), EdgeInsets.zero, EdgeInsets(0.0, 47.0, 0.0, 32.1)
-    // [🦈] EdgeInsets(0.0, 47.0, 0.0, 11.2), EdgeInsets.zero, EdgeInsets(0.0, 47.0, 0.0, 11.2)
-    // [🦈] EdgeInsets(0.0, 47.0, 0.0, 0.0), EdgeInsets.zero, EdgeInsets(0.0, 47.0, 0.0, 0.0)
-
-    // mq.padding;
-    // mq.viewInsets;
     return IntrinsicHeight(
       child: Container(
         width: double.infinity,
-        color: Colors.white,
+        decoration: const BoxDecoration(
+          color: AppColors.scaffold,
+          borderRadius: BorderRadius.vertical(top: Radius.circular(12)),
+        ),
         padding: kPad16,
         child: SafeArea(
           child: Column(

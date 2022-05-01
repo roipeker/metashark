@@ -28,15 +28,27 @@ abstract class _HomeState extends State<HomePage> {
     );
   }
 
-  void onTopCardTap() {
-    // context.openModalSheet(ReferralLoginSheet());
+  void onMyUserTap() {
+    context.openModalSheet(const ReferralLoginSheet());
   }
 
-  void onItemTap() {
-    // context.openModalSheet(PartnerInfoSheetView());
+  void onMyPackageTap() {
+    context.goNamed(PlansPage.url);
   }
 
+  void onMyTeamTap() {
+    context.goNamed(MyTeamPage.url);
+  }
 
-  void onSearchTap() {}
+  void onMyRankTap() {
+    context.goNamed(CareerPage.url);
+  }
 
+  void onMyPlanInfoTap() {
+    context.goNamed(SteakingPage.url);
+  }
+
+  void onMyOfficeTap() {
+    context.go('/plans/tab/subscribe');
+  }
 }

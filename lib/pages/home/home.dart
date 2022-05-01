@@ -1,6 +1,7 @@
 import 'package:metashark/commons.dart';
 
 part 'home_state.dart';
+part 'widgets.dart';
 
 class HomePage extends StatefulWidget {
   static const url = "Dashboard";
@@ -34,37 +35,54 @@ class _HomePage extends _HomeState {
                 children: [
                   kGap16,
                   UserTopCardShare(
-                    onTap: onTopCardTap,
-                    onShareTap: onShareTap,
+                    // onShareTap: onShareTap,
                     title: 'First & last name',
                     subtitle: 'Login',
                     imageUrl: '',
                     rating: 5,
+                    onTap: onMyUserTap,
                   ),
                   kGap16,
-                  const TeamCard(
-                    title: "Моя команда",
-                    label1: 'Партнеры',
+                  _MyTeamWidget(
+                    title: "My team",
+                    label1: 'Partners',
                     value1: '12',
-                    label2: 'Структура',
+                    label2: 'Structure',
                     value2: '10 000',
-                    label3: 'Активные',
+                    label3: 'Active',
                     value3: '3890',
+                    onTap: onMyTeamTap,
                   ),
                   kGap16,
-                  const DashboardTitleCard(
+                  _MyPackageWidget(
+                    data: kPackageTitanium,
+                    onTap: onMyPackageTap,
+                  ),
+                  kGap16,
+                  _MyRankWidget(
+                    onTap: onMyRankTap,
+                    rating: 4,
+                    category: 'BOSS',
+                    nextCategory: 'KING',
+                    nextRating: 5,
+                    percent: 0.85,
+                  ),
+                  kGap16,
+                  _MyPlanInfoWidget(
+                    onTap: onMyPlanInfoTap,
                     title: "My Plan’s Info",
-                    children: [
-                      CardRowTitle(
-                        label: "Total earned",
-                        value: "32 000 MTS",
-                      ),
-                      kGap16,
-                      CardRowTitle(
-                        label: "Total in Stalking",
-                        value: "32 000 MTS",
-                      ),
-                    ],
+                    earned: "32 000 MTS",
+                    stalking: "32 000 MTS",
+                  ),
+                  kGap16,
+                  _MyOfficeWidget(
+                    onTap: onMyOfficeTap,
+                    title: "My office",
+                    barPercent: 0.7,
+                    color: AppColors.green,
+                    barLabel: '347 days',
+                    status: 'Active',
+                    subtitle: 'Activated: 04/23/2022',
                   ),
                   kGap16,
                 ],

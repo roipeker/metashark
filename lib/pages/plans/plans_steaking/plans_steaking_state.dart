@@ -4,7 +4,7 @@ abstract class _PlansSteakingState extends State<PlansSteakingPage> {
 
   final pageController = PageController(
     initialPage: 0,
-    viewportFraction: 0.8,
+    // viewportFraction: 0.8,
   );
 
   List<PlanCardVo> get cards => _kCards;
@@ -31,15 +31,15 @@ abstract class _PlansSteakingState extends State<PlansSteakingPage> {
 }
 
 final _kCards = [
-  _kPlatinum,
-  _kBronze,
-  _kPlatinum,
-  _kBronze,
-  _kPlatinum,
-  _kBronze,
+  kPackageTitanium,
+  kPackageBronze,
+  kPackageTitanium,
+  kPackageBronze,
+  kPackageTitanium,
+  kPackageBronze,
 ];
 
-const _kPlatinum = PlanCardVo(
+const kPackageTitanium = PlanCardVo(
   tokenBonus: '+5%',
   staking: '36% year',
   lockup: '12 months',
@@ -53,7 +53,7 @@ const _kPlatinum = PlanCardVo(
   colors: [Color(0xff29518d), Color(0xff1c3d6d)],
 );
 
-const _kBronze = PlanCardVo(
+const kPackageBronze = PlanCardVo(
   tokenBonus: '+5%',
   staking: '36% year',
   lockup: '12 months',

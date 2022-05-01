@@ -29,21 +29,21 @@ class _PartnerInfoSheetView extends _PartnerInfoSheetState {
               kDivider1,
               kGap16,
               TeamRowCard(
-                label: 'Партнеры',
+                label: 'Partners',
                 value: '12',
                 iconData: AppIcons.person,
                 brightness: Brightness.light,
               ),
               kGap16,
               TeamRowCard(
-                label: 'Структура',
+                label: 'Structure',
                 value: '10 000',
                 iconData: AppIcons.people,
                 brightness: Brightness.light,
               ),
               kGap16,
               TeamRowCard(
-                label: 'Активные',
+                label: 'Active',
                 value: '3890',
                 iconData: AppIcons.power_settings_new,
                 brightness: Brightness.light,
@@ -57,7 +57,7 @@ class _PartnerInfoSheetView extends _PartnerInfoSheetState {
                     height: 44,
                     child: OutlinedButton(
                       onPressed: onShowCommandTap,
-                      child: const Text('Отобразить команду'),
+                      child: const Text('Display command'),
                     ),
                   ).exp(),
                   kGap16,
@@ -65,7 +65,7 @@ class _PartnerInfoSheetView extends _PartnerInfoSheetState {
                     height: 44,
                     child: OutlinedButton(
                       onPressed: onGoBinaryTap,
-                      child: const Text('Перейти в бинар'),
+                      child: const Text('Go to Binary'),
                     ),
                   ).exp(),
                 ],

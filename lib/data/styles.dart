@@ -223,15 +223,27 @@ const kTextAccessoryStyle = TextStyle(
   fontWeight: FontWeight.w600,
 );
 
+const kBoxShadow10 = [
+  BoxShadow(
+    color: Color(0x33cfcfcf),
+    blurRadius: 6 / 2,
+    offset: Offset(0, 10),
+  ),
+  BoxShadow(
+    color: Color(0x4ccfcfcf),
+    blurRadius: 10 / 2,
+    offset: Offset(2, 1),
+  ),
+];
 const kBoxShadow4 = [
   BoxShadow(
     color: Color(0x1e5e5873),
-    blurRadius: 8,
+    blurRadius: 8 / 2,
     offset: Offset(0, 4),
   ),
   BoxShadow(
     color: Color(0x195e5873),
-    blurRadius: 3,
+    blurRadius: 3 / 2,
     offset: Offset(0, 2),
   ),
 ];

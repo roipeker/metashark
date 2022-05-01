@@ -50,11 +50,11 @@ class AppVersionWrapper extends StatelessWidget {
 
   String get versionText {
     var engine = WebUtils.getEngine();
-
-    var parts = [NativeUtils.packageVersion, NativeUtils.packageBuildNumber];
+    // var parts = [NativeUtils.packageVersion, NativeUtils.packageBuildNumber];
     // var versions = parts.join('.').split('.');
     // var result = versions.map((e) => e.padLeft(2, '0')).join('.');
-    var result = parts.join('.');
+    // var result = parts.join('.');
+    var result = NativeUtils.buildVersion;
     var str = 'v.' + result;
     if (engine.isNotEmpty) {
       str = '$engine ' + str;
@@ -62,9 +62,8 @@ class AppVersionWrapper extends StatelessWidget {
     // if (AppStrings.buildVersion == '#replace_build_version') {
     //   str += '| ?';
     // } else {
-    str += ' | ${AppStrings.buildVersion}';
+    // str += ' | ${AppStrings.buildVersion}';
     // }
-
     return str;
   }
 
@@ -134,7 +133,8 @@ class _SafeAreaWebFixerState extends State<SafeAreaWebFixer> {
 
   @override
   void initState() {
-    0.5.seconds.delay(() {
+
+    1.5.seconds.delay(() {
       update();
     });
 

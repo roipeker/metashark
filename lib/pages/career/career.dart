@@ -1,5 +1,4 @@
 import 'package:metashark/commons.dart';
-import 'package:metashark/pages/my_team/modals/modals.dart';
 
 part 'career_state.dart';
 
@@ -65,6 +64,7 @@ class _CareerPage extends _CareerState {
                     onTap: () => onItemTap(),
                   ),
                 ).separator(kGap1),
+                kGap16,
               ],
             ),
           ),
