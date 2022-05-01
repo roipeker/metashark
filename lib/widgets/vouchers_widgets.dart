@@ -92,10 +92,7 @@ class VoucherLogItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return AppMaterialButton.noElevation(
-      padding: kPad8,
-      color: Colors.white,
-      shape: kBorder8,
+    return LogBorderButton(
       onTap: onTap,
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.center,
@@ -137,4 +134,35 @@ class VoucherLogItem extends StatelessWidget {
 }
 
 // --
+class LogBorderButton extends StatelessWidget {
+  final Widget child;
+  final VoidCallback? onTap;
 
+  const LogBorderButton({Key? key, required this.child, this.onTap})
+      : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      foregroundDecoration: BoxDecoration(
+        borderRadius: kBorderRadius8,
+        border: Border.all(color: AppColors.darkGrey12, width: 1),
+      ),
+      child: MaterialButton(
+        padding: EdgeInsets.zero,
+        color: Colors.white,
+        shape: kBorder8,
+        elevation: 0,
+        disabledElevation: 0,
+        focusElevation: 0,
+        hoverElevation: 0,
+        highlightElevation: 0,
+        onPressed: onTap,
+        child: Padding(
+          padding: kPad8,
+          child: child,
+        ),
+      ),
+    );
+  }
+}

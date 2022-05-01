@@ -34,6 +34,7 @@ export "my_team/my_team.dart";
 export "my_team/my_registered_partners/my_registered_partners.dart";
 export "store/store.dart";
 export "steaking/steaking.dart";
+export "steaking/steaking_contract/steaking_contract.dart";
 export "quest/quest.dart";
 export "roulette/roulette.dart";
 export "plans/plans.dart";

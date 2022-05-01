@@ -17,5 +17,8 @@ abstract class _SteakingState extends State<SteakingPage> {
     scrollController.dispose();
     super.dispose();
   }
-}
 
+  void onContractTap(String contractId) {
+    context.pushNamed(SteakingContractPage.url, params: {'id': contractId});
+  }
+}

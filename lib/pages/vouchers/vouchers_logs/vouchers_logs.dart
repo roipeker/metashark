@@ -13,7 +13,7 @@ class VouchersLogsPage extends StatefulWidget {
 }
 
 class _VouchersLogsPage extends _VouchersLogsState {
-  final GlobalKey refKey = GlobalKey();
+  // final GlobalKey refKey = GlobalKey();
 
   @override
   Widget build(BuildContext context) {
@@ -47,39 +47,32 @@ class _VouchersLogsPage extends _VouchersLogsState {
                   clipBehavior: Clip.none,
                   shrinkWrap: true,
                   children: [
-                    Container(
-                      // color: Colors.red,
-                      key: refKey,
-                      child: CustomPaint(
-                        // foregroundPainter: _LinePainter(),
-                        child: Column(
-                          children: [
-                            ...List.generate(
-                              3,
-                              (index) => Row(
-                                crossAxisAlignment: CrossAxisAlignment.center,
-                                mainAxisAlignment: MainAxisAlignment.start,
-                                children: [
-                                  const Dot(
-                                    size: 9,
-                                    color: Color(0xffB9B9C3),
-                                  ),
-                                  const Gap(17),
-                                  VoucherLogItem(
-                                    title: 'Created',
-                                    subtitle: '11.04.2022' +
-                                        ' sample lorem ipsum ' * (10 * (index)),
-                                    id: '# 125',
-                                    onTap: () {
-                                      onVoucherTap();
-                                    },
-                                  ).exp(),
-                                ],
+                    Column(
+                      children: [
+                        ...List.generate(
+                          3,
+                          (index) => Row(
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children: [
+                              const Dot(
+                                size: 9,
+                                color: Color(0xffB9B9C3),
                               ),
-                            ).separator(kGap8),
-                          ],
-                        ),
-                      ),
+                              const Gap(17),
+                              VoucherLogItem(
+                                title: 'Created',
+                                subtitle: '11.04.2022' +
+                                    ' sample lorem ipsum ' * (10 * (index)),
+                                id: '# 125',
+                                onTap: () {
+                                  onVoucherTap();
+                                },
+                              ).exp(),
+                            ],
+                          ),
+                        ).separator(kGap8),
+                      ],
                     ),
                   ],
                 ),

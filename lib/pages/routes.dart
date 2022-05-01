@@ -343,6 +343,21 @@ final router = GoRouter(
       },
     ),
     GoRoute(
+      path: '/steaking/contract/:id',
+      name: SteakingContractPage.url,
+      builder: (_, state) {
+        final id = state.params['id'] ?? '';
+        if(id.isEmpty){
+          throw Exception("Invalid contract id");
+        }
+        return SteakingContractPage(
+          key: state.pageKey,
+          contractId: id,
+        );
+      },
+    ),
+
+    GoRoute(
       path: '/quest',
       name: QuestPage.url,
       // redirect: _redirectComingSoon,
@@ -390,7 +405,8 @@ final router = GoRouter(
       // redirect: _redirectComingSoon,
       builder: (_, state) {
         trace("Params:::", state.params);
-        return PortfolioDetailsPage(key: state.pageKey, type: state.params['category']);
+        return PortfolioDetailsPage(
+            key: state.pageKey, type: state.params['category']);
       },
     ),
 

@@ -1,6 +1,7 @@
 import 'package:metashark/commons.dart';
 
 part 'steaking_state.dart';
+
 part 'widgets.dart';
 
 class SteakingPage extends StatefulWidget {
@@ -15,7 +16,7 @@ class SteakingPage extends StatefulWidget {
 class _SteakingPage extends _SteakingState {
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
+    return Scaffold(
       appBar: CommonAppBar(title: 'Steaking'),
       body: CommonScrollableBody(
         clipBehavior: Clip.none,
@@ -43,13 +44,39 @@ class _SteakingPage extends _SteakingState {
               fontWeight: FontWeight.w600,
             ),
           ),
+          // kGap16,
+          // PlanContractCard(type: kContractGold),
           kGap16,
-          PlanContractCard(type: kContractGold),
+          PlanContractCard(
+            contractId: "# 12345",
+            trendingIcon: AppIcons.trending_up,
+            trendingValue: '36%',
+            trendingColor: AppColors.green,
+            barValue: '6,5 MTS',
+            barPercent: 0.65,
+            type: kContractBronze,
+            onTap: () {
+              onContractTap("12345");
+            },
+          ),
+          // kGap16,
           kGap16,
-          PlanContractCard(type: kContractBronze),
+          PlanContractCard(
+            contractId: "# 23456",
+            trendingIcon: AppIcons.trending_up,
+            trendingValue: '36%',
+            trendingColor: AppColors.green,
+            barValue: '6,5 MTS',
+            barPercent: 0.65,
+            onTap: () {
+              onContractTap("23456");
+            },
+          ),
           kGap16,
         ],
       ),
     );
   }
+
+
 }

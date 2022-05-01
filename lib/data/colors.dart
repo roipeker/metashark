@@ -31,5 +31,6 @@ class AppColors {
   static const appbarIconGrey = Color(0xff5e5873);
   static const darkGrey = Color(0xff5e5873);
   static const darkGrey10 = Color(0x195e5873);
+  static const darkGrey12 = Color(0x1e5e5873);
 
 }

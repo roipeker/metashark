@@ -2,7 +2,6 @@ import 'package:dotted_decoration/dotted_decoration.dart';
 import 'package:metashark/commons.dart';
 
 part 'vouchers_operating_state.dart';
-
 part 'widgets.dart';
 
 class VouchersOperatingPage extends StatefulWidget {
@@ -39,16 +38,16 @@ class _VouchersOperatingPage extends _VouchersOperatingState {
                 subtitle: '#6787099',
                 imageUrl: MockupImages.mockVoucherCard1,
                 onTap: () {
-                  context.toastNotImplemented();
+                  onVoucherTap(id: '#6787099');
                 },
               ),
               kGap16,
               _VoucherCardItem(
                 title: 'Voucher name',
-                subtitle: '#6787099',
+                subtitle: '#611099',
                 imageUrl: MockupImages.mockVoucherCard2,
                 onTap: () {
-                  context.toastNotImplemented();
+                  onVoucherTap(id: '#611099');
                 },
               ),
               // BinaryTreeDemoWidget(),

@@ -1,4 +1,3 @@
-
 import 'package:metashark/commons.dart';
 
 class MyPlanInfoCard extends StatelessWidget {
@@ -46,22 +45,43 @@ class MyPlanInfoCard extends StatelessWidget {
   }
 }
 
-
 /// --- contract card
 ///
 class PlanContractCard extends StatelessWidget {
-  final ContractTypeData type;
+  final ContractTypeData? type;
+  final VoidCallback? onTap;
+  final String contractId;
+  final IconData trendingIcon;
+  final String trendingValue;
+  final Color? trendingColor;
+  final Color? barColor;
+  final String barValue;
+  final double barPercent;
 
   const PlanContractCard({
     Key? key,
-    required this.type,
+    required this.trendingIcon,
+    required this.contractId,
+    required this.trendingValue,
+    required this.trendingColor,
+    required this.barValue,
+    required this.barPercent,
+    this.barColor,
+    this.type,
+    this.onTap,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return AppCard(
+    // return AppCard(
+    //   elevation: 2,
+    //   color: Colors.white,
+    return AppMaterialButton(
       elevation: 2,
+      onTap: onTap,
       color: Colors.white,
+      padding: kPad16,
+      shape: kBorder8,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -69,9 +89,9 @@ class PlanContractCard extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              ContractBadge(type: type),
-              const Text(
-                "# 12354",
+              if (type != null) ContractBadge(type: type!),
+              Text(
+                contractId,
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   color: Color(0xffb9b9c3),
@@ -83,15 +103,15 @@ class PlanContractCard extends StatelessWidget {
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   Icon(
-                    AppIcons.trending_up,
+                    trendingIcon,
                     size: 16,
-                    color: AppColors.green,
+                    color: trendingColor,
                   ),
                   kGap4,
                   Text(
-                    "36%",
+                    trendingValue,
                     style: TextStyle(
-                      color: Color(0xff28c76f),
+                      color: trendingColor,
                       fontSize: 14,
                       fontWeight: FontWeight.w600,
                     ),
@@ -102,10 +122,10 @@ class PlanContractCard extends StatelessWidget {
           ),
           // --
           kGap16,
-          const CardLabelProgressBar(
-            label: '6,5 MTS',
-            percent: 0.6,
-            barForegroundColor: AppColors.lightViolet,
+          CardLabelProgressBar(
+            label: barValue,
+            percent: barPercent,
+            barForegroundColor: barColor??AppColors.lightViolet,
           ),
         ],
       ),
@@ -175,3 +195,57 @@ class VoucherIconTile extends StatelessWidget {
   }
 }
 
+///
+///
+/// /
+///
+
+class SmallAppCardTextDetails extends StatelessWidget {
+  final String label, value;
+  final String? helperText;
+
+  const SmallAppCardTextDetails({
+    Key? key,
+    required this.label,
+    required this.value,
+    this.helperText,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return AppCard(
+      padding: kPad8,
+      borderRadius: kBorderRadius4,
+      color: AppColors.primaryPurple10,
+      clip: Clip.none,
+      child: Column(
+        children: [
+          Text(
+            label,
+            style: const TextStyle(
+              color: Color(0xff5e5873),
+              fontSize: 14,
+            ),
+          ),
+          Text(
+            value,
+            textAlign: TextAlign.right,
+            style: const TextStyle(
+              color: Color(0xff5e5873),
+              fontSize: 14,
+              fontWeight: FontWeight.w700,
+            ),
+          ),
+          if (helperText != null)
+            Text(
+              helperText!,
+              style: const TextStyle(
+                color: Color(0xffb9b9c3),
+                fontSize: 10,
+              ),
+            )
+        ],
+      ),
+    );
+  }
+}

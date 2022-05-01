@@ -786,3 +786,56 @@ class Circle extends StatelessWidget {
     );
   }
 }
+
+///
+///
+///
+
+
+class NotificationCircleBadge extends StatelessWidget {
+  final int value;
+  final Color backgroundColor;
+  final Widget child;
+  final double size;
+  final Offset position;
+  const NotificationCircleBadge({
+    Key? key,
+    required this.value,
+    required this.backgroundColor,
+    required this.child,
+    this.position = const Offset(-8,-8),
+    this.size = 22,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Stack(
+      clipBehavior:  Clip.none,
+      children: [
+        child,
+        Positioned(
+          top: position.dy,
+          right: position.dx,
+          child: Container(
+            width: size,
+            height: size,
+            child: Center(
+              child: Text(
+                '$value',
+                style: const TextStyle(
+                  color: Colors.white,
+                  fontSize: 12,
+                  fontWeight: FontWeight.w600,
+                ),
+              ),
+            ),
+            decoration: BoxDecoration(
+              color: backgroundColor,
+              shape: BoxShape.circle,
+            ),
+          ),
+        )
+      ],
+    );
+  }
+}

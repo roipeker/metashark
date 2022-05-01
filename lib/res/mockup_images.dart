@@ -13,11 +13,11 @@ class MockupImages {
       'assets/images/mockup/mock_card_cinema_ticket.webp';
   static const String mockCardInfinityToken =
       'assets/images/mockup/mock_card_infinity_token.webp';
-  static const String mockCardIphone =
-      'assets/images/mockup/mock_card_iphone.webp';
   static const String mockCardNetwork =
       'assets/images/mockup/mock_card_network.webp';
   static const String mockCardNft = 'assets/images/mockup/mock_card_nft.webp';
+  static const String mockIphonePhoto =
+      'assets/images/mockup/mock_iphone_photo.webp';
   static const String mockVoucherCard1 =
       'assets/images/mockup/mock_voucher_card_1.webp';
   static const String mockVoucherCard2 =

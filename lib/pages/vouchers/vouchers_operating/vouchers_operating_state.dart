@@ -26,4 +26,14 @@ abstract class _VouchersOperatingState extends State<VouchersOperatingPage> {
     // context.pushNamed(CreateVoucherPage.url);
     // context.toastNotImplemented();
   }
+
+  void onVoucherTap({required String id}) {
+    // context.toastNotImplemented();
+    context.openModalSheet(
+      VoucherDetailsSheet(
+        voucherId: id,
+      ),
+    );
+  }
+
 }

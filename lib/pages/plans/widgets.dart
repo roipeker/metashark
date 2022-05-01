@@ -49,13 +49,13 @@ class PlanCardWidget extends StatelessWidget {
                 kGap32,
                 Row(
                   children: [
-                    _SmallCard(
+                    SmallAppCardTextDetails(
                       label: 'Token Bonus:',
                       // value: '+20%',
                       value: data.tokenBonus,
                     ).exp(),
                     kGap16,
-                    _SmallCard(
+                    SmallAppCardTextDetails(
                       label: 'Staking:',
                       // value: '36% year',
                       value: data.staking,
@@ -63,7 +63,7 @@ class PlanCardWidget extends StatelessWidget {
                   ],
                 ),
                 kGap16,
-                _SmallCard(
+                SmallAppCardTextDetails(
                   label: 'Lock Up:',
                   value: data.lockup,
                   // value: '12 months',
@@ -71,13 +71,13 @@ class PlanCardWidget extends StatelessWidget {
                 kGap16,
                 Row(
                   children: [
-                    _SmallCard(
+                    SmallAppCardTextDetails(
                       label: 'Direct Bonus:',
                       // value: '11%',
                       value: data.directBonus,
                     ).exp(),
                     kGap16,
-                    _SmallCard(
+                    SmallAppCardTextDetails(
                       label: 'Binary Bonus:',
                       // value: '11%',
                       value: data.binaryBonus,
@@ -87,13 +87,13 @@ class PlanCardWidget extends StatelessWidget {
                 kGap16,
                 Row(
                   children: [
-                    _SmallCard(
+                    SmallAppCardTextDetails(
                       label: 'Binary Limit:',
                       // value: '150 MTS/day',
                       value: data.binaryLimit,
                     ).exp(),
                     kGap16,
-                    _SmallCard(
+                    SmallAppCardTextDetails(
                       label: 'Matching Bonus',
                       // value: '3 Levels',
                       value: data.matchingBonus,
@@ -177,46 +177,6 @@ class _Header extends StatelessWidget {
               ).separator(const Gap(2)),
             ],
           ),
-        ],
-      ),
-    );
-  }
-}
-
-class _SmallCard extends StatelessWidget {
-  final String label, value;
-
-  const _SmallCard({
-    Key? key,
-    required this.label,
-    required this.value,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return AppCard(
-      padding: kPad8,
-      borderRadius: kBorderRadius4,
-      color: AppColors.primaryPurple10,
-      clip: Clip.none,
-      child: Column(
-        children: [
-          Text(
-            label,
-            style: const TextStyle(
-              color: Color(0xff5e5873),
-              fontSize: 14,
-            ),
-          ),
-          Text(
-            value,
-            textAlign: TextAlign.right,
-            style: const TextStyle(
-              color: Color(0xff5e5873),
-              fontSize: 14,
-              fontWeight: FontWeight.w700,
-            ),
-          )
         ],
       ),
     );

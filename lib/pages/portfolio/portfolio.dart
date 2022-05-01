@@ -58,9 +58,7 @@ class _PortfolioPage extends _PortfolioState {
                     title: 'Products',
                     itemBuilder: (ctx, idx) {
                       return VoucherCard.present(
-                        imageUrl: MockupImages.mockCardIphone,
-                        // imageUrl: MockDataFactory.getRandomImage(
-                        //     w: 800, webp: true, seed: 'iphone11'),
+                        imageUrl: MockupImages.mockIphonePhoto,
                         title: 'iPhone 11',
                         type: ObjectPresentCard.small,
                         body: MockDataFactory.loremWords(30),
