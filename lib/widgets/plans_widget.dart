@@ -146,3 +146,32 @@ class ContractBadge extends StatelessWidget {
     );
   }
 }
+
+///
+///
+///
+
+class VoucherIconTile extends StatelessWidget {
+  final Color color;
+  final IconData iconData;
+
+  const VoucherIconTile({
+    Key? key,
+    this.iconData = AppIcons.subscriptions,
+    required this.color,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      color: color,
+      alignment: Alignment.center,
+      child: Icon(
+        iconData,
+        size: 40,
+        color: Colors.white,
+      ),
+    );
+  }
+}
+

@@ -1,74 +1,14 @@
 part of 'plans.dart';
 
-class _BronzeCard extends StatelessWidget {
-  const _BronzeCard({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      decoration: BoxDecoration(
-        color: const Color(0xff2E9FD9),
-        borderRadius: kBorderRadius20,
-      ),
-      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 32),
-      child: Row(
-        children: [
-          Image.asset(
-            Images.briefcase,
-            fit: BoxFit.contain,
-            cacheHeight: 50,
-            cacheWidth: 50,
-            height: 50,
-            width: 50,
-          ),
-          kGap16,
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Row(
-                children: [
-                  const Text(
-                    "BRONZE",
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 24,
-                      fontWeight: FontWeight.w700,
-                    ),
-                  ),
-                  kGap16,
-                  ...List.generate(
-                    3,
-                    (index) => const Icon(
-                      AppIcons.trophy,
-                      size: 24,
-                      color: AppColors.starOrange,
-                    ),
-                  ),
-                ],
-              ),
-              const Text(
-                "50-100 MTS",
-                style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 16,
-                  fontWeight: FontWeight.w600,
-                ),
-              ),
-            ],
-          )
-        ],
-      ),
-    );
-  }
-}
-
 /// ---
 
-class PlanCardTitanium extends StatelessWidget {
+class PlanCardWidget extends StatelessWidget {
   final VoidCallback? onShowGiftsTap, onBuyTap;
+  final PlanCardVo data;
 
-  const PlanCardTitanium({
+  const PlanCardWidget({
     Key? key,
+    required this.data,
     this.onShowGiftsTap,
     this.onBuyTap,
   }) : super(key: key);
@@ -85,14 +25,20 @@ class PlanCardTitanium extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          const _Header(),
+          _Header(
+            title: data.type,
+            colors: data.colors,
+            ranking: data.ranking,
+          ),
           Padding(
-            padding: kPad16,
+            padding: kPadH16,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
-                const Text(
-                  "50-100 MTS",
+                kGap16,
+                Text(
+                  data.title,
+                  // "50-100 MTS",
                   textAlign: TextAlign.center,
                   style: TextStyle(
                     color: Color(0xff5e5873),
@@ -103,47 +49,54 @@ class PlanCardTitanium extends StatelessWidget {
                 kGap32,
                 Row(
                   children: [
-                    const _SmallCard(
+                    _SmallCard(
                       label: 'Token Bonus:',
-                      value: '+20%',
+                      // value: '+20%',
+                      value: data.tokenBonus,
                     ).exp(),
                     kGap16,
-                    const _SmallCard(
+                    _SmallCard(
                       label: 'Staking:',
-                      value: '36% year',
+                      // value: '36% year',
+                      value: data.staking,
                     ).exp(),
                   ],
                 ),
                 kGap16,
-                const _SmallCard(
+                _SmallCard(
                   label: 'Lock Up:',
-                  value: '12 months',
+                  value: data.lockup,
+                  // value: '12 months',
                 ),
                 kGap16,
                 Row(
                   children: [
-                    const _SmallCard(
+                    _SmallCard(
                       label: 'Direct Bonus:',
-                      value: '11%',
+                      // value: '11%',
+                      value: data.directBonus,
                     ).exp(),
                     kGap16,
-                    const _SmallCard(
-                      label: 'Direct Bonus:',
-                      value: '11%',
+                    _SmallCard(
+                      label: 'Binary Bonus:',
+                      // value: '11%',
+                      value: data.binaryBonus,
                     ).exp(),
                   ],
                 ),
                 kGap16,
                 Row(
                   children: [
-                    const _SmallCard(
+                    _SmallCard(
                       label: 'Binary Limit:',
-                      value: '150 MTS/day',
+                      // value: '150 MTS/day',
+                      value: data.binaryLimit,
                     ).exp(),
                     kGap16,
-                    const _SmallCard(
+                    _SmallCard(
                       label: 'Matching Bonus',
-                      value: '3 Levels',
+                      // value: '3 Levels',
+                      value: data.matchingBonus,
                     ).exp(),
                   ],
                 ),
@@ -162,6 +115,7 @@ class PlanCardTitanium extends StatelessWidget {
                   onTap: onBuyTap,
                   extended: true,
                 ),
+                kGap16,
               ],
             ),
           )
@@ -172,16 +126,25 @@ class PlanCardTitanium extends StatelessWidget {
 }
 
 class _Header extends StatelessWidget {
-  const _Header({Key? key}) : super(key: key);
+  final List<Color> colors;
+  final String title;
+  final int ranking;
+
+  const _Header({
+    Key? key,
+    required this.colors,
+    required this.title,
+    required this.ranking,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      decoration: const BoxDecoration(
+      decoration: BoxDecoration(
         gradient: LinearGradient(
           begin: Alignment.topLeft,
           end: Alignment.bottomRight,
-          colors: [Color(0xff29518d), Color(0xff1c3d6d)],
+          colors: colors,
         ),
       ),
       padding: const EdgeInsets.symmetric(
@@ -193,13 +156,12 @@ class _Header extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          const Text(
-            "TITANIUM",
+          Text(
+            title.toUpperCase(),
             textAlign: TextAlign.center,
             style: const TextStyle(
               color: Colors.white,
               fontSize: 32,
-              fontFamily: "Open Sans",
               fontWeight: FontWeight.w700,
             ),
           ),
@@ -208,7 +170,7 @@ class _Header extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               ...List.generate(
-                5,
+                ranking,
                 (index) => SvgPicture.asset(
                   SvgIcons.diamondBlue,
                 ),

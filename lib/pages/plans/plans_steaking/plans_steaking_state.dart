@@ -1,11 +1,14 @@
 part of 'plans_steaking.dart';
 
 abstract class _PlansSteakingState extends State<PlansSteakingPage> {
-  int count = 6;
+
   final pageController = PageController(
     initialPage: 0,
     viewportFraction: 0.8,
   );
+
+  List<PlanCardVo> get cards => _kCards;
+  int get count => cards.length;
 
   @override
   void initState() {
@@ -26,3 +29,40 @@ abstract class _PlansSteakingState extends State<PlansSteakingPage> {
     context.toastNotImplemented();
   }
 }
+
+final _kCards = [
+  _kPlatinum,
+  _kBronze,
+  _kPlatinum,
+  _kBronze,
+  _kPlatinum,
+  _kBronze,
+];
+
+const _kPlatinum = PlanCardVo(
+  tokenBonus: '+5%',
+  staking: '36% year',
+  lockup: '12 months',
+  directBonus: '11%',
+  binaryBonus: '11%',
+  binaryLimit: '150 MTS/day',
+  matchingBonus: '3 Levels',
+  ranking: 5,
+  type: 'TITANIUM',
+  title: '50-100 MTS',
+  colors: [Color(0xff29518d), Color(0xff1c3d6d)],
+);
+
+const _kBronze = PlanCardVo(
+  tokenBonus: '+5%',
+  staking: '36% year',
+  lockup: '12 months',
+  directBonus: '10%',
+  binaryBonus: '10%',
+  binaryLimit: '4000 MTS',
+  matchingBonus: '1 Levels 4%',
+  ranking: 1,
+  type: 'BRONZE',
+  title: '200 - 1 999 MTS',
+  colors: [Color(0xffC9915B), Color(0xffAF7741)],
+);

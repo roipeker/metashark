@@ -29,28 +29,26 @@ class _PlansSteakingPage extends _PlansSteakingState {
                   clipBehavior: Clip.none,
                   scrollDirection: Axis.horizontal,
                   pageSnapping: true,
-                  children: [
-                    ...List.generate(
-                      count,
-                      (index) => Center(
-                        child: Padding(
-                          padding: kPad16,
-                          child: FittedBox(
-                            alignment: Alignment.center,
-                            fit: BoxFit.contain,
-                            child: SizedBox(
-                              width: 343,
-                              height: 618,
-                              child: PlanCardTitanium(
-                                onBuyTap: onBuyTap,
-                                onShowGiftsTap: onShowGifts,
-                              ),
+                  children: cards.map2(
+                        (data) => Center(
+                      child: Padding(
+                        padding: kPad16,
+                        child: FittedBox(
+                          // alignment: Alignment.center,
+                          fit: BoxFit.contain,
+                          child: SizedBox(
+                            width: 343,
+                            height: 618,
+                            child: PlanCardWidget(
+                              data: data,
+                              onBuyTap: onBuyTap,
+                              onShowGiftsTap: onShowGifts,
                             ),
                           ),
                         ),
                       ),
                     ),
-                  ],
+                  ),
                 ),
               ),
               kGap16,

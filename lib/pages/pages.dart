@@ -42,6 +42,7 @@ export "plans/plans_subscribe/plans_subscribe.dart";
 export "plans/packages/packages.dart";
 export "plans/package_details/package_details.dart";
 export "portfolio/portfolio.dart";
+export "portfolio/portfolio_details/portfolio_details.dart";
 export "vouchers/vouchers.dart";
 export "vouchers/vouchers_operating/vouchers_operating.dart";
 export "vouchers/vouchers_logs/vouchers_logs.dart";

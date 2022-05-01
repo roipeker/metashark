@@ -379,7 +379,19 @@ final router = GoRouter(
     GoRoute(
       path: '/portfolio',
       name: PortfolioPage.url,
-      redirect: _redirectComingSoon,
+      // redirect: _redirectComingSoon,
+      builder: (_, state) {
+        return PortfolioPage(key: state.pageKey);
+      },
+    ),
+    GoRoute(
+      path: '/portfolio/details/:category',
+      name: PortfolioDetailsPage.url,
+      // redirect: _redirectComingSoon,
+      builder: (_, state) {
+        trace("Params:::", state.params);
+        return PortfolioDetailsPage(key: state.pageKey, type: state.params['category']);
+      },
     ),
 
     GoRoute(
@@ -391,7 +403,6 @@ final router = GoRouter(
         return VouchersPage(key: state.pageKey);
       },
     ),
-
 
     // GoRoute(
     //   path: '/vouchers/create',

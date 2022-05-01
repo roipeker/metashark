@@ -109,6 +109,16 @@ final kElevatedButtonSecondaryPill = kElevatedButtonSecondary.copyWith(
   shape: MaterialStateProperty.all(kBorderPill),
 );
 
+final kTextButtonStyleRightAll = TextButton.styleFrom(
+  textStyle: const TextStyle(
+    color: Color(0xff7367f0),
+    fontSize: 14,
+    fontFamily: "Open Sans",
+    fontWeight: FontWeight.w600,
+  ),
+  padding: const EdgeInsets.symmetric(horizontal: 8),
+  minimumSize: const Size(48, 36),
+);
 final kTextButtonStyleAccessory = TextButton.styleFrom(
   textStyle: const TextStyle(
     color: Color(0xff7367f0),
@@ -214,7 +224,7 @@ const kTextAccessoryStyle = TextStyle(
 );
 
 const kBoxShadow4 = [
-   BoxShadow(
+  BoxShadow(
     color: Color(0x1e5e5873),
     blurRadius: 8,
     offset: Offset(0, 4),

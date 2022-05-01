@@ -18,6 +18,13 @@ abstract class _PlansSubscribeState extends State<PlansSubscribePage> {
     super.dispose();
   }
 
+  void onSubscriptionTap({
+    required Widget tile,
+  }) async {
+    context.openModalSheet(PlansSubscribeDetailsSheet(
+      tile: tile,
+    ));
+  }
 
 }
 

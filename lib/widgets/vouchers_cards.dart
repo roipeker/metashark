@@ -57,10 +57,12 @@ class VoucherCard extends StatelessWidget {
     Color? leadingColor,
     required String title,
     required String body,
-    required String imageUrl,
+    String? imageUrl,
+    Widget? tile,
   })  : child = VoucherObjectCashCard(
           title: title,
           body: body,
+          tile: tile,
           imageUrl: imageUrl,
           onTap: onTap,
           leadingColor: leadingColor,
@@ -76,14 +78,16 @@ class VoucherCard extends StatelessWidget {
     required String title,
     required String line1,
     required String line2,
-    required String imageUrl,
+    String? imageUrl,
+    Widget? tile,
   })  : child = VoucherObjectNetworkCard(
           title: title,
           line1: line1,
           line2: line2,
-          imageUrl: imageUrl,
-          onTap: onTap,
           tag: tag,
+          imageUrl: imageUrl,
+          tile: tile,
+          onTap: onTap,
         ),
         super(key: key);
 
@@ -260,7 +264,8 @@ class VoucherObjectCashCard extends StatelessWidget {
   final VoucherObjectCardTag? tag;
 
   final String title, body;
-  final String imageUrl;
+  final String? imageUrl;
+  final Widget? tile;
   final bool extendImage;
   final Color? leadingColor;
 
@@ -272,7 +277,8 @@ class VoucherObjectCashCard extends StatelessWidget {
     this.leadingColor,
     required this.title,
     required this.body,
-    required this.imageUrl,
+    this.imageUrl,
+    this.tile,
   }) : super(key: key);
 
   @override
@@ -317,10 +323,11 @@ class VoucherObjectCashCard extends StatelessWidget {
       // leading: Image.network('asdad'),
       leading: SizedBox(
         height: extendImage ? double.infinity : null,
-        child: AppFadeImage(
-          url: imageUrl,
-          fit: BoxFit.cover,
-        ),
+        child: tile ??
+            AppFadeImage(
+              url: imageUrl!,
+              fit: BoxFit.cover,
+            ),
       ),
     );
   }
@@ -329,7 +336,9 @@ class VoucherObjectCashCard extends StatelessWidget {
 class VoucherObjectNetworkCard extends StatelessWidget {
   final VoidCallback? onTap;
   final VoucherObjectCardTag? tag;
-  final String title, line1, line2, imageUrl;
+  final String title, line1, line2;
+  final String? imageUrl;
+  final Widget? tile;
 
   const VoucherObjectNetworkCard({
     Key? key,
@@ -338,7 +347,8 @@ class VoucherObjectNetworkCard extends StatelessWidget {
     required this.title,
     required this.line1,
     required this.line2,
-    required this.imageUrl,
+    this.imageUrl,
+    this.tile,
   }) : super(key: key);
 
   @override
@@ -380,9 +390,10 @@ class VoucherObjectNetworkCard extends StatelessWidget {
           ),
         ],
       ).padding(16),
-      leading: AppFadeImage(
-        url: imageUrl,
-      ),
+      leading: tile ??
+          AppFadeImage(
+            url: imageUrl!,
+          ),
     );
   }
 }
