@@ -83,6 +83,7 @@ final kElevatedButtonPrimary = ElevatedButton.styleFrom(
   primary: AppColors.primaryPurple,
   onPrimary: Colors.white,
   minimumSize: Size(50, 50),
+  // textStyle: TextStyle(fontWeight: FontWeight.w600),
   // fixedSize: Size(0, 50),
   elevation: 0,
 );

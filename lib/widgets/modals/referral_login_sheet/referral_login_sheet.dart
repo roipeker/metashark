@@ -28,6 +28,7 @@ class _ReferralLoginSheet extends _ReferralLoginSheetState {
               _Title(),
               kGap16,
               AppTextField(
+                enabled: false,
                 label: 'Referral login',
                 hint: 'Referral login',
               ),

@@ -99,9 +99,9 @@ class _LogArea extends StatelessWidget {
                       title: vo.title,
                       date: vo.date,
                       amount: vo.amount,
-                      onTap: () {
-                        state.onLogItemTap(vo);
-                      },
+                      // onTap: () {
+                      //   // state.onLogItemTap(vo);
+                      // },
                     ).exp(),
                   ],
                 );

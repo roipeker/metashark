@@ -25,7 +25,7 @@ class _PlansSubscribeDetailsSheet extends _PlansSubscribeDetailsSheetState {
         margin: const EdgeInsets.only(top: 32),
         decoration: const BoxDecoration(
           color: Colors.white,
-          borderRadius: BorderRadius.vertical(top: Radius.circular(12)),
+          borderRadius: BorderRadius.vertical(top: Radius.circular(8)),
         ),
         padding: kPad16,
         child: SafeArea(
@@ -38,41 +38,71 @@ class _PlansSubscribeDetailsSheet extends _PlansSubscribeDetailsSheetState {
                 "Subscription",
                 style: TextStyle(
                   color: Color(0xff5e5873),
-                  fontSize: 16,
-                  fontWeight: FontWeight.w700,
+                  fontSize: 20,
+                  fontWeight: FontWeight.w600,
                 ),
               ),
               kGap16,
-              VoucherCard.network(
+              VoucherCard.subscribe(
                 title: 'Subscription',
                 line1: 'Action: 3 months',
-                line2: 'Activate until: 05/23/2022',
+                line2: '100 MTS',
                 // tile: const PlansSubscriptionTile(color: Color(0xffFF6C2C)),
                 tile: widget.tile,
-                tag: VoucherObjectCardTag.text(text: 'Activation'),
+                // tag: VoucherObjectCardTag.text(text: 'Activation'),
                 onTap: onCardTap,
               ),
               kGap16,
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: const [
-                  Text(
-                    "Will be activated until:",
-                    style: TextStyle(
-                      color: Color(0xff5e5873),
-                      fontSize: 14,
+              GestureDetector(
+                onTap: automaticActivation.toggle,
+                behavior: HitTestBehavior.opaque,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    const Text(
+                      "Automatic activation:",
+                      style: TextStyle(
+                        color: Color(0xff5e5873),
+                        fontSize: 14,
+                      ),
                     ),
-                  ),
-                  Text(
-                    "05/23/2022",
-                    textAlign: TextAlign.right,
-                    style: TextStyle(
-                      color: Color(0xff5e5873),
-                      fontSize: 14,
-                      fontWeight: FontWeight.w600,
+                    Obs(
+                      () => Switch(
+                          value: automaticActivation(),
+                          onChanged: automaticActivation),
                     ),
+                  ],
+                ),
+              ),
+              kGap8,
+              // kGap16,
+              FormLabeledField(
+                label: 'Select currency',
+                input: Obs(
+                  () => CurrencyDropdown(
+                    options: currencyOptions,
+                    onChanged: currency,
+                    current: currency(),
                   ),
-                ],
+                ),
+              ),
+              kGap16,
+              AppTextField(
+                textInputAction: TextInputAction.done,
+                enabled: false,
+                control: amountTec,
+                label: 'Amount',
+                hint: 'Enter amount',
+                accessory: Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    const Text(
+                      " BTC ",
+                      textAlign: TextAlign.center,
+                      style: kTextAccessoryStyle,
+                    ).center(),
+                  ],
+                ),
               ),
               kGap16,
               AppElevatedButton.primary(

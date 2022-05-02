@@ -33,7 +33,7 @@ class _CareerPage extends _CareerState {
               shrinkWrap: true,
               children: [
                 kGap16,
-                _TopCard(onTap: onTopCardTap).paddingSymmetric(horizontal: 16),
+                _TopCard(onTap: null).paddingSymmetric(horizontal: 16),
                 kGap16,
                 SizedBox(
                   height: 160,

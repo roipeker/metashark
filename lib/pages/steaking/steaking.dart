@@ -34,7 +34,9 @@ class _SteakingPage extends _SteakingState {
           // ),
           // Gap(50),
           // kGap32,
-          MyPlanInfoCard(),
+          MyPlanInfoCard(
+            onPurchasePackageTap: onPurchasePackageTap,
+          ),
           kGap32,
           Text(
             "My contracts",

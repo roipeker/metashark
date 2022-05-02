@@ -44,11 +44,24 @@ abstract class _HomeState extends State<HomePage> {
     context.goNamed(CareerPage.url);
   }
 
+  void onMyPlanInfoPackageTap() {
+    context.goNamed(PlansPage.url);
+  }
+
   void onMyPlanInfoTap() {
     context.goNamed(SteakingPage.url);
   }
 
   void onMyOfficeTap() {
     context.go('/plans/tab/subscribe');
+  }
+
+  void onCurrencyTap() {
+    context.openModalSheet(const ChartCurrencySheet());
+  }
+
+  void onEarnedTap() {
+    context.openModalSheet(const ChartEarnedSheet());
+    // context.toastNotImplemented();
   }
 }

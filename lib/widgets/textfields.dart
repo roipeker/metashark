@@ -155,10 +155,12 @@ class AppTextField extends StatefulWidget {
   final TextInputType? keyboardType;
   final TextInputAction? textInputAction;
   final TextCapitalization textCapitalization;
+  final bool enabled;
 
   const AppTextField({
     Key? key,
     this.keyboardType,
+    this.enabled=true,
     this.textInputAction,
     this.textCapitalization = TextCapitalization.none,
     this.control,
@@ -175,6 +177,7 @@ class AppTextField extends StatefulWidget {
     this.hint = 'hint',
     this.label = 'label',
     this.accessory,
+    this.enabled=true,
     this.bottom,
     this.control,
     this.controller,
@@ -240,6 +243,7 @@ class _AppTextFieldState extends State<AppTextField> {
       input: TextField(
         obscureText: obscured,
         controller: controller,
+        enabled: widget.enabled,
         keyboardType: widget.keyboardType,
         textInputAction: widget.textInputAction,
         textCapitalization: widget.textCapitalization,

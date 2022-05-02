@@ -60,7 +60,7 @@ final router = GoRouter(
       if (!appData.isLogged) {
         return state.namedLocation(LoginPage.name);
       } else {
-        return null ;
+        return null;
         // return state.namedLocation(HomePage.url);
       }
     }
@@ -328,6 +328,18 @@ final router = GoRouter(
       name: MyRegisteredPartnersPage.url,
       builder: (_, state) {
         return MyRegisteredPartnersPage(key: state.pageKey);
+      },
+    ),
+
+    GoRoute(
+      path: '/team/:id',
+      name: PartnerDetailsPage.url,
+      builder: (_, state) {
+        var id = state.queryParams['id'] ?? '';
+        return PartnerDetailsPage(
+          key: state.pageKey,
+          teamId: id,
+        );
       },
     ),
 

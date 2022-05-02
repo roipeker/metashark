@@ -18,6 +18,10 @@ abstract class _SteakingState extends State<SteakingPage> {
     super.dispose();
   }
 
+  void onPurchasePackageTap() {
+    context.pushNamed(PlansPage.url);
+  }
+
   void onContractTap(String contractId) {
     context.pushNamed(SteakingContractPage.url, params: {'id': contractId});
   }

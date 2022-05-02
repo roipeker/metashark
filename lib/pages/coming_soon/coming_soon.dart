@@ -94,16 +94,15 @@ class ComingSoonBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final spacing = BreakpointValue<double>(
-      xs: 0.0,
-      sm: 10.0,
-      md: 30.0,
-      lg: 50.0,
-    ).resolve(context);
-
+    // final spacing = BreakpointValue<double>(
+    //   xs: 0.0,
+    //   sm: 10.0,
+    //   md: 30.0,
+    //   lg: 50.0,
+    // ).resolve(context);
     return Stack(
-      children: [
-        const Positioned.fill(
+      children: const [
+        Positioned.fill(
           child: RiveAnimation.asset(
             Rives.delivery,
             fit: BoxFit.cover,

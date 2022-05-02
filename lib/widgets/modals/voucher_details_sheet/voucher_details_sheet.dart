@@ -34,12 +34,13 @@ class _VoucherDetailsSheet extends _VoucherDetailsSheetState {
                 color: AppColors.scaffold,
                 borderRadius: BorderRadius.vertical(top: Radius.circular(12)),
               ),
-              padding: kPad16,
+              // padding: kPad16,
               child: SafeArea(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   mainAxisSize: MainAxisSize.min,
                   children: [
+                    kGap16,
                     AppCard(
                       padding: kPad16,
                       elevation: 0,
@@ -53,7 +54,7 @@ class _VoucherDetailsSheet extends _VoucherDetailsSheetState {
                           fontWeight: FontWeight.w600,
                         ),
                       ),
-                    ),
+                    ).paddingSymmetric(horizontal: 16),
                     kGap16,
 
                     // owner data.
@@ -78,17 +79,22 @@ class _VoucherDetailsSheet extends _VoucherDetailsSheetState {
                           ),
                         ],
                       ),
-                    ),
+                    ).paddingSymmetric(horizontal: 16),
+
                     kGap16,
                     _Pane(
                       title: 'Recipients',
+                      titlePadding: kPadH16,
                       child: PageViewWithIndicator(
                         itemBuilder: (ctx, idx) {
-                          return _UserCard(
-                            onTap: onUserCardTap,
-                            title: 'Last name First name',
-                            subtitle: 'Login',
-                            subtitleIconData: AppIcons.person,
+                          return Padding(
+                            padding: kPadH16,
+                            child: _UserCard(
+                              onTap: onUserCardTap,
+                              title: 'Last name First name',
+                              subtitle: 'Login',
+                              subtitleIconData: AppIcons.person,
+                            ),
                           );
                         },
                         itemCount: 3,
@@ -97,21 +103,25 @@ class _VoucherDetailsSheet extends _VoucherDetailsSheetState {
                     kGap16,
                     _Pane(
                       title: 'Objects',
+                      titlePadding: kPadH16,
                       child: PageViewWithIndicator(
                         itemBuilder: (ctx, idx) {
-                          return NotificationCircleBadge(
-                            value: 2,
-                            backgroundColor: AppColors.primaryPurple,
-                            child: VoucherCard.network(
-                              title: 'Подписка',
-                              line1: 'Действие:  3 месяца',
-                              line2: 'Активировать до: 23.05.2022',
-                              tile: const VoucherIconTile(
-                                color: Color(0xff18CBC7),
-                                iconData: AppIcons.park_tickets_couple,
+                          return Padding(
+                            padding: kPadH16,
+                            child: NotificationCircleBadge(
+                              value: 2,
+                              backgroundColor: AppColors.primaryPurple,
+                              child: VoucherCard.network(
+                                title: 'Подписка',
+                                line1: 'Действие:  3 месяца',
+                                line2: 'Активировать до: 23.05.2022',
+                                tile: const VoucherIconTile(
+                                  color: Color(0xff18CBC7),
+                                  iconData: AppIcons.park_tickets_couple,
+                                ),
+                                tag: VoucherObjectCardTag.text(text: 'Кинотеатр'),
+                                onTap: () {},
                               ),
-                              tag: VoucherObjectCardTag.text(text: 'Кинотеатр'),
-                              onTap: () {},
                             ),
                           );
                         },
@@ -139,7 +149,9 @@ class _VoucherDetailsSheet extends _VoucherDetailsSheetState {
                           ),
                         ],
                       ),
-                    ),
+                    ).paddingSymmetric(horizontal: 16),
+
+                    kGap16,
                   ],
                 ),
               ),

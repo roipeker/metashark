@@ -159,14 +159,24 @@ class _Dot extends StatelessWidget {
 }
 
 class _UserCard extends StatelessWidget {
-  const _UserCard({Key? key}) : super(key: key);
+  final VoidCallback? onTap;
+
+  const _UserCard({
+    Key? key,
+    this.onTap,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return _PageCard(
+    //// use Home widget
+    return HomeCardWidget(
+      onTap: onTap,
+      background: const BoxDecoration(
+        color: Colors.white,
+      ),
       child: Row(
         children: [
-          CircleAvatar(
+          const CircleAvatar(
             radius: 32 / 2,
             child: Text('L'),
           ),
@@ -219,7 +229,6 @@ class _PageCard extends StatelessWidget {
     );
   }
 }
-
 
 ///
 ///

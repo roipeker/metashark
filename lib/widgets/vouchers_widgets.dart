@@ -151,6 +151,7 @@ class LogBorderButton extends StatelessWidget {
       child: MaterialButton(
         padding: EdgeInsets.zero,
         color: Colors.white,
+        disabledColor: Colors.white,
         shape: kBorder8,
         elevation: 0,
         disabledElevation: 0,

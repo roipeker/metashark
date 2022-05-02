@@ -3,9 +3,11 @@ part of 'voucher_details_sheet.dart';
 class _Pane extends StatelessWidget {
   final String title;
   final Widget child;
+  final EdgeInsets titlePadding;
 
   const _Pane({
     Key? key,
+    this.titlePadding = EdgeInsets.zero,
     required this.title,
     required this.child,
   }) : super(key: key);
@@ -16,12 +18,15 @@ class _Pane extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.stretch,
       mainAxisSize: MainAxisSize.min,
       children: [
-        Text(
-          title,
-          style: const TextStyle(
-            color: AppColors.darkGrey,
-            fontSize: 16,
-            fontWeight: FontWeight.w600,
+        Padding(
+          padding: titlePadding,
+          child: Text(
+            title,
+            style: const TextStyle(
+              color: AppColors.darkGrey,
+              fontSize: 16,
+              fontWeight: FontWeight.w600,
+            ),
           ),
         ),
         kGap16,

@@ -1,6 +1,6 @@
-part of 'my_team.dart';
+part of 'partner_details.dart';
 
-abstract class _MyTeamState extends State<MyTeamPage> {
+abstract class _PartnerDetailsState extends State<PartnerDetailsPage> {
   final scrollController = ScrollController();
 
   Future<void> onRefreshPull() {
@@ -21,10 +21,6 @@ abstract class _MyTeamState extends State<MyTeamPage> {
   void onMyPartnersTap() {
     context.pushNamed(MyRegisteredPartnersPage.url);
   }
-  void onBinarTap() {
-    context.push('/binary/structure?id=2');
-    // context.pushNamed(MyRegisteredPartnersPage.url);
-  }
 
   void onShareTap() {
     NativeUtils.share(
@@ -36,9 +32,14 @@ abstract class _MyTeamState extends State<MyTeamPage> {
     context.openModalSheet(const ReferralLoginSheet());
   }
 
+  void onBinarTap() {
+    context.push('/binary/structure?id=2');
+    // context.pushNamed(MyRegisteredPartnersPage.url);
+  }
+
+
   FutureOr onItemTap() async {
     context.pushNamed(PartnerDetailsPage.url, params: {'id': '123'});
-    // /// MOVEEED TO BINARY DETAILS!!!!
     // final result = await context
     //     .openModalSheet<PartnerResult?>(const PartnerInfoSheetView());
     // if (result == PartnerResult.command) {
@@ -64,15 +65,3 @@ abstract class _MyTeamState extends State<MyTeamPage> {
 }
 
 final _kTeamData = MockDataFactory.randomTeamSearchData();
-
-class TeamMemberVo {
-  final String name, email;
-  final int id;
-  final int rating;
-  const TeamMemberVo({
-    required this.name,
-    required this.email,
-    this.id = 0,
-    this.rating = 0,
-  });
-}

@@ -1,157 +1,5 @@
 part of 'home.dart';
 
-
-class _HomeWidget extends StatelessWidget {
-  final VoidCallback? onTap;
-  final BoxDecoration background;
-  final Widget child;
-  final EdgeInsets padding;
-  final bool inkForeground;
-
-  // utility
-  static Gradient getLinearGradient(List<Color> colors, {List<double>? stops}) {
-    return LinearGradient(
-      colors: colors,
-      stops: stops,
-      begin: Alignment.topLeft,
-      end: Alignment.bottomRight,
-    );
-  }
-
-  const _HomeWidget({
-    Key? key,
-    this.onTap,
-    required this.child,
-    required this.background,
-    this.inkForeground = false,
-    this.padding = kPad16,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    if (inkForeground) {
-      return Stack(
-        children: [
-          Container(
-            decoration: BoxDecoration(
-              color: background.color,
-              borderRadius: kBorderRadius8,
-              boxShadow: kBoxShadow10,
-              gradient: background.gradient,
-            ),
-            padding: padding,
-            child: child,
-          ),
-          Positioned.fill(
-            child: Material(
-              borderRadius: kBorderRadius8,
-              type: MaterialType.transparency,
-              elevation: 0,
-              clipBehavior: Clip.antiAlias,
-              color: Colors.transparent,
-              child: InkWell(
-                onTap: onTap,
-                borderRadius: kBorderRadius8,
-              ),
-            ),
-          ),
-        ],
-      );
-    } else {
-      return Container(
-        decoration: BoxDecoration(
-          color: background.color,
-          borderRadius: kBorderRadius8,
-          boxShadow: kBoxShadow10,
-          gradient: background.gradient,
-        ),
-        child: Material(
-          borderRadius: kBorderRadius8,
-          type: MaterialType.transparency,
-          elevation: 0,
-          clipBehavior: Clip.antiAlias,
-          color: Colors.transparent,
-          child: InkWell(
-            onTap: onTap,
-            borderRadius: kBorderRadius8,
-            child: Padding(
-              padding: padding,
-              child: child,
-            ),
-          ),
-        ),
-      );
-    }
-  }
-}
-
-
-class _MyTeamWidget extends StatelessWidget {
-  final VoidCallback? onTap;
-  final String title, label1, value1, label2, value2, label3, value3;
-
-  const _MyTeamWidget({
-    Key? key,
-    this.onTap,
-    this.title = "Моя команда",
-    this.label1 = 'Партнеры',
-    this.value1 = '12',
-    this.label2 = 'Структура',
-    this.value2 = '10 000',
-    this.label3 = 'Активные',
-    this.value3 = '3890',
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return _HomeWidget(
-      onTap: onTap,
-      inkForeground: false,
-      background: BoxDecoration(
-        gradient: _HomeWidget.getLinearGradient(
-          const [
-            Color(0xffDE8114),
-            Color(0xffDC6E2E),
-            Color(0xffD32A86),
-          ],
-          stops: [0, .2, 1],
-        ),
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: [
-          Text(
-            title,
-            style: const TextStyle(
-              color: Colors.white,
-              fontSize: 16,
-              fontWeight: FontWeight.w600,
-            ),
-          ),
-          TeamRowCard(
-            label: label1,
-            value: value1,
-            iconData: AppIcons.person,
-            brightness: Brightness.dark,
-          ),
-          TeamRowCard(
-            label: label2,
-            value: value2,
-            iconData: AppIcons.people,
-            brightness: Brightness.dark,
-          ),
-          TeamRowCard(
-            label: label3,
-            value: value3,
-            iconData: AppIcons.power_settings_new,
-            brightness: Brightness.dark,
-          ),
-        ].separator(kGap16),
-      ),
-    );
-  }
-}
-
 class _MyPackageWidget extends StatelessWidget {
   final PlanCardVo data;
   final VoidCallback? onTap;
@@ -161,10 +9,10 @@ class _MyPackageWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return _HomeWidget(
+    return HomeCardWidget(
       onTap: onTap,
       background: BoxDecoration(
-        gradient: _HomeWidget.getLinearGradient(data.colors),
+        gradient: HomeCardWidget.getLinearGradient(data.colors),
       ),
       child: Column(
         mainAxisSize: MainAxisSize.min,
@@ -194,7 +42,7 @@ class _MyPackageWidget extends StatelessWidget {
             children: [
               ...List.generate(
                 data.ranking,
-                    (index) => SvgPicture.asset(
+                (index) => SvgPicture.asset(
                   SvgIcons.diamondBlue,
                 ),
               ).separator(const Gap(2)),
@@ -211,7 +59,7 @@ class _MyPackageWidget extends StatelessWidget {
 ///
 
 class _MyPlanInfoWidget extends StatelessWidget {
-  final VoidCallback? onTap;
+  final VoidCallback? onTap, onPurchasePackageTap;
   final String title, earned, stalking;
 
   const _MyPlanInfoWidget({
@@ -220,13 +68,14 @@ class _MyPlanInfoWidget extends StatelessWidget {
     required this.earned,
     required this.stalking,
     this.onTap,
+    this.onPurchasePackageTap,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return _HomeWidget(
+    return HomeCardWidget(
       onTap: onTap,
-      background: BoxDecoration(
+      background: const BoxDecoration(
         color: Colors.white,
       ),
       child: Column(
@@ -257,6 +106,14 @@ class _MyPlanInfoWidget extends StatelessWidget {
             label: "Total in Stalking",
             value: stalking,
           ),
+          kGap16,
+          SizedBox(
+            height: 44,
+            child: AppElevatedButton.primary(
+              child: const Text('Purchase a package'),
+              onTap: onPurchasePackageTap,
+            ),
+          ),
         ],
       ),
     );
@@ -265,7 +122,6 @@ class _MyPlanInfoWidget extends StatelessWidget {
 
 ///
 ///
-
 
 class _MyRankWidget extends StatelessWidget {
   final VoidCallback? onTap;
@@ -287,10 +143,10 @@ class _MyRankWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return _HomeWidget(
+    return HomeCardWidget(
       onTap: onTap,
       background: BoxDecoration(
-        gradient: _HomeWidget.getLinearGradient(
+        gradient: HomeCardWidget.getLinearGradient(
           const [Color(0xff7E4BEA), Color(0xff9A2ACE)],
         ),
       ),
@@ -407,7 +263,6 @@ class _TitleStars extends StatelessWidget {
 ///
 ///
 
-
 class _MyOfficeWidget extends StatelessWidget {
   final String title;
   final String subtitle;
@@ -430,7 +285,7 @@ class _MyOfficeWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return _HomeWidget(
+    return HomeCardWidget(
       onTap: onTap,
       background: const BoxDecoration(color: Colors.white),
       child: Column(

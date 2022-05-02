@@ -16,7 +16,8 @@ abstract class _CareerState extends State<CareerPage> {
   }
 
   void onTopCardTap() {
-    context.pushNamed(MyPartnersPage.url);
+    /// THIS PAGE DOESNT EXISTS.
+    // context.pushNamed(MyPartnersPage.url);
   }
 
   void onItemTap() {

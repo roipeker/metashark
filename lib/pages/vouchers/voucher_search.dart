@@ -50,9 +50,9 @@ class VoucherSearchDelegate extends SearchDelegate<String?> {
         ),
         // foregroundColor: Colors.green,
       ),
-      textTheme: theme.textTheme.copyWith(
-        headline6: kSearchInputStyle,
-      ),
+      // textTheme: theme.textTheme.copyWith(
+      //   headline6: kSearchInputStyle,
+      // ),
     );
   }
 
@@ -61,7 +61,7 @@ class VoucherSearchDelegate extends SearchDelegate<String?> {
   VoucherSearchDelegate({required this.searchData})
       : super(
           searchFieldLabel: 'Search',
-          searchFieldDecorationTheme: _kInputTheme,
+          // searchFieldDecorationTheme: _kInputTheme,
         );
 
   @override

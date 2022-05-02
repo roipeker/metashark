@@ -71,6 +71,31 @@ class VoucherCard extends StatelessWidget {
         ),
         super(key: key);
 
+  VoucherCard.subscribe({
+    Key? key,
+    VoidCallback? onTap,
+    VoucherObjectCardTag? tag,
+    required String title,
+    required String line1,
+    required String line2,
+    String? imageUrl,
+    Widget? tile,
+  })  : child = VoucherObjectNetworkCard(
+    title: title,
+    line1: line1,
+    line2: line2,
+    line2Style: const TextStyle(
+      color: Color(0xff5e5873),
+      fontSize: 20,
+      fontWeight: FontWeight.w600,
+    ),
+    tag: tag,
+    imageUrl: imageUrl,
+    tile: tile,
+    onTap: onTap,
+  ),
+        super(key: key);
+
   VoucherCard.network({
     Key? key,
     VoidCallback? onTap,
@@ -337,6 +362,7 @@ class VoucherObjectNetworkCard extends StatelessWidget {
   final VoidCallback? onTap;
   final VoucherObjectCardTag? tag;
   final String title, line1, line2;
+  final TextStyle? line2Style;
   final String? imageUrl;
   final Widget? tile;
 
@@ -346,6 +372,7 @@ class VoucherObjectNetworkCard extends StatelessWidget {
     this.tag,
     required this.title,
     required this.line1,
+    this.line2Style,
     required this.line2,
     this.imageUrl,
     this.tile,
@@ -383,7 +410,7 @@ class VoucherObjectNetworkCard extends StatelessWidget {
           kGap4,
           Text(
             line2,
-            style: const TextStyle(
+            style: line2Style ?? const TextStyle(
               color: AppColors.greyAccesoryIconColor,
               fontSize: 14,
             ),

@@ -1,30 +1,27 @@
 import 'package:metashark/commons.dart';
-import 'package:metashark/pages/my_team/my_team_search.dart';
 
-part 'my_team_state.dart';
+import '../my_team_search.dart';
 
-part 'widgets.dart';
+part 'partner_details_state.dart';
 
-class MyTeamPage extends StatefulWidget {
-  static const url = "My Team";
+class PartnerDetailsPage extends StatefulWidget {
+  static const url = "/partner-details";
+  final String teamId;
 
-  const MyTeamPage({Key? key}) : super(key: key);
+  const PartnerDetailsPage({Key? key, this.teamId = ''}) : super(key: key);
 
   @override
-  createState() => _MyTeamPage();
+  createState() => _PartnerDetailsPage();
 }
 
-class _MyTeamPage extends _MyTeamState {
+class _PartnerDetailsPage extends _PartnerDetailsState {
   @override
   Widget build(BuildContext context) {
     return ScrollConfiguration(
       behavior: AppScrollBehavior(),
       child: Scaffold(
         appBar: CommonAppBar(
-          title: 'My team',
-          actions: [
-            SearchButton(onTap: onSearchTap),
-          ],
+          title: 'Login (username)',
         ),
         body: Scrollbar(
           controller: scrollController,
@@ -41,10 +38,10 @@ class _MyTeamPage extends _MyTeamState {
                   child: UserTopCardShare(
                     onTap: onTopCardTap,
                     onShareTap: onShareTap,
-                    title: 'First & last name',
+                    title: 'Some User First & last name',
                     subtitle: 'Login',
                     imageUrl: '',
-                    rating: 5,
+                    rating: 3,
                   ).paddingSymmetric(horizontal: 16),
                 ),
                 kGap16,
@@ -52,13 +49,12 @@ class _MyTeamPage extends _MyTeamState {
                   child: MyTeamWidget(
                     gradient: HomeCardWidget.getLinearGradient(
                       const [
-                        Color(0xffDE8114),
-                        Color(0xffDC6E2E),
-                        Color(0xffD32A86),
+                        Color(0xff14A2DE),
+                        Color(0xff7433FF),
                       ],
-                      stops: [0, .2, 1],
+                      stops: [0, 1],
                     ),
-                    title: "My team",
+                    title: "Team",
                     label1: 'Partners',
                     value1: '12',
                     label2: 'Structure',
@@ -66,30 +62,6 @@ class _MyTeamPage extends _MyTeamState {
                     label3: 'Active',
                     value3: '3890',
                   ).paddingSymmetric(horizontal: 16),
-                ),
-                kGap16,
-                SafeArea(
-                  child: UserReferralCard(
-                    onTap: onTopCardTap,
-                    cardTitle: "Referral",
-                    title: "First & last name",
-                    subtitle: "Login",
-                    imageUrl: null,
-                    rating: 5,
-                  ).paddingSymmetric(horizontal: 16),
-                ),
-                kGap16,
-                SafeArea(
-                  child: Padding(
-                    padding: kPadH16,
-                    child: SizedBox(
-                      height: 50,
-                      child: AppElevatedButton.primary(
-                        onTap: onMyPartnersTap,
-                        child: Text('My registered partners'),
-                      ),
-                    ),
-                  ),
                 ),
                 kGap16,
                 SafeArea(
@@ -105,7 +77,6 @@ class _MyTeamPage extends _MyTeamState {
                   ),
                 ),
                 kGap16,
-
                 Container(
                   color: Colors.white,
                   child: SafeArea(
@@ -115,10 +86,13 @@ class _MyTeamPage extends _MyTeamState {
                       mainAxisSize: MainAxisSize.min,
                       children: [
                         ...List.generate(
-                            5,
-                            (index) => TeamLoginItem(onTap: () {
-                                  onItemTap();
-                                })).separator(
+                          5,
+                          (index) => TeamLoginItem(
+                            onTap: () {
+                              onItemTap();
+                            },
+                          ),
+                        ).separator(
                           kDivider1,
                         ),
                       ],

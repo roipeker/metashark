@@ -17,7 +17,11 @@ class _PartnerInfoSheetView extends _PartnerInfoSheetState {
     return IntrinsicHeight(
       child: Container(
         width: double.infinity,
-        color: Colors.white,
+        margin: const EdgeInsets.only(top: 32),
+        decoration: const BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.vertical(top: Radius.circular(8)),
+        ),
         padding: kPad16,
         child: SafeArea(
           child: Column(
@@ -49,27 +53,6 @@ class _PartnerInfoSheetView extends _PartnerInfoSheetState {
                 brightness: Brightness.light,
               ),
               kGap16,
-              kDivider1,
-              kGap16,
-              Row(
-                children: [
-                  SizedBox(
-                    height: 44,
-                    child: OutlinedButton(
-                      onPressed: onShowCommandTap,
-                      child: const Text('Display command'),
-                    ),
-                  ).exp(),
-                  kGap16,
-                  SizedBox(
-                    height: 44,
-                    child: OutlinedButton(
-                      onPressed: onGoBinaryTap,
-                      child: const Text('Go to Binary'),
-                    ),
-                  ).exp(),
-                ],
-              ),
             ],
           ),
         ),

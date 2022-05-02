@@ -3,6 +3,7 @@ import 'package:metashark/commons.dart';
 import 'canvas_tree/tree_widget.dart';
 
 part 'binary_structure_state.dart';
+
 part 'widgets.dart';
 
 class BinaryStructurePage extends StatefulWidget {
@@ -77,9 +78,9 @@ class _BinaryStructurePage extends _BinaryStructureState {
 
     return [
       kGap16,
-      const Padding(
+      Padding(
         padding: kPadH16,
-        child: _UserCard(),
+        child: _UserCard(onTap: onUserCardTap),
       ),
       kGap16,
       _LeftRightPanel(

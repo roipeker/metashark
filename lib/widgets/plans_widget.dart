@@ -1,7 +1,8 @@
 import 'package:metashark/commons.dart';
 
 class MyPlanInfoCard extends StatelessWidget {
-  const MyPlanInfoCard({Key? key}) : super(key: key);
+  final VoidCallback? onPurchasePackageTap;
+  const MyPlanInfoCard({Key? key, this.onPurchasePackageTap}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -38,6 +39,14 @@ class MyPlanInfoCard extends StatelessWidget {
           const CardRowTitle(
             label: "Total in Stalking",
             value: "32 000 MTS",
+          ),
+          kGap16,
+          SizedBox(
+            height: 44,
+            child: AppElevatedButton.primary(
+              child: const Text('Purchase a package'),
+              onTap: onPurchasePackageTap,
+            ),
           ),
         ],
       ),

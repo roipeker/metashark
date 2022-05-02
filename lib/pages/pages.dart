@@ -32,6 +32,7 @@ export "binary/binary_statistics/binary_statistics.dart";
 export "binary/binary_structure/binary_structure.dart";
 export "my_team/my_team.dart";
 export "my_team/my_registered_partners/my_registered_partners.dart";
+export "my_team/partner_details/partner_details.dart";
 export "store/store.dart";
 export "steaking/steaking.dart";
 export "steaking/steaking_contract/steaking_contract.dart";
