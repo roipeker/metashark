@@ -3,6 +3,16 @@ part of 'settings.dart';
 abstract class _SettingsState extends State<SettingsPage> {
   
   String get titleText => 'Settings page';
+  String get versionText {
+    // return "Version: 1.01.177";
+    var engine = WebUtils.getEngine();
+    var result = 'Version: ' + NativeUtils.buildVersion;
+    if (engine.isNotEmpty) {
+      result += ', $engine';
+    }
+    return result;
+  }
+
 
   @override
   void initState(){

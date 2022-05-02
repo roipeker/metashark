@@ -1,24 +1,24 @@
 import 'package:dotted_decoration/dotted_decoration.dart';
 import 'package:metashark/commons.dart';
 
-part 'steaking_contract_state.dart';
+part 'farming_contract_state.dart';
 
 part 'widgets.dart';
 
-class SteakingContractPage extends StatefulWidget {
-  static const url = "/steaking-contract";
+class FarmingContractPage extends StatefulWidget {
+  static const url = "/farming-contract";
   final String contractId;
 
-  const SteakingContractPage({
+  const FarmingContractPage({
     Key? key,
     required this.contractId,
   }) : super(key: key);
 
   @override
-  createState() => _SteakingContractPage();
+  createState() => _FarmingContractPage();
 }
 
-class _SteakingContractPage extends _SteakingContractState {
+class _FarmingContractPage extends _FarmingContractState {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -58,7 +58,7 @@ class _LogArea extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final state = context.findAncestorStateOfType<_SteakingContractState>()!;
+    final state = context.findAncestorStateOfType<_FarmingContractState>()!;
     final logs = state.logs;
 
     return Stack(

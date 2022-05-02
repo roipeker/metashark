@@ -15,6 +15,7 @@ class AppColors {
   // avatar
   static const lightViolet = Color(0xff9E95F5);
   static const scaffold = Color(0xffF8F8F8);
+  static const bottomSheet = scaffold;
 
   static const denim = Color(0xff384f7d);
   static const denim80 = Color(0xcc384f7d);

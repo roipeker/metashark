@@ -78,8 +78,55 @@ class RootMenuState extends State<RootMenu> {
 class RootMenuDrawer extends StatelessWidget {
   const RootMenuDrawer({Key? key}) : super(key: key);
 
+  // String get currentLoc => routerLastState!.subloc;
+  bool isSelected(String urlName) {
+    if (urlName.isEmpty) return false;
+    var routerUrl = routerLastState?.subloc ?? '';
+    String itemUrl = '';
+    try {
+      itemUrl = router.namedLocation(urlName);
+    } catch (e) {
+      trace("Error getting url from name: $urlName");
+    }
+    if (itemUrl.isEmpty) return false;
+    if (itemUrl == '/') {
+      return routerUrl == itemUrl;
+    } else {
+      return routerUrl.startsWith(itemUrl);
+    }
+  }
+
+  Widget getGap() {
+    final p = _params;
+    double val = double.tryParse(p['gap'] ?? '0') ?? 0;
+    return Gap(val);
+  }
+
+  EdgeInsets getPadding() {
+    final p = _params;
+    double val = double.tryParse(p['padding'] ?? '0') ?? 0;
+    return EdgeInsets.symmetric(vertical: 8, horizontal: val);
+  }
+
+  double getItemRadius() {
+    final p = _params;
+    return double.tryParse(p['radius'] ?? '4') ?? 4;
+  }
+
+  Map<String, String> get _params =>
+      routerLastState?.queryParams ??
+      {'gap': '2', 'padding': '4', 'radius': '4'};
+
   @override
   Widget build(BuildContext context) {
+    final gap = getGap();
+    final padding = getPadding();
+    final itemRadius = getItemRadius();
+
+    // const gap = Gap(2);
+    // const padding = EdgeInsets.symmetric(vertical: 8, horizontal: 4);
+    // const itemRadius = 4.0;
+
     return Container(
       width: 300,
       color: AppColors.charcoalGrey,
@@ -125,13 +172,17 @@ class RootMenuDrawer extends StatelessWidget {
                   child: SafeArea(
                     child: Scrollbar(
                       child: ListView(
-                        padding: kPad16,
+                        padding: padding,
+                        // padding: const EdgeInsets.symmetric(
+                        //     vertical: 8, horizontal: 8),
                         shrinkWrap: true,
                         children: [
                           ...kRootMenuList.map2(
                             (e) => _MenuItem(
+                              selected: isSelected(e.url),
                               // svgId: e.svgId,
                               iconData: e.iconData,
+                              radius: itemRadius,
                               label: e.label,
                               onTap: () async {
                                 var url = e.url;
@@ -143,18 +194,16 @@ class RootMenuDrawer extends StatelessWidget {
                                   if (path != current) {
                                     context.goNamed(e.url);
                                     await 0.25.delay();
-
-                                    /// HACK: ONLY WAY TO CLOSE DRAWER.
-                                    if (kRootMenuKey.currentState?.isDrawerOpen ==
-                                        true) {
-                                      kRootMenuKey.currentState?.openEndDrawer();
-                                    }
                                   }
+                                }
+                                if (kRootMenuKey.currentState?.isDrawerOpen ==
+                                    true) {
+                                  kRootMenuKey.currentState?.openEndDrawer();
                                 }
                               },
                             ),
                           ),
-                        ],
+                        ].separator(gap),
                       ),
                     ),
                   ),
@@ -187,9 +236,13 @@ class _MenuItem extends StatelessWidget {
 
   // final String svgId;
   final IconData iconData;
+  final bool selected;
+  final double radius;
 
   const _MenuItem({
     Key? key,
+    this.radius = 4,
+    this.selected = false,
     required this.label,
     // required this.svgId,
     required this.iconData,
@@ -198,27 +251,37 @@ class _MenuItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialButton(
-      height: 44,
-      onPressed: onTap,
-      child: Row(
-        children: [
-          Icon(
-            iconData,
-            size: 24,
-            color: AppColors.appbarIconGrey,
-          ),
-          kGap16,
-          Text(
-            label,
-            style: const TextStyle(
-              color: Color(0xff5e5873),
-              fontSize: 14,
-              fontFamily: "Open Sans",
-              fontWeight: FontWeight.w600,
+    final _borderRadius = BorderRadius.circular(radius);
+    return Container(
+      // color: Colors.red,
+      decoration: BoxDecoration(
+          color: selected ? AppColors.primaryPurple10 : null,
+          // borderRadius: kBorderRadius8,
+          borderRadius: _borderRadius),
+      child: MaterialButton(
+        height: 44,
+        // shape: kBorder8,
+        shape: RoundedRectangleBorder(borderRadius: _borderRadius),
+        onPressed: onTap,
+        child: Row(
+          children: [
+            Icon(
+              iconData,
+              size: 24,
+              color: AppColors.appbarIconGrey,
             ),
-          ),
-        ],
+            kGap16,
+            Text(
+              label,
+              style: const TextStyle(
+                color: Color(0xff5e5873),
+                fontSize: 14,
+                fontFamily: "Open Sans",
+                fontWeight: FontWeight.w600,
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
@@ -238,16 +301,42 @@ final kRootMenuList = [
     iconData: AppIcons.wallet,
   ),
   const _ItemVo(
-    label: 'My team',
+    label: 'Plans',
+    svgId: SvgIcons.shoppingBag,
+    url: PlansPage.url,
+    iconData: AppIcons.shopping_bag,
+  ),
+  const _ItemVo(
+    label: 'Farming',
+    svgId: SvgIcons.people,
+    url: FarmingPage.url,
+    iconData: AppIcons.layer_group,
+  ),
+
+  const _ItemVo(
+    label: 'Portfolio',
+    svgId: SvgIcons.inventory,
+    url: PortfolioPage.url,
+    iconData: AppIcons.inventory,
+  ),
+  const _ItemVo(
+    label: 'My Team',
     svgId: SvgIcons.people,
     url: MyTeamPage.url,
     iconData: AppIcons.people,
   ),
+
   const _ItemVo(
-    label: 'Steaking',
-    svgId: SvgIcons.people,
-    url: SteakingPage.url,
-    iconData: AppIcons.layer_group,
+    label: 'Binary',
+    svgId: SvgIcons.binary,
+    url: BinaryPage.url,
+    iconData: AppIcons.icon_binary,
+  ),
+  const _ItemVo(
+    label: 'Career',
+    svgId: SvgIcons.star,
+    url: CareerPage.url,
+    iconData: AppIcons.star_1,
   ),
   // const _ItemVo(
   //   label: 'Store',
@@ -261,42 +350,21 @@ final kRootMenuList = [
     url: QuestPage.url,
     iconData: AppIcons.trophy,
   ),
-  const _ItemVo(
-    label: 'Roulette',
-    svgId: SvgIcons.cardGiftcard,
-    url: RoulettePage.url,
-    iconData: AppIcons.card_giftcard,
-  ),
-  const _ItemVo(
-    label: 'Plans',
-    svgId: SvgIcons.shoppingBag,
-    url: PlansPage.url,
-    iconData: AppIcons.shopping_bag,
-  ),
-  const _ItemVo(
-    label: 'Portfolio',
-    svgId: SvgIcons.inventory,
-    url: PortfolioPage.url,
-    iconData: AppIcons.inventory,
-  ),
+
   const _ItemVo(
     label: 'Vouchers',
     svgId: SvgIcons.vouchers,
     url: VouchersPage.url,
     iconData: AppIcons.coupon_2,
   ),
+
   const _ItemVo(
-    label: 'Binary',
-    svgId: SvgIcons.binary,
-    url: BinaryPage.url,
-    iconData: AppIcons.icon_binary,
+    label: 'Roulette',
+    svgId: SvgIcons.cardGiftcard,
+    url: RoulettePage.url,
+    iconData: AppIcons.card_giftcard,
   ),
-  const _ItemVo(
-    label: 'Career',
-    svgId: SvgIcons.star,
-    url: CareerPage.url,
-    iconData: AppIcons.star_1,
-  ),
+
   const _ItemVo(
     label: 'Settings',
     svgId: SvgIcons.settings,

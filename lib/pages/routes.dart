@@ -349,22 +349,24 @@ final router = GoRouter(
       redirect: _redirectComingSoon,
     ),
     GoRoute(
-      path: '/steaking',
-      name: SteakingPage.url,
+      /// steaking
+      path: '/farming',
+      name: FarmingPage.url,
       // redirect: _redirectComingSoon,
       builder: (_, state) {
-        return SteakingPage(key: state.pageKey);
+        return FarmingPage(key: state.pageKey);
       },
     ),
+
     GoRoute(
-      path: '/steaking/contract/:id',
-      name: SteakingContractPage.url,
+      path: '/farming/contract/:id',
+      name: FarmingContractPage.url,
       builder: (_, state) {
         final id = state.params['id'] ?? '';
         if (id.isEmpty) {
           throw Exception("Invalid contract id");
         }
-        return SteakingContractPage(
+        return FarmingContractPage(
           key: state.pageKey,
           contractId: id,
         );
@@ -391,7 +393,7 @@ final router = GoRouter(
     GoRoute(
       path: '/plans',
       name: PlansPage.url,
-      redirect: (_) => '/plans/tab/steaking',
+      redirect: (_) => '/plans/tab/farming',
     ),
     GoRoute(
       path: '/plans/tab/:id',
@@ -401,10 +403,42 @@ final router = GoRouter(
         if (tab < 0) {
           throw Exception("Plan tab not found: $id");
         }
-        return PlansPage(key: state.pageKey, currentTab: tab);
+        var packageId = state.queryParams['package_id'] ?? '0';
+        // var farmingIndex = int.tryParse(packageId)??0;
+        var farmingIndex = PlansFarmingPage.getIndexById(packageId);
+        return PlansPage(
+          key: state.pageKey,
+          currentTab: tab,
+          farmingIndex: farmingIndex,
+        );
       },
     ),
-
+    // GoRoute(
+    //   /// previously known as "steaking"
+    //   path: '/plans/tab/farming/:id',
+    //   redirect: (state) {
+    //     var cardId = state.params['id']!;
+    //     if (PlansFarmingPage.isValidIndex(cardId)) {
+    //       return null;
+    //     }
+    //     var index = PlansFarmingPage.getIndexById(cardId);
+    //     return '/plans/tab/farming/$index';
+    //   },
+    //   builder: (_, state) {
+    //     var cardId = state.params['id']!;
+    //     var index = PlansFarmingPage.getIndexById(cardId);
+    //     const theKey = ValueKey('/plans/tab/:id');
+    //     trace("Page Key 1:", state.pageKey);
+    //     trace("Page Key 2:", theKey);
+    //
+    //     return PlansPage(
+    //       // key: state.pageKey,
+    //       key: theKey,
+    //       currentTab: 0,
+    //       farmingIndex: index,
+    //     );
+    //   },
+    // ),
     GoRoute(
       path: '/portfolio',
       name: PortfolioPage.url,

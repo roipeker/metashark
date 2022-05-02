@@ -31,7 +31,7 @@ class _VoucherDetailsSheet extends _VoucherDetailsSheetState {
               width: double.infinity,
               margin: const EdgeInsets.only(top: 32),
               decoration: const BoxDecoration(
-                color: AppColors.scaffold,
+                color: AppColors.bottomSheet,
                 borderRadius: BorderRadius.vertical(top: Radius.circular(12)),
               ),
               // padding: kPad16,

@@ -13,6 +13,7 @@ class SettingsPage extends StatefulWidget {
 }
 
 class _SettingsPage extends _SettingsState {
+
   @override
   Widget build(BuildContext context) {
     return ScrollConfiguration(
@@ -27,65 +28,82 @@ class _SettingsPage extends _SettingsState {
           // ),
           body: RefreshIndicator(
             onRefresh: onRefreshPull,
-            child: ListView(
-              padding: kPad16,
+            child: Column(
               children: [
-                SettingsListItem(
-                  svgId: SvgIcons.personSettings,
-                  iconData: AppIcons.person,
-                  title: 'First Name Last Name',
-                  subtitle: 'Login',
-                  onTap: () {
-                    // nav to edit page.
-                    context.pushNamed(SettingsProfilePage.url);
-                  },
-                ),
-                SettingsListItem(
-                  svgId: SvgIcons.googleAuthIcon,
-                  title: 'Google Authentication',
-                  subtitle: 'Date of creation: 22.05.2022',
-                  suffix: Obs(
-                    () => Text("Active", style: kSettingsTileGreenStyle)
-                        .visible(appData.hasGoogleAuth()),
+                Expanded(
+                  child: ListView(
+                    padding: kPad16,
+                    children: [
+                      SettingsListItem(
+                        svgId: SvgIcons.personSettings,
+                        iconData: AppIcons.person,
+                        title: 'First Name Last Name',
+                        subtitle: 'Login',
+                        onTap: () {
+                          // nav to edit page.
+                          context.pushNamed(SettingsProfilePage.url);
+                        },
+                      ),
+                      SettingsListItem(
+                        svgId: SvgIcons.googleAuthIcon,
+                        title: 'Google Authentication',
+                        subtitle: 'Date of creation: 22.05.2022',
+                        suffix: Obs(
+                          () => Text("Active", style: kSettingsTileGreenStyle)
+                              .visible(appData.hasGoogleAuth()),
+                        ),
+                        onTap: onGoogleAuthTap,
+                      ),
+                      SettingsListItem(
+                        // svgId: SvgIcons.lockOutline,
+                        iconData: AppIcons.lock_outline,
+                        title: 'Change password',
+                        subtitle: 'Modified 90 days ago',
+                        onTap: () {
+                          context.pushNamed(ChangePasswordPage.url);
+                        },
+                      ),
+                      SettingsListItem(
+                        svgId: SvgIcons.mailOutline,
+                        iconData: AppIcons.mail_outline,
+                        title: 'Change email',
+                        subtitle: 'Gmail@gmail.com',
+                        onTap: () {
+                          context.pushNamed(ChangeEmailPage.url);
+                        },
+                      ),
+                      SettingsListItem(
+                        iconData: AppIcons.phonelink_lock,
+                        svgId: SvgIcons.phonelinkLock,
+                        title: 'Sessions',
+                        subtitle: '6 sessions',
+                        onTap: () {
+                          context.pushNamed(SessionsPage.url);
+                        },
+                      ),
+                      SettingsListItem(
+                        svgId: SvgIcons.autoAwesome,
+                        iconData: AppIcons.auto_awesome,
+                        title: 'Confirmations',
+                        onTap: () {
+                          context.pushNamed(SettingsConfirmationsPage.url);
+                        },
+                      ),
+                    ].separator(kGap8),
                   ),
-                  onTap: onGoogleAuthTap,
                 ),
-                SettingsListItem(
-                  // svgId: SvgIcons.lockOutline,
-                  iconData: AppIcons.lock_outline,
-                  title: 'Change password',
-                  subtitle: 'Modified 90 days ago',
-                  onTap: () {
-                    context.pushNamed(ChangePasswordPage.url);
-                  },
+                kGap16,
+                Text(
+                  versionText,
+                  textAlign: TextAlign.center,
+                  style: const TextStyle(
+                    color: AppColors.greyAccesoryIconColor,
+                    fontSize: 12,
+                    fontWeight: FontWeight.w600,
+                  ),
                 ),
-                SettingsListItem(
-                  svgId: SvgIcons.mailOutline,
-                  iconData: AppIcons.mail_outline,
-                  title: 'Change email',
-                  subtitle: 'Gmail@gmail.com',
-                  onTap: () {
-                    context.pushNamed(ChangeEmailPage.url);
-                  },
-                ),
-                SettingsListItem(
-                  iconData: AppIcons.phonelink_lock,
-                  svgId: SvgIcons.phonelinkLock,
-                  title: 'Sessions',
-                  subtitle: '6 sessions',
-                  onTap: () {
-                    context.pushNamed(SessionsPage.url);
-                  },
-                ),
-                SettingsListItem(
-                  svgId: SvgIcons.autoAwesome,
-                  iconData: AppIcons.auto_awesome,
-                  title: 'Confirmations',
-                  onTap: () {
-                    context.pushNamed(SettingsConfirmationsPage.url);
-                  },
-                ),
-              ].separator(kGap8),
+                kGap16,
+              ],
             ),
           ),
         ),

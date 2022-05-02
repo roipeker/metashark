@@ -61,7 +61,7 @@ abstract class _PartnerDetailsState extends State<PartnerDetailsPage> {
   }
 
   void onBinarTap() {
-    context.push('/binary/structure?id=2');
+    context.go('/binary/structure?id=2');
     // context.pushNamed(MyRegisteredPartnersPage.url);
   }
 

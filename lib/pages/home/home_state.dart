@@ -34,8 +34,12 @@ abstract class _HomeState extends State<HomePage> {
     );
   }
 
+  final PlanCardVo currentPackagePlan = kPackagePlatinum;
+
   void onMyPackageTap() {
-    context.goNamed(PlansPage.url);
+    final index = kPackageFarmingCards.indexOf(currentPackagePlan);
+    // '/plans/tab/farming?package_id=$currentPage'
+    context.go("/plans/tab/farming?package_id=$index");
   }
 
   void onMyTeamTap() {
@@ -51,7 +55,7 @@ abstract class _HomeState extends State<HomePage> {
   }
 
   void onMyPlanInfoTap() {
-    context.goNamed(SteakingPage.url);
+    context.goNamed(FarmingPage.url);
   }
 
   void onMyOfficeTap() {

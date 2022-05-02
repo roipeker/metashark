@@ -17,7 +17,7 @@ class _ChartEarnedSheetView extends _ChartEarnedSheetState {
       child: Container(
         width: double.infinity,
         decoration: const BoxDecoration(
-          color: Color(0xffDFE1E9),
+          color: AppColors.bottomSheet,
           borderRadius: BorderRadius.vertical(top: Radius.circular(8)),
         ),
         padding: kPad16,
@@ -26,12 +26,11 @@ class _ChartEarnedSheetView extends _ChartEarnedSheetState {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               const SizedBox(
-                width: 200,
-                height: 200,
+                height: 240,
                 child: RiveAnimation.asset(
-                  Rives.delivery,
-                  fit: BoxFit.none,
-                  alignment: Alignment.center,
+                  Rives.runnerBoy,
+                  // fit: BoxFit.cover,
+                  // alignment: Alignment.topCenter,
                 ),
               ),
               kGap16,

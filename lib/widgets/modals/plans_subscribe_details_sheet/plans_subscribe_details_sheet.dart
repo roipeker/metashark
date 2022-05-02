@@ -24,7 +24,7 @@ class _PlansSubscribeDetailsSheet extends _PlansSubscribeDetailsSheetState {
         width: double.infinity,
         margin: const EdgeInsets.only(top: 32),
         decoration: const BoxDecoration(
-          color: Colors.white,
+          color: AppColors.bottomSheet,
           borderRadius: BorderRadius.vertical(top: Radius.circular(8)),
         ),
         padding: kPad16,

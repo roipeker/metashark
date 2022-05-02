@@ -1,4 +1,5 @@
 import 'package:metashark/commons.dart';
+import 'package:metashark/pages/plans/plans_farming/plans_farming.dart';
 
 part 'model.dart';
 part 'plans_state.dart';
@@ -15,15 +16,22 @@ class PlansPage extends StatefulWidget {
     return RouterUtils.isValidUrlParam(_kBottomMenuNav, id);
   }
 
-  final int currentTab;
+  final int currentTab, farmingIndex;
 
-  const PlansPage({Key? key, this.currentTab = 0}) : super(key: key);
+  const PlansPage({Key? key, this.currentTab = 0, this.farmingIndex=0}) : super(key: key);
 
   @override
   createState() => _PlansPage();
 }
 
 class _PlansPage extends _PlansState {
+
+  @override
+  void didUpdateWidget(covariant PlansPage oldWidget) {
+    // if(widget.farmingIndex)
+    super.didUpdateWidget(oldWidget);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -32,8 +40,8 @@ class _PlansPage extends _PlansState {
         behavior: AppScrollBehavior(),
         child: IndexedStack(
           index: currentIndex,
-          children: const [
-            PlansSteakingPage(),
+          children: [
+            PlansFarmingPage(farmingIndex: widget.farmingIndex),
             PlansSubscribePage(),
           ],
         ),

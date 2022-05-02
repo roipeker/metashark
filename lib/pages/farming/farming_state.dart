@@ -1,6 +1,6 @@
-part of 'steaking.dart';
+part of 'farming.dart';
 
-abstract class _SteakingState extends State<SteakingPage> {
+abstract class _FarmingState extends State<FarmingPage> {
   final scrollController = ScrollController();
 
   Future<void> onRefreshPull() {
@@ -23,6 +23,6 @@ abstract class _SteakingState extends State<SteakingPage> {
   }
 
   void onContractTap(String contractId) {
-    context.pushNamed(SteakingContractPage.url, params: {'id': contractId});
+    context.pushNamed(FarmingContractPage.url, params: {'id': contractId});
   }
 }

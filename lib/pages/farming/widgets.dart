@@ -1,4 +1,4 @@
-part of 'steaking.dart';
+part of 'farming.dart';
 
 class _AnimatedBall extends StatelessWidget {
   final String title, subtitle;

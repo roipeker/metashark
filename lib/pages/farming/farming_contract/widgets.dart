@@ -1,4 +1,4 @@
-part of 'steaking_contract.dart';
+part of 'farming_contract.dart';
 
 class _ContractLogItem extends StatelessWidget {
   final VoidCallback? onTap;

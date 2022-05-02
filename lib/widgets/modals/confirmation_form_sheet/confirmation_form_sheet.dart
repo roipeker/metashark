@@ -15,7 +15,7 @@ class _ConfirmationFormSheetView extends _ConfirmationFormSheetState {
     return IntrinsicHeight(
       child: Container(
         width: double.infinity,
-        color: Colors.white,
+        color: AppColors.bottomSheet,
         padding: kPad16,
         child: SafeArea(
           child: Column(

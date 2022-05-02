@@ -2,8 +2,8 @@ part of 'plans.dart';
 
 const _kBottomMenuNav = <BottomNavItemVo>[
   BottomNavItemVo(
-    name: 'Steaking',
-    urlId: 'steaking',
+    name: 'Farming',
+    urlId: 'farming',
     iconData: AppIcons.layer_group,
   ),
   BottomNavItemVo(

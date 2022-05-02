@@ -30,7 +30,7 @@ class _ShowGiftsSheet extends _ShowGiftsSheetState {
               width: double.infinity,
               margin: const EdgeInsets.only(top: 32),
               decoration: const BoxDecoration(
-                color: Colors.white,
+                color: AppColors.bottomSheet,
                 borderRadius: BorderRadius.vertical(top: Radius.circular(12)),
               ),
               padding: kPad16,

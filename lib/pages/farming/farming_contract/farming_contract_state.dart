@@ -1,6 +1,6 @@
-part of 'steaking_contract.dart';
+part of 'farming_contract.dart';
 
-abstract class _SteakingContractState extends State<SteakingContractPage> {
+abstract class _FarmingContractState extends State<FarmingContractPage> {
   final scrollController = ScrollController();
 
   List<ContractLogVo> get logs => _kData;

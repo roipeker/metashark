@@ -1,23 +1,24 @@
 import 'package:metashark/commons.dart';
+import 'package:metashark/pages/farming/farming_contract/farming_contract.dart';
 
-part 'steaking_state.dart';
+part 'farming_state.dart';
 
 part 'widgets.dart';
 
-class SteakingPage extends StatefulWidget {
-  static const url = "/steaking";
+class FarmingPage extends StatefulWidget {
+  static const url = "/farming";
 
-  const SteakingPage({Key? key}) : super(key: key);
+  const FarmingPage({Key? key}) : super(key: key);
 
   @override
-  createState() => _SteakingPage();
+  createState() => _FarmingPage();
 }
 
-class _SteakingPage extends _SteakingState {
+class _FarmingPage extends _FarmingState {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: CommonAppBar(title: 'Steaking'),
+      appBar: CommonAppBar(title: 'Farming'),
       body: CommonScrollableBody(
         clipBehavior: Clip.none,
         padding: kPad16,
