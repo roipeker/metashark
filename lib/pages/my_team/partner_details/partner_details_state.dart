@@ -1,6 +1,22 @@
 part of 'partner_details.dart';
 
+List<TeamMemberVo> _teamHistory = [];
+
 abstract class _PartnerDetailsState extends State<PartnerDetailsPage> {
+  String get appbarTitle {
+    return widget.teamId;
+  }
+
+  void onHistorySelect(TeamMemberVo vo) {
+    // pop from stack?
+    var index = _teamHistory.indexOf(vo);
+    if (index > -1) {
+      _teamHistory = _teamHistory.sublist(0, index).toList();
+    }
+    var url = '/team/${vo.username}';
+    context.go(url);
+  }
+
   final scrollController = ScrollController();
 
   Future<void> onRefreshPull() {
@@ -8,12 +24,17 @@ abstract class _PartnerDetailsState extends State<PartnerDetailsPage> {
   }
 
   List<TeamMemberVo> get searchData => _teamData;
-  late final _teamData = MockDataFactory.randomTeamMemberList();
+
+  // late final _teamData = MockDataFactory.randomTeamMemberList();
+  late final List<TeamMemberVo> _teamData;
 
   @override
   void initState() {
+    _teamData = List.of(_kBaseTeamData)..shuffle();
+    // take teamId and search for the record?
+    var vo = _getCurrentModel(widget.teamId) ?? _teamData.last;
+    _teamHistory.add(vo);
     super.initState();
-
   }
 
   @override
@@ -57,7 +78,6 @@ abstract class _PartnerDetailsState extends State<PartnerDetailsPage> {
     // }
   }
 
-
   FutureOr onSearchTap() async {
     final result = await showSearch<TeamMemberVo?>(
       context: context,
@@ -69,7 +89,16 @@ abstract class _PartnerDetailsState extends State<PartnerDetailsPage> {
   }
 
   String lastSearch = '';
+
+  static TeamMemberVo? _getCurrentModel(String teamId) {
+    for (var p in _kBaseTeamData) {
+      if (p.username == teamId) return p;
+    }
+    return null;
+  }
 }
+
+final _kBaseTeamData = MockDataFactory.randomTeamMemberList(quantity: 100);
 
 // final _kTeamData = MockDataFactory.randomTeamSearchData();
 // final _kTeamData = MockDataFactory.randomTeamMemberList();

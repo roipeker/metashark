@@ -20,13 +20,27 @@ class BinaryTreeController extends ChangeNotifier {
 
 final controller = BinaryTreeController();
 
-class TreeWidget extends StatelessWidget {
+class TreeWidget extends StatefulWidget {
   final int? nodeId;
+
 
   const TreeWidget({
     Key? key,
     this.nodeId,
   }) : super(key: key);
+
+  @override
+  State<TreeWidget> createState() => _TreeWidgetState();
+}
+
+class _TreeWidgetState extends State<TreeWidget> {
+  // late final transformController = TransformationController();
+  
+  @override
+  void dispose() {
+    // transformController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -41,6 +55,7 @@ class TreeWidget extends StatelessWidget {
           minScale: .25,
           panEnabled: true,
           scaleEnabled: true,
+          // transformationController: transformController,
           child: FittedBox(
             fit: BoxFit.contain,
             child: SizedBox(
@@ -48,7 +63,7 @@ class TreeWidget extends StatelessWidget {
               height: 790,
               child: CanvasTreeView(
                 controller: controller,
-                  nodeId:nodeId,
+                  nodeId:widget.nodeId,
               ),
             ),
             // child: sampleContent(),

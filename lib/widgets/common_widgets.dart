@@ -72,9 +72,11 @@ class CommonAppBar extends StatelessWidget implements PreferredSizeWidget {
   final String? title;
   final List<Widget>? actions;
   final PreferredSizeWidget? bottom;
+  final Widget? leading;
 
   const CommonAppBar({
     Key? key,
+    this.leading,
     this.title,
     this.actions,
     this.bottom,
@@ -84,24 +86,25 @@ class CommonAppBar extends StatelessWidget implements PreferredSizeWidget {
   Widget build(BuildContext context) {
     final menu = RootMenu.of(context);
     final hasDrawer = menu != null;
-    Widget? leading;
-    var can = context.canPop();
-    if (can) {
-      /// show back button.
-      leading = BackButton(
-        onPressed: () {
-          context.pop();
-        },
-      );
-    } else if (hasDrawer) {
-      leading = IconButton(
-        icon: const Icon(Icons.menu),
-        onPressed: () {
-          menu.openDrawer();
-        },
-      );
+    Widget? _leading = leading;
+    if (_leading == null) {
+      var can = context.canPop();
+      if (can) {
+        /// show back button.
+        _leading = BackButton(
+          onPressed: () {
+            context.pop();
+          },
+        );
+      } else if (hasDrawer) {
+        _leading = IconButton(
+          icon: const Icon(Icons.menu),
+          onPressed: () {
+            menu.openDrawer();
+          },
+        );
+      }
     }
-
     Widget? _title;
     if (title != null) {
       _title = Text(title!);
@@ -113,7 +116,7 @@ class CommonAppBar extends StatelessWidget implements PreferredSizeWidget {
     }
     return AppBar(
       title: _title,
-      leading: leading,
+      leading: _leading,
       actions: actions,
       bottom: bottom,
     );
@@ -791,26 +794,26 @@ class Circle extends StatelessWidget {
 ///
 ///
 
-
 class NotificationCircleBadge extends StatelessWidget {
   final int value;
   final Color backgroundColor;
   final Widget child;
   final double size;
   final Offset position;
+
   const NotificationCircleBadge({
     Key? key,
     required this.value,
     required this.backgroundColor,
     required this.child,
-    this.position = const Offset(-8,-8),
+    this.position = const Offset(-8, -8),
     this.size = 22,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Stack(
-      clipBehavior:  Clip.none,
+      clipBehavior: Clip.none,
       children: [
         child,
         Positioned(

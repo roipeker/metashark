@@ -14,11 +14,15 @@ class PartnerDetailsPage extends StatefulWidget {
   createState() => _PartnerDetailsPage();
 }
 
-class _PartnerDetailsPage extends _PartnerDetailsState {
-  String get appbarTitle {
-    return widget.teamId;
-  }
+// class TeamHistoryRecord {
+//   final TeamMemberVo data;
+//   TeamHistoryRecord({required this.data});
+//   String get url {
+//     return data.username;
+//   }
+// }
 
+class _PartnerDetailsPage extends _PartnerDetailsState {
   @override
   Widget build(BuildContext context) {
     return ScrollConfiguration(
@@ -26,6 +30,10 @@ class _PartnerDetailsPage extends _PartnerDetailsState {
       child: Scaffold(
         appBar: CommonAppBar(
           title: appbarTitle,
+          leading: SpecialBackButton(
+            history: _teamHistory,
+            onSelected: onHistorySelect,
+          ),
         ),
         body: Scrollbar(
           controller: scrollController,
@@ -112,6 +120,100 @@ class _PartnerDetailsPage extends _PartnerDetailsState {
           ),
         ),
       ),
+    );
+  }
+}
+
+class SpecialBackButton extends StatelessWidget {
+  final List<TeamMemberVo> history;
+  final ValueChanged<TeamMemberVo> onSelected;
+
+  const SpecialBackButton({
+    Key? key,
+    required this.history,
+    required this.onSelected,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    final hasHistory = history.isNotEmpty;
+    final menu = RootMenu.of(context);
+    final hasDrawer = menu != null;
+    var canPop = Navigator.canPop(context);
+    if (!hasHistory && !canPop && hasDrawer) {
+      return IconButton(
+        icon: const Icon(Icons.menu),
+        onPressed: menu.openDrawer,
+      );
+    }
+    return GestureDetector(
+      behavior: HitTestBehavior.opaque,
+      onLongPress: !hasHistory ? null : () => _openMenu(context),
+      child: IconButton(
+        icon: const BackButtonIcon(),
+        onPressed: () {
+          if (canPop) {
+            Navigator.maybePop(context);
+          } else if (hasHistory) {
+            _openMenu(context);
+          } else {
+            menu?.openDrawer();
+          }
+        },
+      ),
+    );
+  }
+
+  void _openMenu(BuildContext context) {
+    showMenu(
+      shape: kBorder8,
+      elevation: 4,
+      context: context,
+      items: [
+        ...history.map2(
+          (e) {
+            return PopupMenuItem(
+              padding: kPad8,
+              // enabled: e.username != current.username,
+              textStyle: const TextStyle(
+                color: AppColors.darkGrey,
+                fontSize: 14,
+                fontWeight: FontWeight.w600,
+              ),
+              height: 35,
+              onTap: () => onSelected(e),
+              child: Row(
+                children: [
+                  Circle(
+                    color: const Color(0xff9E95F5),
+                    child: Text(
+                      e.name[0].toUpperCase(),
+                      style: const TextStyle(
+                        color: Colors.white,
+                        fontSize: 16,
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
+                  ),
+                  kGap16,
+                  Text(
+                    e.username,
+                    style: const TextStyle(
+                      color: AppColors.darkGrey,
+                      fontSize: 14,
+                      fontFamily: "Open Sans",
+                      fontWeight: FontWeight.w600,
+                    ),
+                  ),
+                ],
+              ),
+              value: e,
+            );
+          },
+        )
+      ],
+      position: RelativeRect.fill,
+      // initialValue: current,
     );
   }
 }

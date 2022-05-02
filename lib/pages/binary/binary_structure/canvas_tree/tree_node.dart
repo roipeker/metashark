@@ -110,7 +110,7 @@ class BinaryNode extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final borderColor = isEmpty
-        // ? Color.lerp(const Color(0xffC4C4C4), Colors.white, .05)
+    // ? Color.lerp(const Color(0xffC4C4C4), Colors.white, .05)
         ? const Color(0xffC4C4C4)
         : Colors.white;
     return MouseRegion(
@@ -123,6 +123,7 @@ class BinaryNode extends StatelessWidget {
               children: [
                 Stack(
                   children: [
+
                     /// round item
                     SizedBox(
                       width: levelConfig.avatarSize,
@@ -142,75 +143,75 @@ class BinaryNode extends StatelessWidget {
                             clipBehavior: Clip.antiAlias,
                             child: !isEmpty
                                 ? Stack(
-                                    children: [
-                                      AppFadeImage(
-                                        url: imageUrl ?? '-',
-                                        fit: BoxFit.cover,
-                                      ),
-                                      if (positionID > 0)
-                                        Center(
-                                          child: Container(
-                                            child: Text(
-                                              '$positionID',
-                                              style: TextStyle(
-                                                fontSize: 24,
-                                                color: Colors.white,
-                                                fontWeight: FontWeight.bold,
-                                              ),
-                                            ),
-                                            padding: kPadH16V4,
-                                            decoration: BoxDecoration(
-                                              color: Colors.black45,
-                                              borderRadius: kBorderRadius8,
-                                            ),
-                                          ),
+                              children: [
+                                AppFadeImage(
+                                  url: imageUrl ?? '-',
+                                  fit: BoxFit.cover,
+                                ),
+                                if (positionID > 0)
+                                  Center(
+                                    child: Container(
+                                      child: Text(
+                                        '$positionID',
+                                        style: const TextStyle(
+                                          fontSize: 24,
+                                          color: Colors.white,
+                                          fontWeight: FontWeight.bold,
                                         ),
-                                    ],
-                                  )
+                                      ),
+                                      padding: kPadH16V4,
+                                      decoration: BoxDecoration(
+                                        color: Colors.black45,
+                                        borderRadius: kBorderRadius8,
+                                      ),
+                                    ),
+                                  ),
+                              ],
+                            )
                                 : null,
                           ),
                         ),
                       ),
                     ),
 
-                    if (!isEmpty && count > 0)
-                      Positioned(
-                        left: levelConfig.countLeft,
-                        top: 0,
-                        child: Circle(
-                          size: levelConfig.countSize,
-                          color: Colors.white,
-                          child: Text(
-                            "$count",
-                            textAlign: TextAlign.center,
-                            style: TextStyle(
-                              color: const Color(0xffffbb32),
-                              fontSize: levelConfig.countFontSize,
-                              fontWeight: FontWeight.w700,
-                            ),
+                    // if (!isEmpty && count > 0)
+                    Positioned(
+                      left: levelConfig.countLeft,
+                      top: 0,
+                      child: Circle(
+                        size: levelConfig.countSize,
+                        color: Colors.white,
+                        child: Text(
+                          "$count",
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                            color: const Color(0xffffbb32),
+                            fontSize: levelConfig.countFontSize,
+                            fontWeight: FontWeight.w700,
                           ),
                         ),
-                      ),
+                      ).vis(!isEmpty),
+                    ),
 
-                    if (!isEmpty)
-                      Positioned(
-                        bottom: 0,
-                        right: levelConfig.activityRight,
-                        child: Circle(
-                          size: levelConfig.activitySize,
-                          color: purchased
-                              ? AppColors.green
-                              : AppColors.binaryTreeNoPurchase,
-                        ),
-                      ),
+                    // if (!isEmpty)
+                    Positioned(
+                      bottom: 0,
+                      right: levelConfig.activityRight,
+                      child: Circle(
+                        size: levelConfig.activitySize,
+                        color: purchased
+                            ? AppColors.green
+                            : AppColors.binaryTreeNoPurchase,
+                      ).vis(!isEmpty),
+                    ),
                   ],
                 ),
-                if (!isEmpty) kGap8,
-                if (!isEmpty)
-                  _BinaryItemName(
-                    fontSize: levelConfig.loginFontSize,
-                    text: name,
-                  ),
+                kGap8,
+                // if (!isEmpty)
+                _BinaryItemName(
+                  fontSize: levelConfig.loginFontSize,
+                  text: name,
+                ).vis(!isEmpty),
               ],
             ),
           ),
@@ -243,6 +244,21 @@ class BinaryNode extends StatelessWidget {
           ),
         ],
       ),
+    );
+  }
+}
+
+
+extension ExtVisible on Widget {
+  Widget vis(bool visible) {
+    return Visibility(
+      child: this,
+      visible: visible,
+      maintainAnimation: true,
+      maintainSize: true,
+      maintainState: true,
+      maintainSemantics: false,
+      maintainInteractivity: false,
     );
   }
 }
