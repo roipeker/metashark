@@ -58,8 +58,8 @@ class _DepositPage extends _DepositState {
                       IgnorePointer(
                         ignoring: loading,
                         child: AnimatedOpacity(
-                          opacity: loading ? 0.21 : 1,
-                          duration: 0.33.seconds,
+                          opacity: loading ? 0 : 1,
+                          duration: 0.2.seconds,
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.stretch,
                             children: [

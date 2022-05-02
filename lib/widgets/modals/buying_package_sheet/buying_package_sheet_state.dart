@@ -10,6 +10,13 @@ abstract class _BuyingPackageSheetState extends State<BuyingPackageSheetView> {
     context.navigator()?.pop();
   }
 
+  void onMaxTap() {
+    amountTec.text = '1000000';
+    amountTec.editor.selection = TextSelection.collapsed(
+      offset: amountTec.text.length,
+    );
+  }
+
   @override
   void initState() {
     super.initState();

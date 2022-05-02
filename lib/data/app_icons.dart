@@ -58,57 +58,58 @@ class AppIcons {
   static const inventory = _AppIconsData(0xf126, 'inventory');
   static const iphone = _AppIconsData(0xf127, 'iphone');
   static const item = _AppIconsData(0xf128, 'item');
-  static const layer_group = _AppIconsData(0xf129, 'layer_group');
-  static const link_broken = _AppIconsData(0xf12a, 'link_broken');
-  static const list_alt = _AppIconsData(0xf12b, 'list_alt');
-  static const lock_outline = _AppIconsData(0xf12c, 'lock_outline');
-  static const mail_outline = _AppIconsData(0xf12d, 'mail_outline');
-  static const man = _AppIconsData(0xf12e, 'man');
-  static const menu = _AppIconsData(0xf12f, 'menu');
-  static const meta_shark_logo = _AppIconsData(0xf130, 'meta_shark_logo');
-  static const metro_flow_tree = _AppIconsData(0xf131, 'metro_flow_tree');
-  static const networks = _AppIconsData(0xf132, 'networks');
-  static const news = _AppIconsData(0xf133, 'news');
-  static const no_image = _AppIconsData(0xf134, 'no_image');
-  static const park_tickets_couple = _AppIconsData(0xf135, 'park_tickets_couple');
-  static const payments = _AppIconsData(0xf136, 'payments');
-  static const people = _AppIconsData(0xf137, 'people');
-  static const person = _AppIconsData(0xf138, 'person');
-  static const phonelink_lock = _AppIconsData(0xf139, 'phonelink_lock');
-  static const pie_chart = _AppIconsData(0xf13a, 'pie_chart');
-  static const power_settings_new = _AppIconsData(0xf13b, 'power_settings_new');
-  static const pregnant_woman = _AppIconsData(0xf13c, 'pregnant_woman');
-  static const privacy_tip = _AppIconsData(0xf13d, 'privacy_tip');
-  static const qr_code = _AppIconsData(0xf13e, 'qr_code');
-  static const ranks = _AppIconsData(0xf13f, 'ranks');
-  static const rocket = _AppIconsData(0xf140, 'rocket');
-  static const search = _AppIconsData(0xf141, 'search');
-  static const send = _AppIconsData(0xf142, 'send');
-  static const settings = _AppIconsData(0xf143, 'settings');
-  static const share = _AppIconsData(0xf144, 'share');
-  static const shark_fin = _AppIconsData(0xf145, 'shark_fin');
-  static const shopping_bag = _AppIconsData(0xf146, 'shopping_bag');
-  static const stacking = _AppIconsData(0xf147, 'stacking');
-  static const star_1 = _AppIconsData(0xf148, 'star_1');
-  static const star_2 = _AppIconsData(0xf149, 'star_2');
-  static const store = _AppIconsData(0xf14a, 'store');
-  static const subscriptions = _AppIconsData(0xf14b, 'subscriptions');
-  static const support_agent = _AppIconsData(0xf14c, 'support_agent');
-  static const text_size = _AppIconsData(0xf14d, 'text_size');
-  static const timer = _AppIconsData(0xf14e, 'timer');
-  static const transactions = _AppIconsData(0xf14f, 'transactions');
-  static const trees = _AppIconsData(0xf150, 'trees');
-  static const trending_up = _AppIconsData(0xf151, 'trending_up');
-  static const trophy = _AppIconsData(0xf152, 'trophy');
-  static const vertical_align_top = _AppIconsData(0xf153, 'vertical_align_top');
-  static const visibility_off = _AppIconsData(0xf154, 'visibility_off');
-  static const visibility = _AppIconsData(0xf155, 'visibility');
-  static const voucher = _AppIconsData(0xf156, 'voucher');
-  static const wallet_1 = _AppIconsData(0xf157, 'wallet_1');
-  static const wallet_2 = _AppIconsData(0xf158, 'wallet_2');
-  static const wallet = _AppIconsData(0xf159, 'wallet');
-  static const woman = _AppIconsData(0xf15a, 'woman');
-  static const work = _AppIconsData(0xf15b, 'work');
+  static const language = _AppIconsData(0xf129, 'language');
+  static const layer_group = _AppIconsData(0xf12a, 'layer_group');
+  static const link_broken = _AppIconsData(0xf12b, 'link_broken');
+  static const list_alt = _AppIconsData(0xf12c, 'list_alt');
+  static const lock_outline = _AppIconsData(0xf12d, 'lock_outline');
+  static const mail_outline = _AppIconsData(0xf12e, 'mail_outline');
+  static const man = _AppIconsData(0xf12f, 'man');
+  static const menu = _AppIconsData(0xf130, 'menu');
+  static const meta_shark_logo = _AppIconsData(0xf131, 'meta_shark_logo');
+  static const metro_flow_tree = _AppIconsData(0xf132, 'metro_flow_tree');
+  static const networks = _AppIconsData(0xf133, 'networks');
+  static const news = _AppIconsData(0xf134, 'news');
+  static const no_image = _AppIconsData(0xf135, 'no_image');
+  static const park_tickets_couple = _AppIconsData(0xf136, 'park_tickets_couple');
+  static const payments = _AppIconsData(0xf137, 'payments');
+  static const people = _AppIconsData(0xf138, 'people');
+  static const person = _AppIconsData(0xf139, 'person');
+  static const phonelink_lock = _AppIconsData(0xf13a, 'phonelink_lock');
+  static const pie_chart = _AppIconsData(0xf13b, 'pie_chart');
+  static const power_settings_new = _AppIconsData(0xf13c, 'power_settings_new');
+  static const pregnant_woman = _AppIconsData(0xf13d, 'pregnant_woman');
+  static const privacy_tip = _AppIconsData(0xf13e, 'privacy_tip');
+  static const qr_code = _AppIconsData(0xf13f, 'qr_code');
+  static const ranks = _AppIconsData(0xf140, 'ranks');
+  static const rocket = _AppIconsData(0xf141, 'rocket');
+  static const search = _AppIconsData(0xf142, 'search');
+  static const send = _AppIconsData(0xf143, 'send');
+  static const settings = _AppIconsData(0xf144, 'settings');
+  static const share = _AppIconsData(0xf145, 'share');
+  static const shark_fin = _AppIconsData(0xf146, 'shark_fin');
+  static const shopping_bag = _AppIconsData(0xf147, 'shopping_bag');
+  static const stacking = _AppIconsData(0xf148, 'stacking');
+  static const star_1 = _AppIconsData(0xf149, 'star_1');
+  static const star_2 = _AppIconsData(0xf14a, 'star_2');
+  static const store = _AppIconsData(0xf14b, 'store');
+  static const subscriptions = _AppIconsData(0xf14c, 'subscriptions');
+  static const support_agent = _AppIconsData(0xf14d, 'support_agent');
+  static const text_size = _AppIconsData(0xf14e, 'text_size');
+  static const timer = _AppIconsData(0xf14f, 'timer');
+  static const transactions = _AppIconsData(0xf150, 'transactions');
+  static const trees = _AppIconsData(0xf151, 'trees');
+  static const trending_up = _AppIconsData(0xf152, 'trending_up');
+  static const trophy = _AppIconsData(0xf153, 'trophy');
+  static const vertical_align_top = _AppIconsData(0xf154, 'vertical_align_top');
+  static const visibility_off = _AppIconsData(0xf155, 'visibility_off');
+  static const visibility = _AppIconsData(0xf156, 'visibility');
+  static const voucher = _AppIconsData(0xf157, 'voucher');
+  static const wallet_1 = _AppIconsData(0xf158, 'wallet_1');
+  static const wallet_2 = _AppIconsData(0xf159, 'wallet_2');
+  static const wallet = _AppIconsData(0xf15a, 'wallet');
+  static const woman = _AppIconsData(0xf15b, 'woman');
+  static const work = _AppIconsData(0xf15c, 'work');
 
   static const all = <String, _AppIconsData>{
     'account_circle': account_circle,
@@ -151,6 +152,7 @@ class AppIcons {
     'inventory': inventory,
     'iphone': iphone,
     'item': item,
+    'language': language,
     'layer_group': layer_group,
     'link_broken': link_broken,
     'list_alt': list_alt,

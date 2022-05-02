@@ -244,40 +244,37 @@ class _LeftRightPanel extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: kPadH16,
-      child: _PageCard(
-        child: Row(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            _SelectorPanel(
-              label: "Left",
-              selected: selectedPanel == "Left",
-              onTap: () {
-                onChange("Left");
-              },
-              accounts: '1200',
-              amount: '2500 MTS',
-            ).exp(),
-            SizedBox(
-              height: 108,
-              child: VerticalDivider(
-                color: const Color(0xff5E5873).withOpacity(.12),
-                width: 32,
-                thickness: 1,
-              ),
+    return _PageCard(
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          _SelectorPanel(
+            label: "Left",
+            selected: selectedPanel == "Left",
+            onTap: () {
+              onChange("Left");
+            },
+            accounts: '1200',
+            amount: '2500 MTS',
+          ).exp(),
+          SizedBox(
+            height: 108,
+            child: VerticalDivider(
+              color: const Color(0xff5E5873).withOpacity(.12),
+              width: 32,
+              thickness: 1,
             ),
-            _SelectorPanel(
-              label: "Right",
-              selected: selectedPanel == "Right",
-              onTap: () {
-                onChange("Right");
-              },
-              accounts: '700',
-              amount: '1200 MTS',
-            ).exp(),
-          ],
-        ),
+          ),
+          _SelectorPanel(
+            label: "Right",
+            selected: selectedPanel == "Right",
+            onTap: () {
+              onChange("Right");
+            },
+            accounts: '700',
+            amount: '1200 MTS',
+          ).exp(),
+        ],
       ),
     );
   }

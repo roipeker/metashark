@@ -1,7 +1,6 @@
 import 'package:metashark/commons.dart';
 
 part 'binary_state.dart';
-
 part 'model.dart';
 
 class BinaryPage extends StatefulWidget {
@@ -35,9 +34,7 @@ class _BinaryPage extends _BinaryState {
     return ScrollConfiguration(
       behavior: AppScrollBehavior(),
       child: Scaffold(
-        appBar: const CommonAppBar(
-          title: 'Binary',
-        ),
+        appBar: const CommonAppBar(title: 'Binary'),
         body: IndexedStack(
           index: currentIndex,
           children: [

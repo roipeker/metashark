@@ -32,6 +32,9 @@ abstract class _WithdrawState extends State<WalletWithdrawPage> {
   }
 
   void onMaxTap() {
-    context.toastNotImplemented();
+    amountTec.text = '1000000';
+    amountTec.editor.selection = TextSelection.collapsed(
+      offset: amountTec.text.length,
+    );
   }
 }

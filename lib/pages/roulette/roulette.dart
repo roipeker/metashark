@@ -59,22 +59,24 @@ class _RoulettePage extends _RouletteState {
         ),
         const Gap(30),
 
-        AnimatedBuilder(
-          animation: pageController,
-          builder: (context, child) {
-            final p = (pageController.page ?? 0).round();
-            if (p == 0) {
-              return child!;
-            } else if (p == 1) {
-              return buildAlert("Not available");
-            }
-            return buildAlert("Will be available on 05/23/2022");
-          },
-          child: BottomActionLabelButtons(
-            label1: 'Take',
-            label2: 'Twist (1/3)',
-            onTap1: onTakeTap,
-            onTap2: onTwistTap,
+        SafeArea(
+          child: AnimatedBuilder(
+            animation: pageController,
+            builder: (context, child) {
+              final p = (pageController.page ?? 0).round();
+              if (p == 0) {
+                return child!;
+              } else if (p == 1) {
+                return buildAlert("Not available");
+              }
+              return buildAlert("Will be available on 05/23/2022");
+            },
+            child: BottomActionLabelButtons(
+              label1: 'Take',
+              label2: 'Twist (1/3)',
+              onTap1: onTakeTap,
+              onTap2: onTwistTap,
+            ),
           ),
         ),
         kGap32,
@@ -88,12 +90,14 @@ class _RoulettePage extends _RouletteState {
       color: AppColors.primaryPurple10,
       borderRadius: kBorderRadius4,
       elevation: 0,
-      child: Text(
-        message,
-        style: const TextStyle(
-          color: Color(0xff5e5873),
-          fontSize: 16,
-          fontWeight: FontWeight.w600,
+      child: Center(
+        child: Text(
+          message,
+          style: const TextStyle(
+            color: Color(0xff5e5873),
+            fontSize: 16,
+            fontWeight: FontWeight.w600,
+          ),
         ),
       ),
     );

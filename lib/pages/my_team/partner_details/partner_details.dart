@@ -31,6 +31,7 @@ class _PartnerDetailsPage extends _PartnerDetailsState {
         appBar: CommonAppBar(
           title: appbarTitle,
           leading: SpecialBackButton(
+            onResolvePop: onResolvePop,
             history: _teamHistory,
             onSelected: onHistorySelect,
           ),
@@ -127,9 +128,11 @@ class _PartnerDetailsPage extends _PartnerDetailsState {
 class SpecialBackButton extends StatelessWidget {
   final List<TeamMemberVo> history;
   final ValueChanged<TeamMemberVo> onSelected;
+  final VoidCallback? onResolvePop;
 
   const SpecialBackButton({
     Key? key,
+    required this.onResolvePop,
     required this.history,
     required this.onSelected,
   }) : super(key: key);
@@ -153,7 +156,10 @@ class SpecialBackButton extends StatelessWidget {
         icon: const BackButtonIcon(),
         onPressed: () {
           if (canPop) {
-            Navigator.maybePop(context);
+            /// special handler for pop.
+            onResolvePop?.call();
+            //// _matches.remove(_matches.last);
+            // Navigator.maybePop(context);
           } else if (hasHistory) {
             _openMenu(context);
           } else {

@@ -27,6 +27,7 @@ Widget fadeTransition(BuildContext context, Animation<double> animation,
 
 GoRouterState? routerLastState;
 final router = GoRouter(
+  // routerNeglect: true,
   urlPathStrategy: UrlPathStrategy.hash,
   // urlPathStrategy: UrlPathStrategy.path,
   initialLocation: '/',
@@ -233,6 +234,11 @@ final router = GoRouter(
       path: '/settings/change-email',
       name: ChangeEmailPage.url,
       builder: (_, state) => const ChangeEmailPage(),
+    ),
+    GoRoute(
+      path: '/settings/language',
+      name: SettingsLanguagePage.url,
+      builder: (_, state) => const SettingsLanguagePage(),
     ),
     GoRoute(
       path: '/settings/change-email/confirmation',

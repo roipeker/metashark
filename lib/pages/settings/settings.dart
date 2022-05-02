@@ -73,6 +73,16 @@ class _SettingsPage extends _SettingsState {
                         },
                       ),
                       SettingsListItem(
+                        svgId: SvgIcons.mailOutline,
+                        iconData: AppIcons.language,
+                        title: 'Language',
+                        subtitle: 'English',
+                        onTap: () {
+                          context.pushNamed(SettingsLanguagePage.url);
+                        },
+                      ),
+
+                      SettingsListItem(
                         iconData: AppIcons.phonelink_lock,
                         svgId: SvgIcons.phonelinkLock,
                         title: 'Sessions',

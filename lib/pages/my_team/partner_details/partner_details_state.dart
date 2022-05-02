@@ -7,6 +7,37 @@ abstract class _PartnerDetailsState extends State<PartnerDetailsPage> {
     return widget.teamId;
   }
 
+  void onResolvePop() {
+    final matches = router.routerDelegate.matches;
+    // pop to page that is not /team/
+    var numPops = 0;
+    for (var i = matches.length - 1; i >= 0; i--) {
+      var match = matches[i];
+      if (match.subloc.startsWith('/team/')) {
+        ++numPops;
+      } else {
+        break;
+      }
+    }
+    var diff = matches.length - numPops;
+    if (diff > 0) {
+      for (var i = 0; i < numPops; ++i) {
+        context.pop();
+      }
+    } else {
+      context.go('/myteam/');
+    }
+    // trace("DIFFF: ", diff, numPops);
+
+    // trace(numPops);
+    // for( var match in matches ){
+    //   /// history.... remove all
+    // }
+    //
+    // http://localhost:53351/#/myteam
+    // Navigator.maybePop(context);
+  }
+
   void onHistorySelect(TeamMemberVo vo) {
     // pop from stack?
     var index = _teamHistory.indexOf(vo);

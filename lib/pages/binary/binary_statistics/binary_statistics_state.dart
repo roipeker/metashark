@@ -9,6 +9,11 @@ abstract class _BinaryStatisticsState extends State<BinaryStatisticsPage> {
     await 2.seconds.delay();
   }
 
+  void onUpgradeTap() {
+    context.go('/plans/tab/farming?package_id=4');
+    // context.goNamed(FarmingPage.url);
+  }
+
   @override
   void initState() {
     super.initState();

@@ -3,7 +3,6 @@ import 'package:metashark/commons.dart';
 import 'canvas_tree/tree_widget.dart';
 
 part 'binary_structure_state.dart';
-
 part 'widgets.dart';
 
 class BinaryStructurePage extends StatefulWidget {
@@ -18,16 +17,6 @@ class BinaryStructurePage extends StatefulWidget {
 
 class _BinaryStructurePage extends _BinaryStructureState {
   @override
-  void didUpdateWidget(covariant BinaryStructurePage oldWidget) {
-    if (oldWidget.nodeId != widget.nodeId) {
-      trace("Change node id!", widget.nodeId);
-    }
-    super.didUpdateWidget(oldWidget);
-  }
-
-  int? get nodeId => widget.nodeId;
-
-  @override
   Widget build(BuildContext context) {
     return LayoutBuilder(
       builder: (_, con) {
@@ -35,6 +24,8 @@ class _BinaryStructurePage extends _BinaryStructureState {
         return RefreshIndicator(
           onRefresh: onRefreshPull,
           child: SafeArea(
+            left: false,
+            right: false,
             child: Scrollbar(
               controller: scrollController,
               child:
@@ -64,6 +55,11 @@ class _BinaryStructurePage extends _BinaryStructureState {
 
   List<Widget> buildChildren({double? treeH}) {
     Widget tree = TreeWidget(nodeId: nodeId);
+    tree = SafeArea(
+      child: tree,
+      left: false,
+      right: false,
+    );
     if (treeH != null) {
       tree = SizedBox(
         height: treeH,
@@ -78,19 +74,26 @@ class _BinaryStructurePage extends _BinaryStructureState {
 
     return [
       kGap16,
-      Padding(
-        padding: kPadH16,
-        child: _UserCard(onTap: onUserCardTap),
+      SafeArea(
+        child: Padding(
+          padding: kPadH16,
+          child: _UserCard(onTap: onUserCardTap),
+        ),
       ),
       kGap16,
-      _LeftRightPanel(
-        selectedPanel: selectedPanel,
-        onChange: (value) {
-          selectedPanel = value;
-          update();
-        },
+      SafeArea(
+        child: Padding(
+          padding: kPadH16,
+          child: _LeftRightPanel(
+            selectedPanel: selectedPanel,
+            onChange: (value) {
+              selectedPanel = value;
+              update();
+            },
+          ),
+        ),
       ),
-      kGap16,
+      // kGap16,
       tree,
     ];
   }

@@ -20,6 +20,7 @@ export "settings/google_auth_cancellation/google_auth_cancellation.dart";
 export "settings/change_password/change_password.dart";
 export "settings/change_email/change_email.dart";
 export "settings/change_email_confirmation/change_email_confirmation.dart";
+export "settings/settings_language/settings_language.dart";
 export "settings/sessions/sessions.dart";
 export "settings/settings_confirmations/settings_confirmations.dart";
 export "finance/finance.dart";

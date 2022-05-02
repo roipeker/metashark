@@ -52,9 +52,7 @@ class _BinaryStatisticsPage extends _BinaryStatisticsState {
                     kGap16,
                     AppElevatedButton.primary(
                       child: Text('Upgrade'),
-                      onTap: () {
-                        context.toastNotImplemented();
-                      },
+                      onTap: onUpgradeTap,
                     ),
                   ],
                 ),
@@ -98,6 +96,7 @@ class _BinaryStatisticsPage extends _BinaryStatisticsState {
       ),
     );
   }
+
 }
 
 class _PackageUpgrade extends StatelessWidget {

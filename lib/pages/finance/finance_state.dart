@@ -13,7 +13,6 @@ abstract class _FinanceState extends State<FinancePage> {
     super.dispose();
   }
 
-
   void onAssetTap(FinanceAssetVo vo) {
     context.pushNamed(WalletPage.url);
   }
@@ -46,19 +45,33 @@ final _kMyAssets = [
     value: '3 000.00000000',
     valueUsdt: '50 USDT',
   ),
-  FinanceAssetVo(
-    iconId: SvgCryptos.dash,
-    title: 'DASH',
-    subtitle: 'Dash',
-    value: '100.00000000',
-    valueUsdt: '1000 USDT',
-  ),
+  // FinanceAssetVo(
+  //   iconId: SvgCryptos.dash,
+  //   title: 'DASH',
+  //   subtitle: 'Dash',
+  //   value: '100.00000000',
+  //   valueUsdt: '1000 USDT',
+  // ),
   FinanceAssetVo(
     iconId: SvgCryptos.trx,
     title: 'TRX',
     subtitle: 'Tron',
     value: '12 000.00000000',
     valueUsdt: '423 USDT',
+  ),
+  FinanceAssetVo(
+    iconId: SvgCryptos.usdt,
+    title: 'USDT',
+    subtitle: 'USDT',
+    value: '324',
+    valueUsdt: '1 USDT',
+  ),
+  FinanceAssetVo(
+    iconId: SvgCryptos.ims,
+    title: 'IMS',
+    subtitle: 'Infinity MetaShark',
+    value: '256 000',
+    valueUsdt: '56.8 USDT',
   ),
 ];
 

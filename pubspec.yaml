@@ -1,7 +1,7 @@
 name: metashark
 description: MetaShark MLM app
 publish_to: 'none'
-version: 1.0.37+193
+version: 1.0.38+197
 
 environment:
   sdk: ">=2.16.2 <3.0.0"
@@ -60,7 +60,7 @@ flutter:
   fonts:
     - family: AppIcons
       fonts:
-        - asset: assets/fonts/App-Icons.ttf?v=8
+        - asset: assets/fonts/App-Icons.ttf?v=9
     - family: Open Sans
       fonts:
         - asset: assets/fonts/OpenSans-Bold.ttf
@@ -95,18 +95,19 @@ flutter:
 ### flutter pub run flutter_launcher_icons:main
 flutter_icons:
   # image_path: "assets/icon/ios.png"
-  image_path_ios: "assets/icon/app_icon_1024.png"
+  image_path_ios: "assets/icon/app_icon.png"
   android: "ic_launcher" # can specify file name here e.g. "ic_launcher"
   ios: "Icon-App" # can specify file name here e.g. "My-Launcher-Icon"
-  image_path_android: "assets/icon/app_icon_1024.png"
+  image_path_android: "assets/icon/app_icon.png"
   remove_alpha_ios: true
-  adaptive_icon_background: "assets/icon/app_icon_back.png"
-  adaptive_icon_foreground: "assets/icon/app_icon_front.png"
+#  adaptive_icon_background: "assets/icon/app_icon_back.png"
+#  adaptive_icon_foreground: "assets/icon/app_icon_front.png"
 
 ### run with:
 ### flutter pub run flutter_native_splash:create
 flutter_native_splash:
   color: "#F8F8F8"
+  #  ED7540
   #  background_image: assets/icon/splash_bg.png
   image: assets/icon/splash_logo.png
   #  branding_mode: center

@@ -59,6 +59,16 @@ class _BuyingPackageSheetView extends _BuyingPackageSheetState {
                 control: amountTec,
                 label: 'Enter amount',
                 hint: 'Enter amount',
+                // accessory: Row(
+                //   mainAxisSize: MainAxisSize.min,
+                //   children: [
+                //     const Text(
+                //       " BTC ",
+                //       textAlign: TextAlign.center,
+                //       style: kTextAccessoryStyle,
+                //     ).center(),
+                //   ],
+                // ),
                 accessory: Row(
                   mainAxisSize: MainAxisSize.min,
                   children: [
@@ -67,6 +77,10 @@ class _BuyingPackageSheetView extends _BuyingPackageSheetState {
                       textAlign: TextAlign.center,
                       style: kTextAccessoryStyle,
                     ).center(),
+                    AppTextButton.accessory(
+                      label: 'MAX',
+                      onTap: onMaxTap,
+                    ),
                   ],
                 ),
               ),
@@ -103,4 +117,5 @@ class _BuyingPackageSheetView extends _BuyingPackageSheetState {
       ),
     );
   }
+
 }

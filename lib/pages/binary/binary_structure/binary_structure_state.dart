@@ -4,6 +4,17 @@ abstract class _BinaryStructureState extends State<BinaryStructurePage> {
   String selectedPanel = 'Left';
   final scrollController = ScrollController();
 
+  @override
+  void didUpdateWidget(covariant BinaryStructurePage oldWidget) {
+    if (oldWidget.nodeId != widget.nodeId) {
+      trace("Change node id!", widget.nodeId);
+    }
+    super.didUpdateWidget(oldWidget);
+  }
+
+  int? get nodeId => widget.nodeId;
+
+
   Future<void> onRefreshPull() async {
     await 2.seconds.delay();
     return;

@@ -23,7 +23,6 @@ final controller = BinaryTreeController();
 class TreeWidget extends StatefulWidget {
   final int? nodeId;
 
-
   const TreeWidget({
     Key? key,
     this.nodeId,
@@ -34,50 +33,87 @@ class TreeWidget extends StatefulWidget {
 }
 
 class _TreeWidgetState extends State<TreeWidget> {
-  // late final transformController = TransformationController();
-  
+  late final transformController = TransformationController();
+
+  @override
+  void initState() {
+    // transformController.addListener(() {
+    //   var m = transformController.value;
+    //   print(m);
+    // });
+    super.initState();
+  }
+
   @override
   void dispose() {
-    // transformController.dispose();
+    transformController.dispose();
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
-    return Stack(
-      children: [
-        InteractiveViewer(
-          clipBehavior: Clip.antiAlias,
-          alignPanAxis: false,
-          constrained: false,
-          boundaryMargin: const EdgeInsets.all(80),
-          maxScale: 1,
-          minScale: .25,
-          panEnabled: true,
-          scaleEnabled: true,
-          // transformationController: transformController,
-          child: FittedBox(
-            fit: BoxFit.contain,
-            child: SizedBox(
-              width: 1200,
-              height: 790,
-              child: CanvasTreeView(
-                controller: controller,
-                  nodeId:widget.nodeId,
+    return LayoutBuilder(
+      builder: (context, constrains) {
+        var availableSize = Size(constrains.maxWidth, constrains.maxHeight);
+        var canvasSize = const Size(1200, 790);
+        if (canvasSize > availableSize) {
+          // adjust scale?
+          var rw = availableSize.width / canvasSize.width;
+          var rh = availableSize.height / canvasSize.height;
+          var m2 = Matrix4.identity();
+          double scale = rw < rh ? rw : rh;
+          var sw = canvasSize.width * scale;
+          var sh = canvasSize.height * scale;
+          // trace('aaa',scale,canvasSize.width * scale);
+          var dx = (availableSize.width - sw) / 2;
+          var dy = (availableSize.height - sh) / 2;
+          m2.translate(dx, dy);
+          m2.scale(scale);
+          transformController.value = m2;
+        }
+        return Stack(
+          children: [
+            InteractiveViewer(
+              clipBehavior: Clip.hardEdge,
+              alignPanAxis: false,
+              constrained: false,
+              boundaryMargin: const EdgeInsets.all(100),
+              maxScale: 1,
+              minScale: .05,
+              panEnabled: true,
+              scaleEnabled: true,
+              transformationController: transformController,
+              child: FittedBox(
+                fit: BoxFit.contain,
+                child: SizedBox(
+                  width: canvasSize.width,
+                  height: canvasSize.height,
+                  child: CanvasTreeView(
+                    controller: controller,
+                    nodeId: widget.nodeId,
+                  ),
+                ),
+                // child: sampleContent(),
               ),
             ),
-            // child: sampleContent(),
-          ),
-        ),
-        _TreeMenu(
-          onTap1: () {
-            controller.goTop();
-          },
-          onTap2: () {
-            controller.goUp();
-          },
-        ),
-      ],
+            Positioned(
+              right: 0,
+              left: 0,
+              top: 16,
+              child: SafeArea(
+                child: _TreeMenu(
+                  onTap1: () {
+                    controller.goTop();
+                  },
+                  onTap2: () {
+                    controller.goUp();
+                  },
+                ),
+              ),
+            ),
+          ],
+        );
+      },
     );
   }
 }
