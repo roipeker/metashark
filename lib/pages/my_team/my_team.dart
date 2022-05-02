@@ -2,7 +2,6 @@ import 'package:metashark/commons.dart';
 import 'package:metashark/pages/my_team/my_team_search.dart';
 
 part 'my_team_state.dart';
-
 part 'widgets.dart';
 
 class MyTeamPage extends StatefulWidget {
@@ -70,7 +69,7 @@ class _MyTeamPage extends _MyTeamState {
                 kGap16,
                 SafeArea(
                   child: UserReferralCard(
-                    onTap: onTopCardTap,
+                    onTap: onReferralTap,
                     cardTitle: "Referral",
                     title: "First & last name",
                     subtitle: "Login",
@@ -105,7 +104,6 @@ class _MyTeamPage extends _MyTeamState {
                   ),
                 ),
                 kGap16,
-
                 Container(
                   color: Colors.white,
                   child: SafeArea(
@@ -114,11 +112,15 @@ class _MyTeamPage extends _MyTeamState {
                     child: Column(
                       mainAxisSize: MainAxisSize.min,
                       children: [
-                        ...List.generate(
-                            5,
-                            (index) => TeamLoginItem(onTap: () {
-                                  onItemTap();
-                                })).separator(
+                        ...List.generate(20, (index) {
+                          var vo = searchData[index];
+                          return TeamLoginItem(
+                            title: vo.name,
+                            subtitle: vo.email,
+                            rating: vo.rating,
+                            onTap: () => onItemTap(vo),
+                          );
+                        }).separator(
                           kDivider1,
                         ),
                       ],

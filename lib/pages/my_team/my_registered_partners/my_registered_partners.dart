@@ -61,7 +61,7 @@ class _MyRegisteredPartnersPage extends _MyRegisteredPartnersState {
                     2,
                     (index) => _LoginItem(
                       activated: '26.04.2022',
-                      onTap: () => onLoginItemTap(),
+                      // onTap: () => onLoginItemTap(),
                     ),
                   ).separator(kGap1),
                 ),

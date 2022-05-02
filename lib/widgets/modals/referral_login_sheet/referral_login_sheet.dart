@@ -2,10 +2,15 @@ import 'package:flutter/services.dart';
 import 'package:metashark/commons.dart';
 
 part 'referral_login_state.dart';
+
 part 'widgets.dart';
 
+enum ReferralSheetType { login, referral }
+
 class ReferralLoginSheet extends StatefulWidget {
-  const ReferralLoginSheet({Key? key}) : super(key: key);
+  final ReferralSheetType type;
+
+  const ReferralLoginSheet({Key? key, required this.type}) : super(key: key);
 
   @override
   State<ReferralLoginSheet> createState() => _ReferralLoginSheet();
@@ -25,13 +30,9 @@ class _ReferralLoginSheet extends _ReferralLoginSheetState {
         child: SafeArea(
           child: Column(
             children: [
-              _Title(),
+              const _Title(),
               kGap16,
-              AppTextField(
-                enabled: false,
-                label: 'Referral login',
-                hint: 'Referral login',
-              ),
+              ...getFields(),
               kGap16,
               Row(
                 children: [
@@ -39,7 +40,7 @@ class _ReferralLoginSheet extends _ReferralLoginSheetState {
                     height: 44,
                     child: OutlinedButton.icon(
                       onPressed: onShareTap,
-                      icon: Icon(
+                      icon: const Icon(
                         AppIcons.share,
                         color: AppColors.primaryPurple,
                       ),
@@ -51,7 +52,7 @@ class _ReferralLoginSheet extends _ReferralLoginSheetState {
                     height: 44,
                     child: ElevatedButton.icon(
                       onPressed: onCopyTap,
-                      icon: Icon(
+                      icon: const Icon(
                         AppIcons.content_copy,
                         color: Colors.white,
                       ),
@@ -65,5 +66,31 @@ class _ReferralLoginSheet extends _ReferralLoginSheetState {
         ),
       ),
     );
+  }
+
+  List<Widget> getFields() {
+    if (widget.type == ReferralSheetType.login) {
+      return const [
+         AppTextField(
+          enabled: false,
+          label: 'Login',
+          hint: 'Login',
+        ),
+      ];
+    } else {
+      return const [
+         AppTextField(
+          enabled: false,
+          label: 'Refferal Login',
+          hint: 'Refferal Login',
+        ),
+        kGap16,
+        AppTextField(
+          enabled: false,
+          label: 'Refferal Email',
+          hint: 'Refferal Email',
+        ),
+      ];
+    }
   }
 }

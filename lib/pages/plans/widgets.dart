@@ -3,7 +3,8 @@ part of 'plans.dart';
 /// ---
 
 class PlanCardWidget extends StatelessWidget {
-  final VoidCallback? onShowGiftsTap, onBuyTap;
+  final VoidCallback? onShowGiftsTap;
+  final VoidCallback? onBuyTap;
   final PlanCardVo data;
 
   const PlanCardWidget({
@@ -172,10 +173,16 @@ class _Header extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               ...List.generate(
-                ranking,
-                (index) => SvgPicture.asset(
-                  SvgIcons.diamondBlue,
-                ),
+                5,
+                (index) {
+                  double alpha = index < ranking ? 1 : 0.3;
+                  return Opacity(
+                    opacity: alpha,
+                    child: SvgPicture.asset(
+                      SvgIcons.diamondBlue,
+                    ),
+                  );
+                },
               ).separator(const Gap(2)),
             ],
           ),

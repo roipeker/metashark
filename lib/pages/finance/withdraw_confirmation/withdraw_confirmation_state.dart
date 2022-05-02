@@ -17,6 +17,7 @@ abstract class _WithdrawConfirmationState
   }
 
   void onSaveTap() {
-    context.goNamed(FinancePage.url);
+    // context.goNamed(FinancePage.url);
+    context.goNamed(WalletPage.url);
   }
 }

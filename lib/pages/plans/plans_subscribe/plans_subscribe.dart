@@ -1,8 +1,7 @@
 import 'package:metashark/commons.dart';
 
-import '../modals/plans_subscribe_details_sheet/plans_subscribe_details_sheet.dart';
-
 part 'plans_subscribe_state.dart';
+
 part 'widgets.dart';
 
 class PlansSubscribePage extends StatefulWidget {
@@ -71,5 +70,4 @@ class _PlansSubscribePage extends _PlansSubscribeState {
       ),
     );
   }
-
 }

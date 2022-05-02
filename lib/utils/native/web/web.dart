@@ -80,11 +80,11 @@ abstract class WebUtils {
     // keyboard DONE hack
     if (isIOS()) {
       trace2("Listen focus out!");
-      html.window.addEventListener('focusout', _removeFocus);
-      html.window.addEventListener('resize', (e) {
-        trace2(
-            "window resize: ", html.window.innerWidth, html.window.innerHeight);
-      });
+      // html.window.addEventListener('focusout', _removeFocus);
+      // html.window.addEventListener('resize', (e) {
+      //   trace2(
+      //       "window resize: ", html.window.innerWidth, html.window.innerHeight);
+      // });
     }
 
     // Periodic timer to check if there's a new version.

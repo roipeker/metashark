@@ -30,7 +30,7 @@ final _kInputTheme = InputDecorationTheme(
   focusedBorder: _borderFocus,
 );
 
-class MyTeamSearchDelegate extends SearchDelegate<String?> {
+class MyTeamSearchDelegate extends SearchDelegate<TeamMemberVo?> {
   @override
   ThemeData appBarTheme(BuildContext context) {
     final theme = super.appBarTheme(context);
@@ -56,16 +56,23 @@ class MyTeamSearchDelegate extends SearchDelegate<String?> {
     );
   }
 
-  final List<String> searchData;
+  final List<TeamMemberVo> searchData;
+  bool _justInited = true;
 
   MyTeamSearchDelegate({required this.searchData})
       : super(
-    searchFieldLabel: 'Search',
-    // searchFieldDecorationTheme: _kInputTheme,
-  );
+          searchFieldLabel: 'Search',
+          // searchFieldDecorationTheme: _kInputTheme,
+        );
 
   @override
   List<Widget>? buildActions(BuildContext context) {
+    if (_justInited) {
+      _justInited = false;
+      WidgetsBinding.instance?.addPostFrameCallback((timeStamp) {
+        showSuggestions(context);
+      });
+    }
     return [
       IconButton(
         onPressed: () {
@@ -85,7 +92,7 @@ class MyTeamSearchDelegate extends SearchDelegate<String?> {
   @override
   Widget? buildLeading(BuildContext context) {
     return IconButton(
-      onPressed: () => close(context, query),
+      onPressed: () => close(context, null),
       icon: const Icon(AppIcons.arrow_back),
     );
   }
@@ -98,15 +105,15 @@ class MyTeamSearchDelegate extends SearchDelegate<String?> {
   @override
   Widget buildSuggestions(BuildContext context) {
     var _query = query.trim();
-    if (_query.isEmpty) {
-      return const Align(
-        alignment: Alignment(0, -0.9),
-        child: NotFoundFish(
-          boxSize: 200,
-          text: 'Search for team members..',
-        ),
-      );
-    }
+    // if (_query.isEmpty) {
+    //   return const Align(
+    //     alignment: Alignment(0, -0.9),
+    //     child: NotFoundFish(
+    //       boxSize: 200,
+    //       text: 'Search for team members..',
+    //     ),
+    //   );
+    // }
 
     final results = getResults(_query);
     if (results.isEmpty) {
@@ -122,21 +129,32 @@ class MyTeamSearchDelegate extends SearchDelegate<String?> {
     return ListView.builder(
       itemCount: results.length,
       itemBuilder: (_, index) {
-        var text = results[index];
+        var person = results[index];
         return ListTile(
-          title: Text(text),
+          title: Row(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Text(person.name),
+              kGap8,
+              StarRating(count: person.rating),
+            ],
+          ),
+          subtitle: Text(person.username),
           onTap: () {
-            close(context, text);
+            close(context, person);
           },
         );
       },
     );
   }
 
-  List<String> getResults(String q) {
+  List<TeamMemberVo> getResults(String q) {
+    if (q.isEmpty) {
+      return List.from(searchData);
+    }
     q = q.toLowerCase();
     return searchData
-        .where((element) => element.toLowerCase().contains(q))
+        .where((element) => element.name.toLowerCase().contains(q))
         .toList(growable: false);
   }
 }

@@ -21,11 +21,10 @@ abstract class _BinaryStructureState extends State<BinaryStructurePage> {
   }
 
   Future<void> onUserCardTap() async {
-    trace("TAP!");
     final result = await context
         .openModalSheet<PartnerResult?>(const PartnerInfoSheetView());
     if (result == PartnerResult.command) {
-      context.pushNamed(PartnerDetailsPage.url, params: {'id': '123'});
+      context.pushNamed(PartnerDetailsPage.url, params: {'id': 'roipeker'});
     } else if (result == PartnerResult.binary) {
       context.push('/binary/structure?id=4');
     }

@@ -16,7 +16,6 @@ class WalletDepositPage extends StatefulWidget {
 class _DepositPage extends _DepositState {
   @override
   Widget build(BuildContext context) {
-    // trace("WERASDASD", "1NeJEFzY8PbVS9RvYPfDP93iqXxHjav791".length);
     return Scaffold(
       appBar: const CommonAppBar(title: 'Deposit'),
       body: SafeArea(
@@ -37,7 +36,7 @@ class _DepositPage extends _DepositState {
             FormLabeledField(
               label: 'Select processing',
               input: Obs(
-                    () => CurrencyNetworkDropdown(
+                () => CurrencyNetworkDropdown(
                   options: networkOptions,
                   onChanged: currencyNetwork,
                   current: currencyNetwork(),
@@ -51,80 +50,107 @@ class _DepositPage extends _DepositState {
               color: Colors.white,
               borderRadius: kBorderRadius8,
               padding: kPad16,
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                children: [
-                  Center(
-                    child: Obs(
-                      () => QrCodeBox(
-                        code: qrCode,
-                        backgroundColor: AppColors.scaffold,
-                      ),
-                    ),
-                  ),
-                  kGap16,
-                  const Text(
-                    'Your wallet address',
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                      color: AppColors.darkGrey,
-                      fontSize: 14,
-                      fontWeight: FontWeight.w600,
-                    ),
-                  ),
-                  kGap16,
-                  AppCard(
-                    color: AppColors.primaryPurple.withOpacity(.1),
-                    child: Obs(
-                      () => Text(
-                        qrCode,
-                        textAlign: TextAlign.center,
-                        style: const TextStyle(
-                          color: AppColors.primaryPurple,
-                          fontSize: 14,
-                          fontWeight: FontWeight.w600,
-                        ),
-                      ),
-                    ),
-                  ),
-                  kGap4,
-                  const Text(
-                    "Commission for all incoming transactions: 0.001 MTS",
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                      color: AppColors.greyAccesoryIconColor,
-                      fontSize: 10,
-                    ),
-                  ),
-                  kGap16,
-                  Row(
+              child: Obs(
+                () {
+                  var loading = isLoading();
+                  return Stack(
                     children: [
-                      SizedBox(
-                        height: 44,
-                        child: OutlinedButton.icon(
-                          onPressed: onShareTap,
-                          icon: Icon(
-                            AppIcons.share,
-                            color: AppColors.primaryPurple,
+                      IgnorePointer(
+                        ignoring: loading,
+                        child: AnimatedOpacity(
+                          opacity: loading ? 0.21 : 1,
+                          duration: 0.33.seconds,
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.stretch,
+                            children: [
+                              Center(
+                                child: Obs(
+                                  () => QrCodeBox(
+                                    code: qrCode,
+                                    backgroundColor: AppColors.scaffold,
+                                  ),
+                                ),
+                              ),
+                              kGap16,
+                              const Text(
+                                'Your wallet address',
+                                textAlign: TextAlign.center,
+                                style: TextStyle(
+                                  color: AppColors.darkGrey,
+                                  fontSize: 14,
+                                  fontWeight: FontWeight.w600,
+                                ),
+                              ),
+                              kGap16,
+                              AppCard(
+                                color: AppColors.primaryPurple.withOpacity(.1),
+                                child: Obs(
+                                  () => Text(
+                                    qrCode,
+                                    textAlign: TextAlign.center,
+                                    style: const TextStyle(
+                                      color: AppColors.primaryPurple,
+                                      fontSize: 14,
+                                      fontWeight: FontWeight.w600,
+                                    ),
+                                  ),
+                                ),
+                              ),
+                              kGap4,
+                              const Text(
+                                "Commission for all incoming transactions: 0.001 MTS",
+                                textAlign: TextAlign.center,
+                                style: TextStyle(
+                                  color: AppColors.greyAccesoryIconColor,
+                                  fontSize: 10,
+                                ),
+                              ),
+                              kGap16,
+                              Row(
+                                children: [
+                                  SizedBox(
+                                    height: 44,
+                                    child: OutlinedButton.icon(
+                                      onPressed: onShareTap,
+                                      icon: Icon(
+                                        AppIcons.share,
+                                        color: AppColors.primaryPurple,
+                                      ),
+                                      label: const Text('Share'),
+                                    ),
+                                  ).exp(),
+                                  kGap16,
+                                  SizedBox(
+                                    height: 44,
+                                    child: ElevatedButton.icon(
+                                      onPressed: onCopyTap,
+                                      icon: Icon(
+                                        AppIcons.content_copy,
+                                        color: Colors.white,
+                                      ),
+                                      label: const Text('Copy'),
+                                    ),
+                                  ).exp(),
+                                ],
+                              ),
+                            ],
                           ),
-                          label: const Text('Share'),
                         ),
-                      ).exp(),
-                      kGap16,
-                      SizedBox(
-                        height: 44,
-                        child: ElevatedButton.icon(
-                          onPressed: onCopyTap,
-                          icon: Icon(
-                            AppIcons.content_copy,
-                            color: Colors.white,
+                      ),
+
+                      /// loader.
+                      Positioned.fill(
+                        child: AnimatedOpacity(
+                          opacity: loading ? 1 : 0,
+                          duration: 0.25.seconds,
+                          child: const Center(
+                            child: CircularProgressIndicator(),
                           ),
-                          label: const Text('Copy'),
                         ),
-                      ).exp(),
+                      )
                     ],
-                  ),
-                ],
+                  );
+                },
               ),
             ),
           ],

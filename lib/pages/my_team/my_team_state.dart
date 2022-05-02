@@ -7,6 +7,9 @@ abstract class _MyTeamState extends State<MyTeamPage> {
     return 2.seconds.delay();
   }
 
+  List<TeamMemberVo> get searchData => _teamData;
+  late final _teamData = MockDataFactory.randomTeamMemberList();
+
   @override
   void initState() {
     super.initState();
@@ -21,8 +24,9 @@ abstract class _MyTeamState extends State<MyTeamPage> {
   void onMyPartnersTap() {
     context.pushNamed(MyRegisteredPartnersPage.url);
   }
+
   void onBinarTap() {
-    context.push('/binary/structure?id=2');
+    context.go('/binary/structure?id=2');
     // context.pushNamed(MyRegisteredPartnersPage.url);
   }
 
@@ -33,11 +37,21 @@ abstract class _MyTeamState extends State<MyTeamPage> {
   }
 
   void onTopCardTap() {
-    context.openModalSheet(const ReferralLoginSheet());
+    context.openModalSheet(
+      const ReferralLoginSheet(type: ReferralSheetType.login),
+    );
   }
 
-  FutureOr onItemTap() async {
-    context.pushNamed(PartnerDetailsPage.url, params: {'id': '123'});
+  void onReferralTap() {
+    context.openModalSheet(
+      const ReferralLoginSheet(type: ReferralSheetType.referral),
+    );
+  }
+
+  FutureOr onItemTap(TeamMemberVo vo) async {
+    context.pushNamed(PartnerDetailsPage.url, params: {
+      'id': vo.username,
+    });
     // /// MOVEEED TO BINARY DETAILS!!!!
     // final result = await context
     //     .openModalSheet<PartnerResult?>(const PartnerInfoSheetView());
@@ -48,30 +62,38 @@ abstract class _MyTeamState extends State<MyTeamPage> {
     // }
   }
 
-  List<String> get searchData => _kTeamData;
+  // List<String> get searchData => _kTeamData;
 
   FutureOr onSearchTap() async {
-    final result = await showSearch<String?>(
+    final result = await showSearch<TeamMemberVo?>(
       context: context,
       delegate: MyTeamSearchDelegate(searchData: searchData),
-      query: lastSearch,
+      // query: lastSearch,
+      useRootNavigator: false,
     );
-    lastSearch = result ?? '';
-    trace("Result... $result");
+    if (result != null) {
+      /// GO FOR THE ITEM
+      onItemTap(result);
+    }
+    // lastSearch = result ?? '';
+    // trace("Result... $result");
   }
 
   String lastSearch = '';
 }
 
-final _kTeamData = MockDataFactory.randomTeamSearchData();
+// final _kTeamData = MockDataFactory.randomTeamSearchData();
+// final _kTeamData = MockDataFactory.randomTeamMemberList();
 
 class TeamMemberVo {
-  final String name, email;
+  final String name, email, username;
   final int id;
   final int rating;
+
   const TeamMemberVo({
     required this.name,
     required this.email,
+    required this.username,
     this.id = 0,
     this.rating = 0,
   });

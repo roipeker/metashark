@@ -1,6 +1,5 @@
 import 'package:expandable_page_view/expandable_page_view.dart';
 import 'package:metashark/commons.dart';
-import 'package:metashark/pages/plans/modals/plans_subscribe_details_sheet/plans_subscribe_details_sheet.dart';
 
 part 'portfolio_state.dart';
 

@@ -1,10 +1,8 @@
 import 'package:flip_card/flip_card.dart';
 import 'package:flip_card/flip_card_controller.dart';
 import 'package:metashark/commons.dart';
-import 'package:rive/rive.dart' hide LinearGradient, Fill;
 
 part 'roulette_state.dart';
-
 part 'widgets.dart';
 
 class RoulettePage extends StatefulWidget {
@@ -35,6 +33,7 @@ class _RoulettePage extends _RouletteState {
 
   Widget _buildCards() {
     return Column(
+      crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
         kGap32,
         //// page view.
@@ -59,14 +58,44 @@ class _RoulettePage extends _RouletteState {
           count: controllers.length,
         ),
         const Gap(30),
-        BottomActionLabelButtons(
-          label1: 'Take',
-          label2: 'Twist (1/3)',
-          onTap1: onTakeTap,
-          onTap2: onTwistTap,
+
+        AnimatedBuilder(
+          animation: pageController,
+          builder: (context, child) {
+            final p = (pageController.page ?? 0).round();
+            if (p == 0) {
+              return child!;
+            } else if (p == 1) {
+              return buildAlert("Not available");
+            }
+            return buildAlert("Will be available on 05/23/2022");
+          },
+          child: BottomActionLabelButtons(
+            label1: 'Take',
+            label2: 'Twist (1/3)',
+            onTap1: onTakeTap,
+            onTap2: onTwistTap,
+          ),
         ),
         kGap32,
       ],
+    );
+  }
+
+  Widget buildAlert(String message) {
+    return AppCard(
+      padding: const EdgeInsets.symmetric(vertical: 11, horizontal: 8),
+      color: AppColors.primaryPurple10,
+      borderRadius: kBorderRadius4,
+      elevation: 0,
+      child: Text(
+        message,
+        style: const TextStyle(
+          color: Color(0xff5e5873),
+          fontSize: 16,
+          fontWeight: FontWeight.w600,
+        ),
+      ),
     );
   }
 }

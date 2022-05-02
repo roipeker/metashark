@@ -34,19 +34,6 @@ class _PlansSteakingPage extends _PlansSteakingState {
                           onBuyTap: onBuyTap,
                           onShowGiftsTap: onShowGifts,
                         ),
-                        // child: FittedBox(
-                        //   // alignment: Alignment.center,
-                        //   fit: BoxFit.contain,
-                        //   child: SizedBox(
-                        //     width: 343,
-                        //     height: 618,
-                        //     child: PlanCardWidget(
-                        //       data: data,
-                        //       onBuyTap: onBuyTap,
-                        //       onShowGiftsTap: onShowGifts,
-                        //     ),
-                        //   ),
-                        // ),
                       ),
                 ),
               ),

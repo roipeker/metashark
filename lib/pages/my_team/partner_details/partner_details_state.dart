@@ -7,9 +7,13 @@ abstract class _PartnerDetailsState extends State<PartnerDetailsPage> {
     return 2.seconds.delay();
   }
 
+  List<TeamMemberVo> get searchData => _teamData;
+  late final _teamData = MockDataFactory.randomTeamMemberList();
+
   @override
   void initState() {
     super.initState();
+
   }
 
   @override
@@ -29,7 +33,10 @@ abstract class _PartnerDetailsState extends State<PartnerDetailsPage> {
   }
 
   void onTopCardTap() {
-    context.openModalSheet(const ReferralLoginSheet());
+    // context.openModalSheet(const ReferralLoginSheet());
+    context.openModalSheet(
+      const ReferralLoginSheet(type: ReferralSheetType.login),
+    );
   }
 
   void onBinarTap() {
@@ -37,9 +44,10 @@ abstract class _PartnerDetailsState extends State<PartnerDetailsPage> {
     // context.pushNamed(MyRegisteredPartnersPage.url);
   }
 
-
-  FutureOr onItemTap() async {
-    context.pushNamed(PartnerDetailsPage.url, params: {'id': '123'});
+  FutureOr onItemTap(TeamMemberVo vo) async {
+    context.pushNamed(PartnerDetailsPage.url, params: {
+      'id': vo.username,
+    });
     // final result = await context
     //     .openModalSheet<PartnerResult?>(const PartnerInfoSheetView());
     // if (result == PartnerResult.command) {
@@ -49,19 +57,19 @@ abstract class _PartnerDetailsState extends State<PartnerDetailsPage> {
     // }
   }
 
-  List<String> get searchData => _kTeamData;
 
   FutureOr onSearchTap() async {
-    final result = await showSearch<String?>(
+    final result = await showSearch<TeamMemberVo?>(
       context: context,
       delegate: MyTeamSearchDelegate(searchData: searchData),
       query: lastSearch,
     );
-    lastSearch = result ?? '';
+    // lastSearch = result ?? '';
     trace("Result... $result");
   }
 
   String lastSearch = '';
 }
 
-final _kTeamData = MockDataFactory.randomTeamSearchData();
+// final _kTeamData = MockDataFactory.randomTeamSearchData();
+// final _kTeamData = MockDataFactory.randomTeamMemberList();

@@ -15,13 +15,17 @@ class PartnerDetailsPage extends StatefulWidget {
 }
 
 class _PartnerDetailsPage extends _PartnerDetailsState {
+  String get appbarTitle {
+    return widget.teamId;
+  }
+
   @override
   Widget build(BuildContext context) {
     return ScrollConfiguration(
       behavior: AppScrollBehavior(),
       child: Scaffold(
         appBar: CommonAppBar(
-          title: 'Login (username)',
+          title: appbarTitle,
         ),
         body: Scrollbar(
           controller: scrollController,
@@ -86,12 +90,16 @@ class _PartnerDetailsPage extends _PartnerDetailsState {
                       mainAxisSize: MainAxisSize.min,
                       children: [
                         ...List.generate(
-                          5,
-                          (index) => TeamLoginItem(
-                            onTap: () {
-                              onItemTap();
-                            },
-                          ),
+                          14,
+                          (index) {
+                            var vo = searchData[index];
+                            return TeamLoginItem(
+                              title: vo.name,
+                              subtitle: vo.email,
+                              rating: vo.rating,
+                              onTap: () => onItemTap(vo),
+                            );
+                          },
                         ).separator(
                           kDivider1,
                         ),

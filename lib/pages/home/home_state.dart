@@ -29,7 +29,9 @@ abstract class _HomeState extends State<HomePage> {
   }
 
   void onMyUserTap() {
-    context.openModalSheet(const ReferralLoginSheet());
+    context.openModalSheet(
+      const ReferralLoginSheet(type: ReferralSheetType.login),
+    );
   }
 
   void onMyPackageTap() {

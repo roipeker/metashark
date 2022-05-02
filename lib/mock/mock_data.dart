@@ -73,8 +73,19 @@ class MockDataFactory {
     'Cartoon Network',
   ];
 
-  // static List<TeamMemberVo> randomTeamMemberList({int quantity = 50}) {
-  // }
+  static List<TeamMemberVo> randomTeamMemberList({int quantity = 50}) {
+    return List.generate(quantity, (index) {
+      return TeamMemberVo(
+        name: kFaker.person.name(),
+        email: kFaker.internet.email(),
+        username: kFaker.internet.userName(),
+        rating: randomInt(1, 5),
+      );
+    });
+    // final person = getPersonNames();
+    // quantity = min(quantity, 90);
+    // return person.take(quantity).toList(growable: false);
+  }
 
   static List<String> randomTeamSearchData({int quantity = 50}) {
     final person = getPersonNames();

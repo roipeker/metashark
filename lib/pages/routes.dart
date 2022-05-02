@@ -335,7 +335,7 @@ final router = GoRouter(
       path: '/team/:id',
       name: PartnerDetailsPage.url,
       builder: (_, state) {
-        var id = state.queryParams['id'] ?? '';
+        var id = state.params['id'] ?? 'Login';
         return PartnerDetailsPage(
           key: state.pageKey,
           teamId: id,

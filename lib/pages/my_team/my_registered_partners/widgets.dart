@@ -44,6 +44,7 @@ class _LoginItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialButton(
       color: Colors.white,
+      disabledColor: Colors.white,
       elevation: 0,
       focusElevation: 0,
       highlightElevation: 0,

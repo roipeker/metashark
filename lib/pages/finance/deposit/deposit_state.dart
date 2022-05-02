@@ -5,8 +5,12 @@ abstract class _DepositState extends State<WalletDepositPage> {
   // String get qrCode =>_qrCode();
   // String qrCode = '1NeJEFzY8PbVS9RvYPfDP93iqXxHjav791';
 
-  String get qrCode => currency().address;
-
+  // String get qrCode => currency().address;
+  String get qrCode {
+    /// hacky.
+    isLoading();
+    return _address;
+  }
 
   List<CurrencyVo> get currencyOptions => MockDataFactory.cryptoCurrencies;
   late final Rx<CurrencyVo> currency = currencyOptions.first.obs();
@@ -14,9 +18,28 @@ abstract class _DepositState extends State<WalletDepositPage> {
   List<String> get networkOptions => MockDataFactory.cryptoNetworkOptions;
   late final Rx<String> currencyNetwork = networkOptions.first.obs();
 
+  final isLoading = false.obs();
+
   @override
   void initState() {
+    _address = currency().address;
+    currency.addListener(onCurrencyChange);
+    currencyNetwork.addListener(onCurrencyChange);
     super.initState();
+  }
+
+  Timer? _delay;
+  String _address = '';
+  //currency().address
+  FutureOr onCurrencyChange() async {
+    isLoading.value = true;
+    if (_delay?.isActive == true) {
+      _delay?.cancel();
+    }
+    _delay = Timer(const Duration(seconds: 2), () {
+      _address = currency().address;
+      isLoading.value = false;
+    });
   }
 
   @override
