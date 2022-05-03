@@ -1,7 +1,7 @@
 name: metashark
 description: MetaShark MLM app
 publish_to: 'none'
-version: 1.0.39+203
+version: 1.0.40+204
 
 environment:
   sdk: ">=2.16.2 <3.0.0"

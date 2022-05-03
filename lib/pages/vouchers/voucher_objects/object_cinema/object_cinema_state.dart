@@ -1,17 +1,19 @@
 part of 'object_cinema.dart';
 
 abstract class _ObjectCinemaState extends State<ObjectCinemaPage> {
-  
-  String get titleText => 'Object Cinema page';
+
+  final activeItem1 = false.obs();
+  final getRadio = VoucherCard.getRadio;
 
   @override
   void initState(){
-    super.initState();  
+    super.initState();
   }
 
   @override
   void dispose(){
-    super.dispose();  
+    activeItem1.dispose();
+    super.dispose();
   }
 }
 

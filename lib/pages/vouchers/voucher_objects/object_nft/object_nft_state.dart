@@ -1,17 +1,17 @@
 part of 'object_nft.dart';
 
 abstract class _ObjectNftState extends State<ObjectNftPage> {
-  
-  String get titleText => 'Object Nft page';
+  final activeItem1 = false.obs();
+  final getRadio = VoucherCard.getRadio;
 
   @override
-  void initState(){
-    super.initState();  
+  void initState() {
+    super.initState();
   }
 
   @override
-  void dispose(){
-    super.dispose();  
+  void dispose() {
+    activeItem1.dispose();
+    super.dispose();
   }
 }
-

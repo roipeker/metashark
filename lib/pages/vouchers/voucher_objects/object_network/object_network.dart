@@ -12,14 +12,24 @@ class ObjectNetworkPage extends StatefulWidget {
 }
 
 class _ObjectNetworkPage extends _ObjectNetworkState {
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text(titleText),
-      ),
-      body: const Center(
-        child: Text('Content for Object Network page'),
+      appBar: const CommonAppBar(title: 'Ticket to activate Network'),
+      body: CommonScrollableBody(
+        padding: kPad16,
+        children: [
+          VoucherCard.network(
+            title: 'Subscription',
+            line1: 'Action: 6 months',
+            line2: 'Activate until: 05/23/2022',
+            imageUrl: MockupImages.mockCardNetwork,
+            radio: getRadio(activeItem1),
+            onTap: activeItem1.toggle,
+          ),
+          kGap16,
+        ],
       ),
     );
   }

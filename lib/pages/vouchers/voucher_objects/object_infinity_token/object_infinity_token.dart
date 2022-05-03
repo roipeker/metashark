@@ -14,12 +14,30 @@ class ObjectInfinityTokenPage extends StatefulWidget {
 class _ObjectInfinityTokenPage extends _ObjectInfinityTokenState {
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
-      appBar: CommonAppBar(
-        title: 'Infiniti Token',
-      ),
-      body: Center(
-        child: Text('Content for Object Infinity Token page'),
+    return Scaffold(
+      appBar: const CommonAppBar(title: 'Infiniti Token'),
+      body: CommonScrollableBody(
+        padding: kPad16,
+        children: [
+          SizedBox(
+            height: 72,
+            child: VoucherObjectCashCard(
+              extendImage: true,
+              radio: getRadio(activeItem1),
+              onTap: activeItem1.toggle,
+              title: "100 MTS",
+              imageUrl: MockupImages.mockCardInfinityToken,
+              body: 'Infinity MetaShark Tokens',
+            ),
+          ),
+          kGap16,
+          OutlinedButton(
+              style: OutlinedButton.styleFrom(
+                padding: const EdgeInsets.symmetric(vertical: 24),
+              ),
+              onPressed: onCreateTap,
+              child: const Text('Create')),
+        ],
       ),
     );
   }

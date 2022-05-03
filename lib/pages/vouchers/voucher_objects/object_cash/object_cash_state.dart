@@ -1,17 +1,21 @@
 part of 'object_cash.dart';
 
 abstract class _ObjectCashState extends State<ObjectCashPage> {
-  
-  String get titleText => 'Object Cash page';
+  final activeItem1 = false.obs();
+  final getRadio = VoucherCard.getRadio;
 
   @override
-  void initState(){
-    super.initState();  
+  void initState() {
+    super.initState();
   }
 
   @override
-  void dispose(){
-    super.dispose();  
+  void dispose() {
+    activeItem1.dispose();
+    super.dispose();
+  }
+
+  void onCreateTap() {
+    context.openModalSheet(const CreateTokenSheet());
   }
 }
-

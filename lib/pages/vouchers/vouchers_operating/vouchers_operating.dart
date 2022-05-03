@@ -13,6 +13,15 @@ class VouchersOperatingPage extends StatefulWidget {
   createState() => _VouchersOperatingPage();
 }
 
+class _Pill extends StatelessWidget {
+  const _Pill({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container();
+  }
+}
+
 class _VouchersOperatingPage extends _VouchersOperatingState {
   @override
   Widget build(BuildContext context) {
@@ -34,28 +43,48 @@ class _VouchersOperatingPage extends _VouchersOperatingState {
               ),
               kGap16,
               _VoucherCardItem(
-                title: 'Voucher name',
-                subtitle: '#6787099',
+                title: '#4123452',
+                recipients: [
+                  VoucherChip.optional(icon: AppIcons.person, label: '5'),
+                  VoucherChip.optional(icon: AppIcons.people, label: '5'),
+                ],
+                objects: '5',
+                createdAt: '10.05.2022',
                 imageUrl: MockupImages.mockVoucherCard1,
+                onTap: () {
+                  onVoucherTap(id: '#4123452');
+                },
+              ),
+              kGap16,
+              _VoucherCardItem(
+                title: '#6787099',
+                recipients: [
+                  VoucherChip.optional(icon: AppIcons.person, label: '1'),
+                ],
+                objects: '2',
+                createdAt: '5.05.2023',
+                imageUrl: MockupImages.mockVoucherCard2,
                 onTap: () {
                   onVoucherTap(id: '#6787099');
                 },
               ),
               kGap16,
               _VoucherCardItem(
-                title: 'Voucher name',
-                subtitle: '#611099',
-                imageUrl: MockupImages.mockVoucherCard2,
+                title: '#1345123',
+                recipients: [
+                  VoucherChip.optional(icon: AppIcons.person, label: '3'),
+                ],
+                objects: '3',
+                createdAt: '2.05.2022',
+                imageUrl: MockupImages.mockVoucherCard1,
                 onTap: () {
-                  onVoucherTap(id: '#611099');
+                  onVoucherTap(id: '#1345123');
                 },
               ),
-              // BinaryTreeDemoWidget(),
             ],
           ),
         ),
       ),
     );
   }
-
 }

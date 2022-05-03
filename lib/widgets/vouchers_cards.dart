@@ -6,6 +6,16 @@ import 'package:metashark/commons.dart';
 class VoucherCard extends StatelessWidget {
   final Widget child;
 
+  /// reactive radio button.
+  static Widget getRadio(ObsValue<bool> rx) => Obs(
+        () => Radio<bool>(
+          groupValue: true,
+          value: rx(),
+          toggleable: true,
+          onChanged: (_) => rx.toggle(),
+        ),
+      );
+
   const VoucherCard._({
     Key? key,
     required this.child,
@@ -14,12 +24,14 @@ class VoucherCard extends StatelessWidget {
   VoucherCard.present({
     Key? key,
     VoidCallback? onTap,
+    Widget? radio,
     VoucherObjectCardTag? tag,
     ObjectPresentCard type = ObjectPresentCard.big,
     required String imageUrl,
     required String title,
     required String body,
   })  : child = VoucherObjectCardPresent(
+          radio: radio,
           title: title,
           type: type,
           body: body,
@@ -33,12 +45,14 @@ class VoucherCard extends StatelessWidget {
     Key? key,
     VoidCallback? onTap,
     VoucherObjectCardTag? tag,
+    Widget? radio,
     required String imageUrl,
     required String collection,
     required String id,
     required String status,
     required String strength,
   })  : child = VoucherObjectCollectionCard(
+          radio: radio,
           collection: collection,
           id: id,
           status: status,
@@ -51,6 +65,7 @@ class VoucherCard extends StatelessWidget {
 
   VoucherCard.cash({
     Key? key,
+    Widget? radio,
     VoidCallback? onTap,
     VoucherObjectCardTag? tag,
     bool extendImage = true,
@@ -60,6 +75,7 @@ class VoucherCard extends StatelessWidget {
     String? imageUrl,
     Widget? tile,
   })  : child = VoucherObjectCashCard(
+          radio: radio,
           title: title,
           body: body,
           tile: tile,
@@ -81,31 +97,33 @@ class VoucherCard extends StatelessWidget {
     String? imageUrl,
     Widget? tile,
   })  : child = VoucherObjectNetworkCard(
-    title: title,
-    line1: line1,
-    line2: line2,
-    line2Style: const TextStyle(
-      color: Color(0xff5e5873),
-      fontSize: 20,
-      fontWeight: FontWeight.w600,
-    ),
-    tag: tag,
-    imageUrl: imageUrl,
-    tile: tile,
-    onTap: onTap,
-  ),
+          title: title,
+          line1: line1,
+          line2: line2,
+          line2Style: const TextStyle(
+            color: Color(0xff5e5873),
+            fontSize: 20,
+            fontWeight: FontWeight.w600,
+          ),
+          tag: tag,
+          imageUrl: imageUrl,
+          tile: tile,
+          onTap: onTap,
+        ),
         super(key: key);
 
   VoucherCard.network({
     Key? key,
     VoidCallback? onTap,
     VoucherObjectCardTag? tag,
+    Widget? radio,
     required String title,
     required String line1,
     required String line2,
     String? imageUrl,
     Widget? tile,
   })  : child = VoucherObjectNetworkCard(
+          radio: radio,
           title: title,
           line1: line1,
           line2: line2,
@@ -130,6 +148,7 @@ class VoucherBaseObjectCard extends StatelessWidget {
   final Axis axis;
   final VoidCallback? onTap;
   final VoucherObjectCardTag? tag;
+  final Widget? radioButton;
   final ObjectCardTagLocation? tagLocation;
   final Border? border;
   final double elevation;
@@ -140,6 +159,7 @@ class VoucherBaseObjectCard extends StatelessWidget {
     required this.content,
     required this.axis,
     this.elevation = 4,
+    this.radioButton,
     this.border,
     this.leadingSize,
     this.leadingColor,
@@ -215,7 +235,7 @@ class VoucherBaseObjectCard extends StatelessWidget {
       child = Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          Container(
+          SizedBox(
             height: leadingSize ?? 229,
             // width: double.infinity,
             child: leading,
@@ -224,21 +244,38 @@ class VoucherBaseObjectCard extends StatelessWidget {
         ],
       );
     }
-    if (tag != null) {
-      final _tagLocation = _locationFromAxis();
-      final _isLeft = _tagLocation == ObjectCardTagLocation.left;
+
+    var hasStack = tag != null || radioButton != null;
+
+    if (hasStack) {
+      Widget? _tag, _radio;
+
+      if (tag != null) {
+        final _tagLocation = _locationFromAxis();
+        final _isLeft = _tagLocation == ObjectCardTagLocation.left;
+        _tag = Positioned(
+          top: 0,
+          left: _isLeft ? 0 : null,
+          right: !_isLeft ? 0 : null,
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16.0),
+            child: tag!,
+          ),
+        );
+      }
+      if (radioButton != null) {
+        /// todo: add wrapper code.
+        _radio = Positioned(
+          top: 16,
+          right: 16,
+          child: radioButton!,
+        );
+      }
       child = Stack(
         children: [
           child,
-          Positioned(
-            top: 0,
-            left: _isLeft ? 0 : null,
-            right: !_isLeft ? 0 : null,
-            child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16.0),
-              child: tag!,
-            ),
-          ),
+          if (_radio != null) _radio,
+          if (_tag != null) _tag,
         ],
       );
     }
@@ -293,12 +330,14 @@ class VoucherObjectCashCard extends StatelessWidget {
   final Widget? tile;
   final bool extendImage;
   final Color? leadingColor;
+  final Widget? radio;
 
   const VoucherObjectCashCard({
     Key? key,
     this.onTap,
     this.tag,
     this.extendImage = true,
+    this.radio,
     this.leadingColor,
     required this.title,
     required this.body,
@@ -310,6 +349,7 @@ class VoucherObjectCashCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return VoucherBaseObjectCard(
       onTap: onTap,
+      radioButton: radio,
       border: Border.all(
         color: AppColors.darkGrey.withOpacity(.12),
         width: 1,
@@ -365,11 +405,13 @@ class VoucherObjectNetworkCard extends StatelessWidget {
   final TextStyle? line2Style;
   final String? imageUrl;
   final Widget? tile;
+  final Widget? radio;
 
   const VoucherObjectNetworkCard({
     Key? key,
     this.onTap,
     this.tag,
+    this.radio,
     required this.title,
     required this.line1,
     this.line2Style,
@@ -382,6 +424,7 @@ class VoucherObjectNetworkCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return VoucherBaseObjectCard(
       onTap: onTap,
+      radioButton: radio,
       border: Border.all(
         color: AppColors.darkGrey.withOpacity(.12),
         width: 1,
@@ -410,10 +453,11 @@ class VoucherObjectNetworkCard extends StatelessWidget {
           kGap4,
           Text(
             line2,
-            style: line2Style ?? const TextStyle(
-              color: AppColors.greyAccesoryIconColor,
-              fontSize: 14,
-            ),
+            style: line2Style ??
+                const TextStyle(
+                  color: AppColors.greyAccesoryIconColor,
+                  fontSize: 14,
+                ),
           ),
         ],
       ).padding(16),
@@ -429,11 +473,13 @@ class VoucherObjectCollectionCard extends StatelessWidget {
   final VoidCallback? onTap;
   final VoucherObjectCardTag? tag;
   final String collection, id, imageUrl, status, strength;
+  final Widget? radio;
 
   const VoucherObjectCollectionCard({
     Key? key,
     this.onTap,
     this.tag,
+    this.radio,
     required this.imageUrl,
     required this.collection,
     required this.id,
@@ -446,6 +492,7 @@ class VoucherObjectCollectionCard extends StatelessWidget {
     return VoucherBaseObjectCard(
       onTap: onTap,
       tag: tag,
+      radioButton: radio,
       axis: Axis.vertical,
       content: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -500,10 +547,12 @@ class VoucherObjectCardPresent extends StatelessWidget {
   final String imageUrl, title, body;
   final VoidCallback? onTap;
   final ObjectPresentCard type;
+  final Widget? radio;
 
   const VoucherObjectCardPresent({
     Key? key,
     this.onTap,
+    this.radio,
     this.type = ObjectPresentCard.big,
     required this.imageUrl,
     required this.title,
@@ -519,7 +568,15 @@ class VoucherObjectCardPresent extends StatelessWidget {
       clip: Clip.antiAlias,
       onTap: onTap,
       color: Colors.white,
-      child: _getBody(),
+      child: Stack(children: [
+        _getBody(),
+        if (radio != null)
+          Positioned(
+            top: 16,
+            right: 16,
+            child: radio!,
+          ),
+      ]),
     );
   }
 

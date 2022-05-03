@@ -165,7 +165,9 @@ class _EmptyCard extends StatelessWidget {
           ),
           kGap16,
           OutlinedButton(
-            // style: kBinaryTreeCircleButtonStyle,
+            // style: OutlinedButton.styleFrom(
+            //   padding: const EdgeInsets.symmetric(vertical: 24),
+            // ),
             onPressed: onTap,
             child: Text(buttonText),
           ),

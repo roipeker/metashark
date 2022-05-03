@@ -1,8 +1,9 @@
 part of 'object_network.dart';
 
 abstract class _ObjectNetworkState extends State<ObjectNetworkPage> {
-  
-  String get titleText => 'Object Network page';
+
+  final activeItem1 = false.obs();
+  final getRadio = VoucherCard.getRadio;
 
   @override
   void initState(){
@@ -11,6 +12,7 @@ abstract class _ObjectNetworkState extends State<ObjectNetworkPage> {
 
   @override
   void dispose(){
+    activeItem1.dispose();
     super.dispose();  
   }
 }

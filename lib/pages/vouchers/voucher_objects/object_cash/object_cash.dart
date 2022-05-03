@@ -15,12 +15,31 @@ class _ObjectCashPage extends _ObjectCashState {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: CommonAppBar(
-        title: 'Cash',
-      ),
-      body: const Center(
-        child: Text('Content for Object Cash page'),
+      appBar: const CommonAppBar(title: 'Cash'),
+      body: CommonScrollableBody(
+        padding: kPad16,
+        children: [
+          SizedBox(
+            height: 72,
+            child: VoucherObjectCashCard(
+              extendImage: true,
+              radio: getRadio(activeItem1),
+              onTap: activeItem1.toggle,
+              title: "100 MTS",
+              imageUrl: MockupImages.mockCardInfinityToken,
+              body: 'Infinity MetaShark Tokens',
+            ),
+          ),
+          kGap16,
+          OutlinedButton(
+              style: OutlinedButton.styleFrom(
+                padding: const EdgeInsets.symmetric(vertical: 24),
+              ),
+              onPressed: onCreateTap,
+              child: const Text('Create')),
+        ],
       ),
     );
   }
+
 }

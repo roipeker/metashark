@@ -47,7 +47,6 @@ class _ChangePasswordPage extends _ChangePasswordState {
   Future<void> onNextTap() async {
     var res = await context
         .openModalSheet<bool?>(const PasswordConfirmationFormSheet());
-    trace("RESULT:!", res);
     if (res == true) {
       if (context.canPop()) {
         context.pop();

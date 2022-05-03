@@ -27,7 +27,9 @@ abstract class _CreateVoucherState extends State<CreateVoucherPage> {
   }
 
   void onCreateTap() {
-    context.toastNotImplemented();
+    if(context.canPop()){
+      context.pop();
+    }
   }
 
   void onObjectsTap() {
