@@ -32,8 +32,9 @@ abstract class _VouchersOperatingState extends State<VouchersOperatingPage> {
     context.openModalSheet(
       VoucherDetailsSheet(
         voucherId: id,
+        mode: VoucherMode.pay,
+        type: VoucherType.other,
       ),
     );
   }
-
 }

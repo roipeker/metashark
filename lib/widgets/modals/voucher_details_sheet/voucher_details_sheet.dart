@@ -1,14 +1,32 @@
 import 'package:expandable_page_view/expandable_page_view.dart';
+import 'package:flutter/services.dart';
 import 'package:metashark/commons.dart';
 
 part 'voucher_details_sheet_state.dart';
+part 'widget_my_voucher.dart';
+part 'widget_person_voucher.dart';
 part 'widgets.dart';
+
+enum VoucherMode { pay, code }
+enum VoucherType { me, other }
+
+extension VoucherModeExt on VoucherMode {
+  isPay() => this == VoucherMode.pay;
+
+  isCode() => this == VoucherMode.code;
+}
 
 class VoucherDetailsSheet extends StatefulWidget {
   final String voucherId;
+  final VoucherMode mode;
+  final VoucherType type;
 
-  const VoucherDetailsSheet({Key? key, required this.voucherId})
-      : super(key: key);
+  const VoucherDetailsSheet({
+    Key? key,
+    required this.voucherId,
+    this.type = VoucherType.other,
+    this.mode = VoucherMode.pay,
+  }) : super(key: key);
 
   @override
   createState() => _VoucherDetailsSheet();
@@ -56,102 +74,17 @@ class _VoucherDetailsSheet extends _VoucherDetailsSheetState {
                       ),
                     ).paddingSymmetric(horizontal: 16),
                     kGap16,
+                    if (type == VoucherType.other)
+                      OtherVoucher(
+                        onPayTap: onPayTap,
+                        onUserCardTap: onUserCardTap,
+                      ),
 
-                    // owner data.
-                    _Pane(
-                      title: 'Owner',
-                      child: Column(
-                        children: [
-                          _UserCard(
-                            onTap: onUserCardTap,
-                            title: 'Last name First name',
-                            subtitle: 'Login',
-                          ),
-                          kGap16,
-                          const _LabelValueRow(
-                            label: 'Date of creation:',
-                            value: '11.04.2022 23:50',
-                          ),
-                          kGap8,
-                          const _LabelValueRow(
-                            label: 'Cancellation date:',
-                            value: '11.04.2022 23:55',
-                          ),
-                        ],
+                    if (type == VoucherType.me)
+                      MyVoucher(
+                        onPayTap: onPayTap,
+                        onUserCardTap: onUserCardTap,
                       ),
-                    ).paddingSymmetric(horizontal: 16),
-
-                    kGap16,
-                    _Pane(
-                      title: 'Recipients',
-                      titlePadding: kPadH16,
-                      child: PageViewWithIndicator(
-                        itemBuilder: (ctx, idx) {
-                          return Padding(
-                            padding: kPadH16,
-                            child: _UserCard(
-                              onTap: onUserCardTap,
-                              title: 'Last name First name',
-                              subtitle: 'Login',
-                              subtitleIconData: AppIcons.person,
-                            ),
-                          );
-                        },
-                        itemCount: 3,
-                      ),
-                    ),
-                    kGap16,
-                    _Pane(
-                      title: 'Objects',
-                      titlePadding: kPadH16,
-                      child: PageViewWithIndicator(
-                        itemBuilder: (ctx, idx) {
-                          return Padding(
-                            padding: kPadH16,
-                            child: NotificationCircleBadge(
-                              value: 2,
-                              backgroundColor: AppColors.primaryPurple,
-                              child: VoucherCard.network(
-                                title: 'Подписка',
-                                line1: 'Действие:  3 месяца',
-                                line2: 'Активировать до: 23.05.2022',
-                                tile: const VoucherIconTile(
-                                  color: Color(0xff18CBC7),
-                                  iconData: AppIcons.park_tickets_couple,
-                                ),
-                                tag: VoucherObjectCardTag.text(text: 'Кинотеатр'),
-                                onTap: () {},
-                              ),
-                            ),
-                          );
-                        },
-                        itemCount: 3,
-                      ),
-                    ),
-                    kGap16,
-                    _Pane(
-                      title: 'Activation',
-                      child: Column(
-                        children: [
-                          const _LabelValueRow(
-                            label: 'Available:',
-                            value: '200 MTS',
-                          ),
-                          kGap4,
-                          SafeArea(
-                            child: SizedBox(
-                              height: 47,
-                              child: AppElevatedButton.primary(
-                                child: Text('Pay: 100 MTS'),
-                                onTap: onPayTap,
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ).paddingSymmetric(horizontal: 16),
-
-                    kGap16,
                   ],
                 ),
               ),

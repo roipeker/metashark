@@ -84,39 +84,62 @@ class _CreateVoucherPage extends _CreateVoucherState {
                           ),
                         ],
                       ),
-                      kGap16,
-                      FormLabeledField(
-                        label: 'Select currency',
-                        input: Obs(
-                          () => CurrencyDropdown(
-                            options: currencyOptions,
-                            onChanged: currency,
-                            current: currency(),
-                          ),
-                        ),
-                      ),
-                      kGap16,
-                      AppTextField(
-                        keyboardType: const TextInputType.numberWithOptions(
-                          decimal: true,
-                          signed: false,
-                        ),
-                        textInputAction: TextInputAction.done,
-                        control: amountTec,
-                        label: 'Enter amount',
-                        hint: 'Enter amount',
-                        accessory: ConstrainedBox(
-                          constraints: const BoxConstraints(maxWidth: 50),
-                          child: const Text(
-                            "BTC",
-                            textAlign: TextAlign.center,
-                            style: kTextAccessoryStyle,
-                          ).center(),
-                        ),
-                      ),
+                      Obs(() {
+                        var visible =
+                            activationType() == ActivationType.payment;
+                        return Column(
+                          children: [
+                            kGap16,
+                            FormLabeledField(
+                              label: 'Select currency',
+                              input: Obs(
+                                () => CurrencyDropdown(
+                                  options: currencyOptions,
+                                  onChanged: currency,
+                                  current: currency(),
+                                ),
+                              ),
+                            ),
+                            kGap16,
+                            AppTextField(
+                              keyboardType:
+                                  const TextInputType.numberWithOptions(
+                                decimal: true,
+                                signed: false,
+                              ),
+                              textInputAction: TextInputAction.done,
+                              control: amountTec,
+                              label: 'Enter amount',
+                              hint: 'Enter amount',
+                              accessory: ConstrainedBox(
+                                constraints: const BoxConstraints(maxWidth: 50),
+                                child: const Text(
+                                  "BTC",
+                                  textAlign: TextAlign.center,
+                                  style: kTextAccessoryStyle,
+                                ).center(),
+                              ),
+                            ),
+                          ],
+                        ).visible(visible);
+                      }),
                     ],
                   ),
                 ),
+              ),
+              GestureDetector(
+                behavior: HitTestBehavior.opaque,
+                onTap: voucherPersonal.toggle,
+                child: Obs(
+                  () => Row(
+                    children: [
+                      Checkbox(
+                          value: voucherPersonal(), onChanged: voucherPersonal),
+                      kGap8,
+                      Text('I\'m the voucher owner?'),
+                    ],
+                  ),
+                ).padding(16),
               ),
               SizedBox(
                 height: 47,
@@ -132,6 +155,4 @@ class _CreateVoucherPage extends _CreateVoucherState {
       ),
     );
   }
-
-
 }

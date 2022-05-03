@@ -26,10 +26,20 @@ abstract class _CreateVoucherState extends State<CreateVoucherPage> {
     super.initState();
   }
 
+  final voucherPersonal = false.obs();
   void onCreateTap() {
-    if(context.canPop()){
-      context.pop();
-    }
+    var mode = activationType()==ActivationType.code ? VoucherMode.code : VoucherMode.pay;
+    var type = voucherPersonal() ? VoucherType.me : VoucherType.other;
+    context.openModalSheet(
+      VoucherDetailsSheet(
+        voucherId: '#0000000',
+        mode: mode,
+        type: type,
+      ),
+    );
+    // if(context.canPop()){
+    //   context.pop();
+    // }
   }
 
   void onObjectsTap() {

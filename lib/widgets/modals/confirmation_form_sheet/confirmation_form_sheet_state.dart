@@ -7,7 +7,7 @@ abstract class _ConfirmationFormSheetState
   final codeEmail2 = AppTextControl();
 
   void onSaveTap() {
-    context.navigator()?.pop();
+    context.navigator()?.pop(true);
   }
 
   @override

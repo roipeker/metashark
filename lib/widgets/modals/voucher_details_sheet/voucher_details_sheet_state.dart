@@ -5,6 +5,19 @@ abstract class _VoucherDetailsSheetState extends State<VoucherDetailsSheet> {
     return ModalScrollController.of(context);
   }
 
+  List<CurrencyVo> get currencyOptions => MockDataFactory.cryptoCurrencies;
+  late final Rx<CurrencyVo> currency = currencyOptions.first.obs();
+  final amountControl = AppTextControl();
+  final activationCodeControl = AppTextControl();
+
+  VoucherMode get mode => widget.mode;
+
+  VoucherType get type => widget.type;
+
+  String get buttonLabel {
+    return mode.isCode() ? 'Activate' : 'Pay';
+  }
+
   @override
   void initState() {
     WidgetsBinding.instance?.addPostFrameCallback((timeStamp) {
@@ -24,8 +37,13 @@ abstract class _VoucherDetailsSheetState extends State<VoucherDetailsSheet> {
 
   String get voucherTitle => 'Voucher ID: ${widget.voucherId}';
 
-  void onPayTap() {
-    context.navigator()?.pop();
+  Future<void> onPayTap() async {
+    var result = await context
+        .openModalSheet<bool?>(const ConfirmationFormSheet(showEmail2: false));
+    if (result == true) {
+      await 0.5.delay();
+      context.navigator()?.pop();
+    }
   }
 
   void onUserCardTap() {
@@ -34,7 +52,24 @@ abstract class _VoucherDetailsSheetState extends State<VoucherDetailsSheet> {
 
   @override
   void dispose() {
-    // scrollController?.removeListener(_onScrollUpdate);
+    activationCodeControl.dispose();
+    amountControl.dispose();
+    currency.dispose();
     super.dispose();
+  }
+
+  FutureOr onShareTap() async {
+    var result = await NativeUtils.share(
+      subject: 'Metashark wallet address',
+      message: 'Something to share.',
+    );
+  }
+
+  FutureOr onCopyTap() async {
+    await Clipboard.setData(ClipboardData(text: 'metashark'));
+    AppToast.infoIcon(
+      message: 'MetaShark copied to clipboard!',
+      icon: Icons.content_copy,
+    );
   }
 }

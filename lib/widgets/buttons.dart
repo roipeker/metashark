@@ -33,6 +33,14 @@ class AppElevatedButton extends StatelessWidget {
   })  : style = kElevatedButtonPrimary,
         super(key: key);
 
+  AppElevatedButton.alert({
+    Key? key,
+    required this.child,
+    this.onTap,
+    this.extended = true,
+  })  : style = kElevatedButtonAlert,
+        super(key: key);
+
   AppElevatedButton.secondary({
     Key? key,
     required this.child,

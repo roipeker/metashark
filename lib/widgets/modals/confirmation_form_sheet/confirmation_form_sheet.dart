@@ -3,7 +3,10 @@ import 'package:metashark/commons.dart';
 part 'confirmation_form_sheet_state.dart';
 
 class ConfirmationFormSheet extends StatefulWidget {
-  const ConfirmationFormSheet({Key? key}) : super(key: key);
+  /// TEMPORAL!
+  final bool showEmail2;
+  const ConfirmationFormSheet({Key? key, this.showEmail2 = true})
+      : super(key: key);
 
   @override
   createState() => _ConfirmationFormSheetView();
@@ -41,17 +44,18 @@ class _ConfirmationFormSheetView extends _ConfirmationFormSheetState {
                 hint: 'Enter code',
                 textControl: codeEmail1,
               ),
-              kGap16,
-              AppTextFieldInsert(
-                label: 'Enter another code from Gma***@gmail.com',
-                hint: 'Enter code',
-                textControl: codeEmail2,
-              ),
+              if (widget.showEmail2) kGap16,
+              if (widget.showEmail2)
+                AppTextFieldInsert(
+                  label: 'Enter another code from Gma***@gmail.com',
+                  hint: 'Enter code',
+                  textControl: codeEmail2,
+                ),
               kGap16,
               SizedBox(
                 height: 50,
                 child: ElevatedButton(
-                  onPressed: () {},
+                  onPressed: onSaveTap,
                   child: const Text('Save'),
                 ),
               ),
