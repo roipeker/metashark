@@ -49,6 +49,7 @@ class FigmaLink extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    return child;
     final hasNode = node != null;
     if (!hasNode && !hasHome) return SafeArea(child: child);
 

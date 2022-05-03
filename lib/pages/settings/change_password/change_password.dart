@@ -1,7 +1,6 @@
 import 'package:metashark/commons.dart';
 
 part 'change_password_state.dart';
-part 'widgets.dart';
 
 class ChangePasswordPage extends StatefulWidget {
   static const url = "/change-password";
@@ -13,40 +12,31 @@ class ChangePasswordPage extends StatefulWidget {
 }
 
 class _ChangePasswordPage extends _ChangePasswordState {
-  List<String> get tabsTitles => [
-        'Password',
-        '2-FA',
-      ];
-
-  List<Tab> get tabsData => tabsTitles.map2(
-        (text) => Tab(text: text),
-      );
-
   @override
   Widget build(BuildContext context) {
-    return FigmaLink(
-      node: null,
-      child: Scaffold(
-        appBar: CommonAppBar(
-          title: 'Change password',
-        ),
-        body: Column(
+    return Scaffold(
+      appBar: const CommonAppBar(title: 'Change password'),
+      body: Scrollbar(
+        child: ListView(
+          physics: const AlwaysScrollableScrollPhysics(),
+          clipBehavior: Clip.none,
+          shrinkWrap: true,
+          padding: kPad16,
           children: [
-            TabBar(
-              controller: _tabController,
-              tabs: tabsData,
-              indicatorWeight: 3,
-              indicatorColor: context.theme.primaryColor,
-              onTap: onTabTap,
+            AppTextField.password(
+              label: 'Enter new password',
+              hint: 'Enter password',
             ),
-            Expanded(
-              child: TabBarView(
-                controller: _tabController,
-                children: const [
-                  _ChangePasswordTab1(),
-                  _ChangePasswordTab2(),
-                ],
-              ),
+            kGap16,
+            AppTextField.password(
+              label: 'Repeat new password',
+              hint: 'Enter password',
+            ),
+            kGap16,
+            AppElevatedButton.primary(
+              child: Text('Next'),
+              onTap: onNextTap,
+              extended: true,
             ),
           ],
         ),
@@ -54,7 +44,14 @@ class _ChangePasswordPage extends _ChangePasswordState {
     );
   }
 
-  void onTabTap(int value) {
-    FocusScope.of(context).unfocus();
+  Future<void> onNextTap() async {
+    var res = await context
+        .openModalSheet<bool?>(const PasswordConfirmationFormSheet());
+    trace("RESULT:!", res);
+    if (res == true) {
+      if (context.canPop()) {
+        context.pop();
+      }
+    }
   }
 }

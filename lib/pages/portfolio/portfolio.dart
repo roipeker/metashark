@@ -1,5 +1,6 @@
 import 'package:expandable_page_view/expandable_page_view.dart';
 import 'package:metashark/commons.dart';
+import 'package:rive/rive.dart';
 
 part 'portfolio_state.dart';
 
@@ -15,8 +16,19 @@ class PortfolioPage extends StatefulWidget {
 }
 
 class _PortfolioPage extends _PortfolioState {
+  int count(String key, [int orCount = 3]) {
+    var params = router.routerDelegate.matches.last.queryParams;
+    return int.tryParse('${params[key]}') ?? orCount;
+  }
+
   @override
   Widget build(BuildContext context) {
+    ///http://localhost:58980/#/portfolio?nft=6&products=3&cinema=0&subscription=5
+    ///http://localhost:58980/#/portfolio?nft=5&products=9&cinema=6&subscriptions=2
+    var countNft = count('nft', 4);
+    var countCinema = count('cinema', 3);
+    var countProducts = count('products', 6);
+    var countSubscription = count('subscriptions', 2);
     return Scaffold(
       appBar: const CommonAppBar(title: 'Portfolio'),
       body: ScrollConfiguration(
@@ -36,8 +48,15 @@ class _PortfolioPage extends _PortfolioState {
                   kGap16,
                   _PortfolioSection(
                     /// padding 16.
-                    itemCount: 3,
+                    itemCount: countNft,
                     title: 'NFT',
+                    emptyHelpTitle: 'NFT',
+                    emptyHelpText:
+                        'By purchasing staking packages, you will be credited with NFT lottery cards',
+                    emptyButtonText: 'Go to farming packages',
+                    emptyButtonOnTap: () {
+                      context.go('/plans/tab/farming');
+                    },
                     itemBuilder: (ctx, idx) {
                       return VoucherCard.collection(
                         imageUrl: MockupImages.mockCardNft,
@@ -53,11 +72,15 @@ class _PortfolioPage extends _PortfolioState {
                   ),
                   // kGap16,
                   _PortfolioSection(
-                    itemCount: 5,
+                    itemCount: countProducts,
                     title: 'Products',
+                    emptyHelpText:
+                        'Confirm the conditions for completing quests and get prizes',
+                    emptyButtonText: 'Go to quests',
+                    emptyButtonOnTap: () => context.go('/quest'),
                     itemBuilder: (ctx, idx) {
                       return VoucherCard.present(
-                        imageUrl: MockupImages.mockIphonePhoto,
+                        imageUrl: MockupImages.mockIphone,
                         title: 'iPhone 11',
                         type: ObjectPresentCard.small,
                         body: MockDataFactory.loremWords(30),
@@ -67,26 +90,36 @@ class _PortfolioPage extends _PortfolioState {
                     onAllTap: onProductsAllTap,
                   ),
                   _PortfolioSection(
-                    itemCount: 3,
-                    title: 'Subscription',
+                    itemCount: countCinema,
+                    title: 'Cinema ticket',
+                    emptyHelpText:
+                        'By purchasing staking packages, you can get tickets to the online cinema as a gift',
+                    emptyButtonText: 'Go to farming plans',
+                    emptyButtonOnTap: () =>
+                        context.go('/plans/tab/farming'),
                     itemBuilder: (ctx, idx) {
                       return VoucherCard.network(
-                        title: 'Subscription',
+                        title: 'Cinema ticket',
                         line1: 'Action: 3 months',
                         line2: 'Activate until: 05/23/2022',
                         tile: const VoucherIconTile(
                           color: Color(0xff18CBC7),
                           iconData: AppIcons.park_tickets_couple,
                         ),
-                        tag: VoucherObjectCardTag.text(text: 'Activation'),
+                        tag: VoucherObjectCardTag.text(text: 'Cinema'),
                         onTap: _onItemTap,
                       ).paddingSymmetric(horizontal: 16);
                     },
-                    onAllTap: onSubscriptionAllTap,
+                    onAllTap: onCinemaAllTap,
                   ),
                   _PortfolioSection(
-                    itemCount: 2,
-                    title: 'Subscription',
+                    itemCount: countSubscription,
+                    title: 'Subscriptions',
+                    emptyHelpTitle: 'Subscription',
+                    emptyHelpText:
+                        'Subscription activates all bonuses and makes it possible to earn more',
+                    emptyButtonText: 'Go to subscription plans',
+                    emptyButtonOnTap: () => context.go('/plans/tab/subscribe'),
                     itemBuilder: (ctx, idx) {
                       return VoucherCard.network(
                         title: 'Subscription',

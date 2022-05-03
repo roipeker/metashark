@@ -19,7 +19,8 @@ abstract class _PortfolioDetailsState extends State<PortfolioDetailsPage> {
 }
 
 const _kTitleByCategory = {
-  'subscription': 'Farming',
-  'nft': 'NFT',
+  'cinema': 'Cinema ticket',
+  'subscription': 'Subscription',
+  'nft': 'Steaking',
   'products': 'Products',
 };

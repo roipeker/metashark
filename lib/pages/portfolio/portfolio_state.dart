@@ -24,6 +24,13 @@ abstract class _PortfolioState extends State<PortfolioPage> {
     );
   }
 
+  void onCinemaAllTap() {
+    context.pushNamed(
+      PortfolioDetailsPage.url,
+      params: {'category': 'cinema'},
+    );
+  }
+
   void onSubscriptionAllTap() {
     context.pushNamed(
       PortfolioDetailsPage.url,

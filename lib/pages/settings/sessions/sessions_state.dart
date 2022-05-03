@@ -11,4 +11,9 @@ abstract class _SessionsState extends State<SessionsPage> {
   void dispose(){
     super.dispose();  
   }
+
+  Future<void> onRefreshPull() async {
+    await 2.seconds.delay();
+  }
+
 }

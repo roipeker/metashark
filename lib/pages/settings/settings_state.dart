@@ -1,8 +1,8 @@
 part of 'settings.dart';
 
 abstract class _SettingsState extends State<SettingsPage> {
-  
   String get titleText => 'Settings page';
+
   String get versionText {
     // return "Version: 1.01.177";
     var engine = WebUtils.getEngine();
@@ -13,17 +13,15 @@ abstract class _SettingsState extends State<SettingsPage> {
     return result;
   }
 
-
   @override
-  void initState(){
-    super.initState();  
+  void initState() {
+    super.initState();
   }
 
   @override
-  void dispose(){
-    super.dispose();  
+  void dispose() {
+    super.dispose();
   }
-
 
   Future<void> onGoogleAuthTap() async {
     if (appData.hasGoogleAuth()) {
@@ -42,8 +40,5 @@ abstract class _SettingsState extends State<SettingsPage> {
 
   Future<void> onRefreshPull() async {
     await 2.seconds.delay();
-    return;
   }
-
 }
-

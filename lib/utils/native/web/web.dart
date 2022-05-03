@@ -7,6 +7,9 @@ import 'package:flutter/scheduler.dart';
 import 'package:http/http.dart' as http;
 import 'package:metashark/commons.dart';
 
+import 'data.dart';
+
+
 void trace2(
   dynamic arg1, [
   dynamic arg2,
@@ -80,11 +83,11 @@ abstract class WebUtils {
     // keyboard DONE hack
     if (isIOS()) {
       trace2("Listen focus out!");
-      // html.window.addEventListener('focusout', _removeFocus);
-      // html.window.addEventListener('resize', (e) {
-      //   trace2(
-      //       "window resize: ", html.window.innerWidth, html.window.innerHeight);
-      // });
+      html.window.addEventListener('focusout', _removeFocus);
+      html.window.addEventListener('resize', (e) {
+        trace2(
+            "window resize: ", html.window.innerWidth, html.window.innerHeight);
+      });
     }
 
     // Periodic timer to check if there's a new version.
@@ -101,6 +104,13 @@ abstract class WebUtils {
       return 'engine ' + res.toString();
     }
     return '';
+  }
+
+  static MobileOs getMobileOs() {
+    var res = js.context.callMethod('getMobileOS');
+    if(res=='ios') return MobileOs.ios;
+    if(res=='android') return MobileOs.android;
+    return MobileOs.other;
   }
 
   static bool isIOS() {

@@ -34,12 +34,23 @@ class NativeUtils {
   }
 
   static String get packageBuildNumber => _packageInfo.buildNumber;
+
   static String get packageVersion => _packageInfo.version;
 
   static late PackageInfo _packageInfo;
 
   static FutureOr init() async {
     _packageInfo = await PackageInfo.fromPlatform();
+  }
+
+  static FutureOr openUrl(String url) async {
+    if (await $launcher.canLaunch(url)) {
+      await $launcher.launch(
+        url,
+        forceSafariVC: false,
+        universalLinksOnly: true,
+      );
+    }
   }
 
   static FutureOr openFigmaRef(String node) async {

@@ -46,108 +46,53 @@ class _SessionsPage extends _SessionsState {
 
   @override
   Widget build(BuildContext context) {
-    return FigmaLink(
-      node: '11%3A2537',
+    return ScrollConfiguration(
+      behavior: AppScrollBehavior(),
       child: Scaffold(
-        appBar: CommonAppBar(title: 'Sessions'),
-        body: ListView(
-          clipBehavior: Clip.none,
-          padding: kPad16.copyWith(top: 24),
-          shrinkWrap: true,
-          children: [
-            SessionsCard(
-              title: "Current session",
-              content: _getCardContent(),
-              suffix: Text(
-                "Online",
-                textAlign: TextAlign.right,
-                style: TextStyle(
-                  color: Color(0xff28c76f),
-                  fontSize: 14,
-                ),
-              ),
-            ),
-            kGap16,
-            AppElevatedButton.primary(
-              child: Text('Cancel other sessions'),
-              onTap: onCancelTap,
-              extended: true,
-            ),
-            kGap16,
-            // SessionsCard(
-            //   title: "Device",
-            //   content: _getCardContent(),
-            // ),
-
-            AppCard(
-              elevation: 4,
-              clip: Clip.antiAlias,
-              padding: EdgeInsets.zero,
-              child: Dismissible(
-                movementDuration: .3.seconds,
-                key: ValueKey('session1'),
-                // onDismissed: (e) {
-                //   trace('e', e);
-                // },
-                direction: DismissDirection.endToStart,
-                background: Container(
-                  color: AppColors.red,
-                  padding: kPad16,
-                  child: Text(
-                    'Delete',
-                    style: TextStyle(color: Colors.white),
-                  ).centerRight(),
-                ),
-                confirmDismiss: (dir) async {
-                  var result = await openConfirmationDialog();
-                  return result;
-                  // trace("Dir: ", dir);
-                  // await 1.seconds.delay();
-                  // return false;
-                },
-                dismissThresholds: {DismissDirection.endToStart: .25},
-                // onUpdate: (e) {
-                //   trace(e.direction, e.reached);
-                // },
-                child: Padding(
-                  padding: kPad16,
-                  child: Row(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: [
-                      Expanded(child: _getCardContent()),
-                      // if (suffix != null) suffix!,
-                    ],
+        appBar: const CommonAppBar(title: 'Sessions'),
+        body: RefreshIndicator(
+          onRefresh: onRefreshPull,
+          child: ListView(
+            clipBehavior: Clip.none,
+            padding: kPad16.copyWith(top: 24),
+            shrinkWrap: true,
+            children: [
+              SessionsCard(
+                title: "Current session",
+                content: _getCardContent(),
+                suffix: Text(
+                  "Online",
+                  textAlign: TextAlign.right,
+                  style: TextStyle(
+                    color: Color(0xff28c76f),
+                    fontSize: 14,
                   ),
                 ),
               ),
-            ),
-
-            kGap16,
-            SessionsCard(
-              title: "Automatically end sessions",
-              content: Text(
-                "If the session is not active",
+              kGap16,
+              AppElevatedButton.primary(
+                child: Text('Cancel other sessions'),
+                onTap: onCancelTap,
+                extended: true,
+              ),
+              kGap16,
+              const AppText(
+                'Device',
                 style: TextStyle(
                   color: Color(0xff5e5873),
                   fontSize: 14,
                 ),
+                overflow: TextOverflow.ellipsis,
+                maxLines: 1,
               ),
-              suffix: Row(
-                children: [
-                  Text(
-                    "1 Week",
-                    style: TextStyle(
-                      color: Color(0xffb9b9c3),
-                      fontSize: 14,
-                    ),
-                  ),
-                  kGap8,
-                  SvgPicture.asset(SvgIcons.arrowForwardIos)
-                ],
+              kGap16,
+              DismissableSessionItem(
+                id: '1',
+                content: _getCardContent(),
               ),
-            ),
-          ],
+
+            ],
+          ),
         ),
       ),
     );
@@ -166,5 +111,60 @@ class _SessionsPage extends _SessionsState {
         .openDialog<bool?>(ConfirmDialogCupertino())
         // .openDialog<bool?>(ConfirmDialogMaterial())
         .then((value) => value ?? false);
+  }
+}
+
+class DismissableSessionItem extends StatelessWidget {
+  final String id;
+  final Widget content;
+
+  const DismissableSessionItem({
+    Key? key,
+    required this.id,
+    required this.content,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return AppCard(
+      elevation: 4,
+      clip: Clip.antiAlias,
+      padding: EdgeInsets.zero,
+      child: Dismissible(
+        movementDuration: .3.seconds,
+        key: ValueKey('session$id'),
+        // onDismissed: (e) {
+        //   trace('e', e);
+        // },
+        direction: DismissDirection.endToStart,
+        background: Container(
+          color: AppColors.red,
+          padding: kPad16,
+          child: Text(
+            'Delete',
+            style: TextStyle(color: Colors.white),
+          ).centerRight(),
+        ),
+        confirmDismiss: (dir) async {
+          return true;
+          // var result = await openConfirmationDialog();
+          // return result;
+          // trace("Dir: ", dir);
+          // await 1.seconds.delay();
+          // return false;
+        },
+        child: Padding(
+          padding: kPad16,
+          child: Row(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              Expanded(child: content),
+              // if (suffix != null) suffix!,
+            ],
+          ),
+        ),
+      ),
+    );
   }
 }

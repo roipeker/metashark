@@ -37,6 +37,20 @@
   </head>
   <body>
     <script>
+      function getMobileOS() {
+        const ua = navigator.userAgent;
+        var hasA = /iPad|iPhone|iPod/.test(ua);
+        if (/android/i.test(ua)) {
+          return "android";
+        } else if (
+          hasA ||
+          (navigator.platform === "MacIntel" && navigator.maxTouchPoints > 1)
+        ) {
+          return "ios";
+        }
+        return "other";
+      }
+      
       function isInstalled() {
         // For iOS
         if (window.navigator.standalone) return true;
@@ -134,10 +148,10 @@ https://developers.google.com/web/fundamentals/primers/service-workers -->
         if (scriptLoaded) {
           return;
         }
-        console.log( "load engine, web renderer: ", window.flutterWebRenderer );
+        console.log("load engine, web renderer: ", window.flutterWebRenderer);
         scriptLoaded = true;
         var scriptTag = document.createElement("script");
-      scriptTag.src = "main.dart.js?v=1.0.38+197";
+      scriptTag.src = "main.dart.js?v=1.0.39+203";
         scriptTag.type = "application/javascript";
         document.body.append(scriptTag);
       }

@@ -17,7 +17,7 @@ class _ChangeEmailPage extends _ChangeEmailState {
     return FigmaLink(
       node: '11%3A2427',
       child: Scaffold(
-        appBar: CommonAppBar(title: 'Change email'),
+        appBar: const CommonAppBar(title: 'Change email'),
         body: ListView(
           padding: kPad16.copyWith(top: 24),
           shrinkWrap: true,
@@ -25,6 +25,7 @@ class _ChangeEmailPage extends _ChangeEmailState {
             AppTextField(
               label: 'Current email',
               hint: 'Email@gmail.com',
+              enabled: false,
             ),
             kGap16,
             AppTextField(

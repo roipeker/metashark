@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'data.dart';
 
 void trace2(
   dynamic arg1, [
@@ -16,6 +17,7 @@ abstract class WebUtils {
   static void computeSafeArea() {}
   static bool isIOS() => false;
 
+  static MobileOs getMobileOs() => MobileOs.other;
   static EdgeInsets getSafeArea() => EdgeInsets.zero;
 
   static String getEngine() {

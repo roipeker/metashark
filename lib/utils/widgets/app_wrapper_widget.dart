@@ -32,12 +32,11 @@ class AppWrapperWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return AppVersionWrapper(
-      child: AppFocusWidget(
-        child: AppToast(
-          key: AppToast.toastKey,
-          child: child,
-        ),
+    /// AppVersionWrapper
+    return AppFocusWidget(
+      child: AppToast(
+        key: AppToast.toastKey,
+        child: child,
       ),
     );
   }
@@ -133,7 +132,6 @@ class _SafeAreaWebFixerState extends State<SafeAreaWebFixer> {
 
   @override
   void initState() {
-
     1.5.seconds.delay(() {
       update();
     });

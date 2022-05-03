@@ -531,11 +531,14 @@ class VoucherObjectCardPresent extends StatelessWidget {
             height: 229,
             width: double.infinity,
             color: AppColors.appbarIconGrey,
-            child: FadeInImage.memoryNetwork(
-              placeholder: kTransparentImage,
-              image: imageUrl,
-              fit: BoxFit.cover,
+            child: AppFadeImage(
+              url: imageUrl,
             ),
+            // child: FadeInImage.memoryNetwork(
+            //   placeholder: kTransparentImage,
+            //   image: imageUrl,
+            //   fit: BoxFit.cover,
+            // ),
           ),
           _footer(),
         ],
@@ -548,11 +551,14 @@ class VoucherObjectCardPresent extends StatelessWidget {
               width: 130,
               height: double.infinity,
               color: AppColors.appbarIconGrey,
-              child: FadeInImage.memoryNetwork(
-                placeholder: kTransparentImage,
-                image: imageUrl,
-                fit: BoxFit.cover,
+              child: AppFadeImage(
+                url: imageUrl,
               ),
+              // child: FadeInImage.memoryNetwork(
+              //   placeholder: kTransparentImage,
+              //   image: imageUrl,
+              //   fit: BoxFit.cover,
+              // ),
             ),
             Flexible(child: _footer()),
           ],
