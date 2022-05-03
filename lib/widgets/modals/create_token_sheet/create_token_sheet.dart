@@ -22,6 +22,7 @@ class _CreateTokenSheet extends _CreateTokenSheetState {
         padding: kPad16,
         child: SafeArea(
           child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
               const Text(
                 "Create",
